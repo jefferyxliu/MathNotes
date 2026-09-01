@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculus 2 Notes [WIP]</title>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            color: black;
+            background-color: white;
+        }
+
+/*         a {
+            color: cyan;
+        } */
+
+        table { 
+            border: 1px solid grey;
+        }
+
+        td {
+            border: 1px solid rgb(160 160 160);
+            padding: 4px;
+        }
+
+        .environmentheader {
+            border: 1px solid grey;
+            padding: 4px;
+        }
+
+        .definition {
+            border: 1px solid grey;
+            padding: 4px;
+            margin: 4px;
+        }
+
+        .example {
+            border: 1px solid grey;
+            padding: 4px;
+            margin: 4px;
+        }
+
+        .formula {
+            border: 1px solid grey;
+            padding: 4px;
+            margin: 4px;
+        }
+
+        .tip {
+            border: 1px solid grey;
+            padding: 4px;
+        }
+
+        .solution {
+            border: 1px solid grey;
+            padding: 4px;
+        }
+
+        .hint {
+            border: 1px solid grey;
+            padding: 4px;
+        }
+
+        .theorem {
+            border: 1px solid grey;
+            padding: 4px;
+            margin: 4px;
+        }
+
+        .algorithm {
+            border: 1px solid grey;
+            padding: 4px;
+            margin: 4px;
+        }
+    </style>
+    <body>
+        <h1>Table of Contents</h1>
+        <ul id="tableOfContents"></ul>
+
+        <div id="content">
+            <h1 id="Ch7">Chapter 7. Integration</h1>
+
+            <div class="definition">
+                <p>
+                    We will refer to the following functions (in a single variable \(x\)) as our <strong>core functions</strong>:
+                </p>
+                <ul>
+                    <li>Constant Functions: e.g. \(2, \pi, e\) or any real number </li>
+                    <li>Power Functions: \(x, x^2, x^r\) (where \(r\) is any real number)</li>
+                    <li>Trigonometric Functions: e.g. \(\sin(x),\cos(x),\tan(x)\)</li>
+                    <li>Exponential Functions: e.g. \(e^x, b^x\) (where \(b\) is any positive number)</li>
+                    <li>Inverse Trigonometric Functions: e.g. \(\arcsin(x),\arccos(x),\arctan(x)\)</li>
+                    <li>Logarithm Functions: e.g. \(\ln(x), \log_b(x)\) (where \(b\) is any positive number)</li>
+                </ul>
+                <p>
+                    We will refer to any function obtained by combining the core functions via addition, multiplication, division, or composition, as an <strong>elementary function</strong>. For example, \(x^2 + 2x + 1\), \(x^2 \cdot \sin(x)\), \(\sin(x^2)\) are elementary functions.
+                </p>
+            </div>
+
+            <p>
+               You should be familiar already with the derivatives of all of the core functions. Using the linearity, product rule, quotient rule, and chain rule, you should be able to algorithmically compute the derivative of any elementary function. In this way the derivative of any elementary function is elementary.
+            </p>
+
+            <p>
+                Recall by the Fundamental Theorem of Calculus that integration is related to the inverse process of differentiation (i.e. finding antiderivatives). In general, <strong>computing antiderivatives is much harder than computing derivatives</strong>. Some elementary functions (such as \(\sqrt{x^3 + 1}\), \(\frac{\sin(x)}{x}\), and \(e^{-x^2}\) ) do not even have elementary antiderivatives. In this chapter, we will learn several techniques of integration.
+            </p>
+
+            <h2 id="Ch7.1">7.1 Integration by Substitution</h2>
+
+            <h3>Integration by Substitution</h3>
+
+            <p>Recall the chain rule for computing the derivative of a composite function \(F(g(x))\):
+
+            \[ \frac{d}{dx}\left( F(g(x)) \right) = F'(g(x)) \cdot g'(x).\]
+
+            Therefore, the antiderivative of \(F'(g(x)) \cdot g'(x)\) is
+                
+            \[ \int F'(g(x)) \cdot g'(x) \: dx = F(g(x)) + C.\]
+
+            To apply this as an integration technique, identify an expression in the integrand \(g(x)\) whose derivative \(g'(x)\) appears as another factor.
+            </p>
+
+            <div class="example">
+                <p>
+                    Integrate \(\int 3x^2 \cdot \sin(x^3) \: dx\).
+                </p>
+                <div class="solution">
+                    <p>In the integrand \(3x^2 \cdot \sin(x^3) \), the derivative of \(x^3\) appears as a factor \(3x^2\). We set \(g(x) = x^3\) and \(F'(x) = \sin(x)\). The antiderivative of \(F'(x) = \sin(x)\) is \(F(x) = -\cos(x)\). Therefore,
+
+                    \[\int 3x^2 \cdot \sin(x^3) \: dx = -\cos(x^3) + C.\]</p>
+                </div>
+                <div class="tip">
+                    <p>
+                        Check your answer by taking the derivative again. Here, by the chain rule,
+                        \[\frac{d}{dx}(-\cos(x^3)) =  \sin(x^3) \cdot \frac{d}{dx}(x^3) = \sin(x^3) \cdot 3x^2\]
+                    </p>
+                    
+                </div>
+            </div>
+
+            <p>
+                To facilitate using this technique, we may introduce a new variable for the inside function \(u = g(x)\). As before, choose \(u\) so that its derivative \(\frac{du}{dx} = g'(x)\) appears as another factor. Then, the relation between infinitesimals \(du\) and \(dx\) is \(du = g'(x) \: dx\). Then, rewrite the integral in terms of the new variable \(u\) and its infinitesimal \(du\). Don't forget to also substitute the infinitesimal part! 
+                
+                \[
+                \begin{align*}
+                \int F'(g(x)) \cdot g'(x) \: dx &= \int F'(u) \: du &\text{substitute} \begin{cases} u = g(x) \\ du = g'(x) \: dx \end{cases}\\ 
+                &= F(u) + C &\text{antiderivative}\\
+                &= F(g(x)) + C &\text{rewrite in original variable}
+                \end{align*}
+                \]
+
+                This technique is called Integration by Substitution.
+            </p>
+
+            <div class="formula">
+                <p>
+                    <strong>Integration by Substitution.</strong> When making the substitution \(u = g(x)\), the infinitesimal part changes by a factor of the derivative
+                    \begin{align*}
+                        u &= g(x)\\
+                        du &= g'(x) \: dx
+                    \end{align*}
+                </p>
+            </div>
+            
+            <div class="example">
+                <p>
+                    Integrate \(\int 3x^2 \cdot \sin(x^3) \: dx\).
+                </p>
+                <div class="solution">
+                    <p>In the integrand \(3x^2 \cdot \sin(x^3) \), the derivative of \(x^3\) appears as a factor \(3x^2\). Substitute \(u = x^3\) and \(du = 3x^2 \: dx\). Then,
+
+                        \[
+                        \begin{align*}
+                        \int 3x^2 \cdot \sin(x^3) \: dx = \int \sin(x^3) \cdot 3x^2 \: dx &= \int \sin(u) \: du &\text{substitute} \begin{cases} u = x^3 \\  du = 3x^2 \: dx \end{cases}\\ 
+                        &= -\cos(u) + C &\text{core antiderivative}\\
+                        &= -\cos(x^3) + C &\text{rewrite in original variable}
+                        \end{align*}
+                        \]
+                    </p>
+                </div>
+            </div>
+
+            <p>By linearity of the integral, it is possible to correct for a constant factor. So we only need to choose \(u \) so that its derivative appears as a factor up to a constant multiple.</p>
+
+            <div class="example">
+                <p>
+                    Integrate \(\int x^3 \sqrt{x^4 + 1} \: dx\).
+                </p>
+                <div class="solution">
+                    <p>In the integrand \(x^3 \sqrt{x^4 + 1}  \), the derivative of \(x^4 + 1\) is \(4x^3\) which appears as the factor \(x^3\) up to a constant multiple. Substitute \(u = x^4 + 1\) and \(du = 4x^3 \: dx\). Correct for the factor by multiplying by \(\frac{1}{4}\). Then, \(\frac{1}{4} \: du = x^3 \: dx\), and the substitution yields
+
+                        \[
+                        \begin{align*}
+                        \int x^3 \sqrt{x^4 + 1} \: dx = \int \sqrt{x^4 + 1} \cdot x^3 \: dx &= \int \sqrt{u} \cdot \frac{1}{4}\: du & \text{substitute} \begin{cases} u = x^4 + 1 \\ \frac{1}{4} \: du = x^3 \: dx \end{cases} \\ 
+                        &= \frac{1}{4} \int \sqrt{u} \: du &\text{linearity of the integral}\\
+                        &= \frac{1}{4} \cdot \frac{2}{3} u^{3/2} + C &\text{core antiderivative}\\
+                        &= \frac{1}{6} u^{3/2} + C\\
+                        &= \frac{1}{6} (x^4 + 1)^{3/2} + C &\text{rewrite in original variable}
+                        \end{align*}
+                        \]
+                    </p>
+                </div>
+            </div>
+
+            
+            <p>
+                You can always make a linear change of variable \(u = ax + b\) for "free". Since the derivative is constant \(du = a \: dx\), we have \(\frac{1}{a} \: du = dx\). The integral just picks up a constant factor \(\frac{1}{a}\). For any outer function \(f(x)\), this looks like
+                    \[\int f(ax + b) \: dx = \int f(u) \cdot \frac{1}{a} \: du = \frac{1}{a} \int f(u) \: du\]
+            </p>
+            
+
+            <div class="example">
+                <p>
+                    Integrate \(\int \tan(x) \: dx\).
+                </p>
+                <div class="solution">
+                    <p>By rewriting \(\tan(x) = \frac{\sin(x)}{\cos(x)}\), this can be solved with a substitution \(u = \cos(x)\) and \(du = -\sin(x) \: dx\). 
+                        \[
+                        \begin{align*}
+                        \int \tan(x) \: dx = \int \frac{\sin(x)}{\cos(x)} \: dx = \int \frac{1}{\cos(x)} \cdot \sin(x) \: dx &= -\int \frac{1}{u} \: du & \text{substitute} \begin{cases} u = \cos(x) \\ du = -\sin(x) \: dx \\ -du = \sin(x) \: dx \end{cases} \\
+                        &= -\ln|u| + C &\text{core antiderivative}\\
+                        &= -\ln|\cos(x)| + C &\text{rewrite in original variable}
+                        \end{align*}
+                        \]
+                    </p>
+                </div>
+            </div>
+
+
+
+            <h3>Substitution with Definite Integrals</h3>
+            
+            <p>
+                For definite integrals (i.e. those with bounds like \(\int_a^b f(x) \: dx\)), remember that the bounds are in terms of the variable of integration. Therefore, when computing definite integrals using substitution we must either... 
+                <ul>
+                    <li>compute the antiderivative in the original variable, and evaluate the net change in the original variable, or</li>
+                    <li>change the bounds in terms of the new variable and evaluate the net change in the new variable.</li>
+                </ul>
+                To avoid confusion, we may write the variable of integration in the bounds \(\int_a^b f(x) \: dx = \int_{x = a}^{x = b} f(x) \: dx\).
+            </p>
+            <div class="example">
+                <p>
+                    Integrate \(\int_{0}^{\pi/4} \frac{\tan^3(x)}{\cos^2(x)} \: dx\).
+                </p>
+                <div class="solution">
+                    <p>In the integrand \(\frac{\tan^3(x)}{\cos^2(x)}\), the derivative of \( \tan(x) \) is \(\sec^2(x) = \frac{1}{\cos^2(x)}\). Substitute \(u = \tan(x)\) and \(du = \frac{1}{\cos^2(x)} \: dx\).
+                        \[
+                        \begin{align*}
+                        \int_{0}^{\pi/4} \frac{\tan^3(x)}{\cos^2(x)} \: dx = \int_{x=0}^{x=\pi/4} \tan^3(x) \cdot \frac{1}{\cos^2(x)} \: dx &= \int_{x=0}^{x=\pi/4} u^3 \: du & \text{substitute} \begin{cases} u = \tan(x) \\ \frac{1}{4} \: du = \frac{1}{\cos^2(x)} \: dx \end{cases} \\ 
+                        &= \left[\frac{1}{4} u^{4}\right]_{x=0}^{x=\pi/4} &\text{core antiderivative}\\
+                        &= \left[\frac{1}{4} \tan^{4}(x)\right]_{x=0}^{x=\pi/4} &\text{rewrite in original variable}\\
+                        &= \left[\frac{1}{4} \tan^{4}(\pi/4)\right] - \left[\frac{1}{4} \tan^{4}(0)\right] &\text{evaluate net change}\\
+                        &= \left[\frac{1}{4} (1)^4\right] - \left[\frac{1}{4} (0)^4\right]\\
+                        &= \frac{1}{4}
+                        \end{align*}
+                        \]
+                        alternatively, we may change the bounds in terms of the new variable. In the lower bound \(x = 0\), so \(u = \tan(0) = 0\). In the upper bound \(x = \pi/4\), then \(u = \tan(\pi/4) = 1\).
+                        
+                        \[
+                        \begin{align*}
+                        \int_{0}^{\pi/4} \frac{\tan^3(x)}{\cos^2(x)} \: dx = \int_{x=0}^{x=\pi/4} \tan^3(x) \cdot \frac{1}{\cos^2(x)} \: dx &= \int_{u=0}^{u=1} u^3 \: du & \text{substitute} \begin{cases} u = \tan(x) \\ \frac{1}{4} \: du = \frac{1}{\cos^2(x)} \: dx\\ x = 0 \implies u = 0 \\ x = \pi/4 \implies u = 1\end{cases} \\ 
+                        &= \left[\frac{1}{4} u^{4}\right]_{u=0}^{u=1} &\text{core antiderivative}\\
+                        &= \left[\frac{1}{4} (1)^4\right] - \left[\frac{1}{4} (0)^4\right] &\text{evaluate net change}\\
+                        &= \frac{1}{4}
+                        \end{align*}
+                        \]
+                    </p>
+                </div>
+            </div>    
+
+            <div class="example">
+                <p>
+                    Integrate \(\int_{1}^{3} \frac{1}{5 - x} \: dx\).
+                </p>
+                <div class="solution">
+                    <p>
+                        Make the substitution \(u = 5 - x\) and \(du = -1 \: dx\), \(-1 \: du = dx\).
+                        \[
+                        \begin{align*}
+                        \int_{1}^{3} \frac{1}{5 - x} \: dx = \int_{x=1}^{x=3} \frac{1}{5 - x} \: dx &= \int_{x=1}^{x=3} \frac{1}{u} \cdot (-1)\: du & \text{substitute} \begin{cases} u = 5-x \\  - du = dx \end{cases} \\ 
+                        &= \left[-\ln|u|\right]_{x=1}^{x=3} &\text{core antiderivative}\\
+                        &= \left[-\ln|5-x|\right]_{x=1}^{x=3} &\text{rewrite in original variable}\\
+                        &= \left[-\ln|5-3|\right] - \left[-\ln|5-1|\right] &\text{evaluate net change}\\
+                        &= -\ln(2) + \ln(4)\\
+                        &= \ln(4/2)\\
+                        &= \ln(2)
+                        \end{align*}
+                        \]
+                        bounds in terms of the new variable \(x = 1 \implies u = 5 - 1 = 4\) and \(x = 3 \implies u = 5 - 3 = 2\):
+                        \[
+                        \begin{align*}
+                        \int_{1}^{3} \frac{1}{5 - x} \: dx = \int_{x=1}^{x=3} \frac{1}{5 - x} \: dx &= \int_{u=4}^{u=2} \frac{1}{u} \cdot (-1)\: du & \text{substitute} \begin{cases} u = 5-x \\  - du = dx \\ x = 1 \implies u = 4 \\ x = 3 \implies u = 2\end{cases} \\ 
+                        &= \left[-\ln|u|\right]_{u=4}^{x=2} &\text{core antiderivative}\\
+                        &= \left[-\ln|2|\right] - \left[-\ln|4|\right] &\text{evaluate net change}\\
+                        &= -\ln(2) + \ln(4)\\
+                        &= \ln(4/2)\\
+                        &= \ln(2)
+                        \end{align*}
+                        \]
+                    </p>
+                </div>
+            </div>
+
+            <h3>More Complex Substitutions</h3>
+                In some cases the derivative doesn't appear as another, but you can still "brute force" the substitution.
+                <div class="example">
+                    <p>
+                        Integrate \(\int \sqrt{1 + \sqrt{x}} \: dx\).
+                    </p>
+                    <div class="solution">
+                        <p>
+                            Make the substitution \(u = 1 + \sqrt{x}\). Then solving for \(x\):
+                            \[
+                            \begin{align*}
+                                u - 1 &= \sqrt{x}\\
+                                (u - 1)^2 &= x
+                            \end{align*}
+                            \]
+                            and taking the derivative, \(2(u-1) \: du = dx\). Applying the substitution, we get
+                            \[
+                            \begin{align*}
+                            \int \sqrt{1 + \sqrt{x}} \: dx &= \int \sqrt{u} \cdot 2(u-1) \: du & \text{substitute} \begin{cases} u = 1 + \sqrt{x} \\ 2(u-1) \: du = dx \end{cases} \\
+                            &= \int 2 u^{3/2} - 2 u^{1/2} \: du \\
+                            &= \frac{4}{5}u^{5/2} - \frac{4}{3}u^{3/2} + C &\text{core antiderivative}\\
+                            &= \frac{4}{5}(1 + \sqrt{x})^{5/2} - \frac{4}{3}(1 + \sqrt{x})^{3/2} + C &\text{rewrite in original variable}
+                            \end{align*}
+                            \]
+                            Notice that the substitution produced an extra factor \(2(u-1)\); however, after distributing, the integrand the difference of power functions which can be solved by the power rule.
+                        </p>
+                    </div>
+                </div>
+                <div class="example">
+                    <p>
+                        Integrate \(\int (x+7)\sqrt[3]{3 - 2x} \: dx\).
+                    </p>
+                    <div class="solution">
+                        <p>
+                            Make the substitution \(u = 3 - 2x\). Then solving for \(x\):
+                            \[
+                            \begin{align*}
+                                u - 3 &= -2x\\
+                                \frac{3}{2} - \frac{1}{2}u &= x
+                            \end{align*}
+                            \]
+                            and taking the derivative, \(-\frac{1}{2} \: du = dx\). Applying the substitution, we get
+                            \[
+                            \begin{align*}
+                            \int (x+7)\sqrt[3]{3 - 2x} \: dx &= \int \left(\frac{3}{2} - \frac{1}{2}u + 7\right)\sqrt[3]{u} \cdot \left(-\frac{1}{2}\right) \: du & \text{substitute} \begin{cases} u = 3 - 2x \\ \frac{3}{2} - \frac{1}{2}u = x\\ -\frac{1}{2} \: du = dx \end{cases} \\
+                            &= \int -\frac{1}{2}\left(\frac{17}{2} - \frac{1}{2}u\right)\sqrt[3]{u} \: du\\
+                            &= \int \left(\frac{1}{4}u - \frac{17}{4}\right)\sqrt[3]{u} \: du\\
+                            &= \int \frac{1}{4}u^{4/3} - \frac{17}{4}u^{1/3} \: du\\
+                            &= \frac{3}{28}u^{7/3} - \frac{51}{16}u^{4/3} + C &\text{core antiderivative}\\
+                            &= \frac{3}{28}(3 - 2x)^{7/3} - \frac{51}{16}(3 - 2x)^{4/3} + C &\text{rewrite in original variable}
+                            \end{align*}
+                            \]
+                        </p>
+                    </div>
+                </div>
+                In principle, you can "brute force" any substitution, but the goal is to convert the integral into one which you already know.
+            
+            <h2 id="Ch7.2">7.2 Integration by Parts</h2>
+            <p>
+                Here is an example where substitution does not help:
+                \[\int x \cdot e^x \: dx\]
+                The \(x\) factor doesn't appear as the derivative of another part.
+            </p>
+            
+            <p>
+                We introduce another technique which is based on the product rule for derivatives. Suppose \(u\) and \(v\) are functions of \(x\). By the product rule:
+                \[\frac{d}{dx}(u \cdot v) = u' \cdot v + u \cdot v'\]
+                by integrating both sides,
+                \[u \cdot v = \int u' \cdot v \: dx + \int u \cdot v' \: dx\]
+                and rearranging terms
+                \[\int u \cdot v' \: dx = u \cdot v - \int u' \cdot v \: dx\]
+                yields a formula for writing one integral \(\int u \cdot v' \: dx\) in terms of another \(\int u' \cdot v \: dx\). As with substitution, the goal is to pick the parts \(u\) and \(v'\) wisely so that the right side integral is easier to solve than left side. This technique is called Integration by Parts.
+            </p>
+            <div class="formula">
+                <p>
+                    Integration by Parts.
+                \[\int u \cdot v' \: dx = u \cdot v - \int u' \cdot v \: dx\]
+                </p>
+            </div>
+
+            <div class="example">
+                <p>Integrate \(\int x e^x \: dx\).</p>
+                <div class="solution">
+                    <p>
+                        Choose parts \(u = x\) and \(v' = e^x\). Then, the derivative is \(u' = 1\) and the antiderivative is \(v = e^x\). Applying Integration by Parts formula,
+                        \[
+                        \begin{align*}
+                        \int x e^x \:dx &= x e^x - \int 1 \cdot e^x \: dx &\text{Integration by Parts}\\
+                        &= x e^x - \int e^x \: dx\\
+                        &= x e^x - e^x + C &\text{core antiderivative}\\
+                        \end{align*}
+                        \]
+                    </p>
+                </div>
+                <div class="tip">
+                    <p>We chose \(u = x\) and \(v' = e^x\) so that the resulting integral becomes simpler. If we had instead chosen \(u = e^x\) and \(v' = x\), then \(u' = e^x\) and \(v = \frac{1}{2}x^2\), then
+                    \[\int x e^x \:dx = \frac{1}{2}x^2 e^x - \int \frac{1}{2}x^2 e^x \: dx\]
+                    the right side integral is no easier.</p>
+
+                    <p>Knowing which parts to choose is just as important as knowing the formula itself.</p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Integrate \(\int \theta \cos(\theta) \: d\theta\).</p>
+                <div class="solution">
+                    <p>
+                        Choose parts \(u = \theta\) and \(v' = \cos(\theta)\). Then, \(u' = 1\) and \(v = \sin(\theta)\). Applying Integration by Parts formula,
+                        \[
+                        \begin{align*}
+                        \int \theta \cos(\theta) \:d\theta &= \theta \sin(\theta) - \int 1 \cdot \sin(\theta) \: d\theta &\text{Integration by Parts}\\
+                        &= \theta \sin(\theta) - \int \sin(\theta) \: d\theta\\
+                        &= \theta \sin(\theta) + \cos(\theta) + C &\text{core antiderivative}\\
+                        \end{align*}
+                        \] 
+                    </p>
+                </div>
+            </div>
+            <p>
+                When applying Integration by Parts, one factor transforms to its derivative \(u \mapsto u'\) and the other factor to its antiderivative \(v' \mapsto v\). So it helps to choose as \(v'\) the factor which has the easiest integrate. Exponential functions \(e^x\), and the trigonometric functions \(\sin(x), \cos(x)\) are good candidates for \(v'\), as their antiderivative is again a simple exponential or trigonometric function. 
+                Polynomial functions like \(x^n\) are next easiest to integrate; their antiderivative is polynomial, but increase in degree.
+                The inverse functions \(\ln(x), \arcsin(x), \arccos(x)\) are much harder to integrate, and are bad candidates for \(v'\). To summarize, in order from harder to easier to integrate:
+            </p>
+            
+            <ul>
+                <li>Logarithm: \(\ln(x)\)</li>
+                <li>Inverse Trigonometric: \(\arcsin(x), \arccos(x)\)</li>
+                <li>Polynomial: \(x^n\)</li>
+                <li>Exponential: \(e^x\)</li>
+                <li>Trigonometric: \(\sin(x), \cos(x)\)</li>
+            </ul>
+
+            <p>The can be remembered by the acronym "LIPET". Choose \(u\) higher on the list and \(v'\) lower on the list.</p>
+
+            <p>For definite integrals, the term uv is part of the antiderivative, hence, the net change is applied to it.</p>
+
+            <div class="formula">
+                <p>
+                    Integration by Parts for Definite Integrals.
+                    \[\int_{a}^{b} u \cdot v' \: dx = [u \cdot v]_{a}^{b} - \int_{a}^{b} u' \cdot v \: dx\]
+                    The term \([u \cdot v]_{a}^{b}\) stands for the net change \(u(b)\cdot v(b) - u(a)\cdot v(a)\)
+                </p>
+            </div>
+
+            <div class="example">
+                <p>Integrate \(\int_2^3 \ln(x) \: dx\).</p>
+                <div class="solution">
+                    <p>
+                        \(\ln(x) = 1 \cdot \ln(x)\). \(1\) is polynomial and \(\ln(x)\) is logarithmic, so choose parts \(u = \ln(x)\) and \(v' = 1\). Then, \(u' = \frac{1}{x}\) and \(v = x\). Applying Integration by Parts formula,
+                        \[
+                        \begin{align*}
+                        \int_2^3 \ln(x) \: dx &= [x \ln(x)]_2^3 - \int_2^3 \frac{1}{x} \cdot x \: dx &\text{Integration by Parts}\\
+                        &= [x \ln(x)]_2^3 - \int_2^3 \: dx\\
+                        &= [x \ln(x)]_2^3 - [x]_2^3 &\text{core antiderivative}\\
+                        &= [3 \ln(3) - 2 \ln(2)] - [3 - 2] &\text{net change}\\
+                        &= 3 \ln(3) - 2 \ln(2) - 1\\
+                        \end{align*}
+                        \] 
+                    </p>
+                </div>
+            </div>
+
+            <h3>Use Multiple Integration Techniques</h3>
+
+            <p>Here is an example which requires substitution and integration by parts:</p>
+
+            <div class="example">
+                <p>Integrate \(\int x^3 e^{x^2} \: dx\).</p>
+                <div class="solution">
+                    <p>
+                        We would like to convert \(e^{x^2}\) to the core function \(e^t\) which has a simple antiderivative. Use substitution \(t = x^2\) and 
+                        \[
+                            \begin{align*}
+                            dt &= 2x \: dx\\
+                            \frac{1}{2} \: dt &= x \: dx\\
+                            \end{align*}
+                        \]
+                        the integral becomes
+                        \[
+                            \begin{align*}
+                            \int x^3 e^{x^2} \: dx &= \int x^2 \cdot e^{x^2} \cdot x \: dx\\ 
+                            &= \int t \cdot e^t \cdot \frac{1}{2} \:dt\\
+                            &= \int \frac{1}{2} t \cdot e^t \:dt\\
+                            \end{align*}
+                        \]
+                        which may be solved with Integration by Parts with \(u = \frac{1}{2}t\) and \(v' = e^t\). Then, \(u' = \frac{1}{2}\) and \(v = e^t\).
+                        \[
+                        \begin{align*}
+                        \int \frac{1}{2} t \cdot e^t \:dt &= \frac{1}{2} t e^t - \int \frac{1}{2} e^t \:dt &\text{Integration by Parts}\\
+                        &= \frac{1}{2} t e^t - \frac{1}{2} e^t + C &\text{core antiderivative}\\
+                        &= \frac{1}{2} x^2 e^{x^2} - \frac{1}{2} e^{x^2} + C &\text{rewrite original variable}
+                        \end{align*}
+                        \]
+                    </p>
+                </div>
+            </div>
+            
+            <p>Here is an example which requires integration by parts multiple times:</p>
+
+            <div class="example">
+                <p>Integrate \(\int x^2 \sin(4x) \: dx\).</p>
+                <div class="solution">
+                    <p>
+                        The integrand is a polynomial times a trigonometric function. Use Integration by Parts with \(u = x^2\) and \(v' = \sin(4x)\). Then, \(u' = 2x\) and \(v = -\frac{1}{4}\cos(4x)\).
+                        \[
+                        \begin{align*}
+                        \int x^2 \sin(4x) \: dx &= x^2 \cdot (-\frac{1}{4}\cos(4x)) - \int 2x \cdot (-\frac{1}{4}\cos(4x)) \:dx &\text{Integration by Parts}\\
+                        &= -\frac{1}{4} x^2 \cos(4x) + \int \frac{1}{2} x \cdot \cos(4x) \:dx
+                        \end{align*}
+                        \]
+                        Notice the integrand is still a polynomial times a trigonometric function, but the polynomial has decrease in degree by one. Use Integration by Parts again with \(u = \frac{1}{2} x\) and \(v' = \cos(4x)\). Then, \(u' = \frac{1}{2}\) and \(v = \frac{1}{4}\sin(4x)\).
+                        \begin{align*}
+                        -\frac{1}{4} x^2 \cos(4x) + \int \frac{1}{2} x \cdot \cos(4x) \:dx &= -\frac{1}{4} x^2 \cos(4x) +  \frac{1}{2} x \cdot \frac{1}{4}\sin(4x) - \int \frac{1}{2} \cdot \frac{1}{4}\sin(4x) \: dx &\text{Integration by Parts}\\
+                        &= -\frac{1}{4} x^2 \cdot \cos(4x) +  \frac{1}{8} x \sin(4x) - \int \frac{1}{8} \sin(4x) \: dx\\
+                        &= -\frac{1}{4} x^2 \cos(4x) +  \frac{1}{8} x \sin(4x) + \frac{1}{32} \cos(4x) + C &\text{core antiderivative}\\
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            <p>In some cases we use integration by parts to transform the integral into some multiple of the original, then solve for the original:</p>
+
+            <div class="example">
+                <p>Integrate \(\int \cos^2(x) \: dx\).</p>
+                <div class="solution">
+                    <p>
+                        The integrand \(\cos^2(x) = \cos(x) \cdot \cos(x)\) is a trigonometric function times a trigonometric function. Use Integration by Parts with \(u = \cos(x)\) and \(v' = \cos(x)\). Then, \(u' = -\sin(x)\) and \(v = \sin(x)\).
+                        \[
+                        \begin{align*}
+                        \int \cos^2(x) \: dx &= \cos(x)\sin(x) - \int (-\sin(x)) \cdot \sin(x) \:dx &\text{Integration by Parts}\\
+                        &= \cos(x)\sin(x) + \int \sin^2(x) \:dx
+                        \end{align*}
+                        \]
+                        Notice the integrand is still trigonometric function times a trigonometric function, no better than before. However, using the Pythagorean identity, \(\cos^2(x) + \sin^2(x) = 1\),
+
+                        \begin{align*}
+                        \int \cos^2(x) \: dx = \cos(x)\sin(x) + \int \sin^2(x) \:dx \:dx &= \cos(x)\sin(x) + \int [1 - \cos^2(x)] \:dx\\
+                        &= \cos(x)\sin(x) + \int 1 \:dx - \int \cos^2(x) \:dx\\
+                        &= \cos(x)\sin(x) + x - \int \cos^2(x) \:dx &\text{core antiderivative}\\
+                        \end{align*}
+
+                        It seems we are back where we started. However, now we have an equation for which we can solve for the integral \(\int \cos^2(x) \:dx\):
+                        
+                        \begin{align*}
+                        \int \cos^2(x) \: dx &= \cos(x)\sin(x) + x - \int \cos^2(x) \:dx\\
+                        2\int \cos^2(x) \: dx &= \cos(x)\sin(x) + x &\text{add $\int \cos^2(x) \:dx$ on both sides}\\
+                        \int \cos^2(x) \: dx &= \frac{1}{2}\cos(x)\sin(x) + \frac{1}{2}x + C\\
+                        \end{align*}
+
+                    </p>
+                </div>
+            </div>
+
+            <h3>The DI Table Method</h3>
+
+            <p>The DI table, or tabular method, is a method for doing integration by parts. It contains no more and no less information than the integration by parts formula. It is helpful for organizing your work, especially when using integration by parts multiple times.</p>
+            
+            <p>Set up a table with three columns: the first column is an alternating sign, the second with header "D", and the third with header "I":</p>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>D</th>
+                        <th>I</th>
+                    </tr>
+                    <tr>
+                        <td>\(+\)</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>                       
+                        <td>\(-\)</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>\(+\)</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>                       
+                        <td>\(-\)</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <p>The "D" stands for derivative and the "I" for integral. The number of rows after the first row represents the number of times you intend to use integration by parts. Place your choice for \(u\) in the "D" column and for \(v'\) in the "I" column. We illustrate with the earlier example \(\int x^2 \sin(4x) \: dx\).</p>
+                <table>
+                    <tr>
+                        <th></th><th>D</th><th>I</th>
+                    </tr>
+                    <tr>
+                        <td>\(+\)</td><td>\(x^2\)</td><td>\(\sin(4x)\)</td>
+                    </tr>
+                    <tr>                       
+                        <td>\(-\)</td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td>\(+\)</td><td></td><td></td>
+                    </tr>
+                    <tr>                       
+                        <td>\(-\)</td><td></td><td></td>
+                    </tr>
+                </table>
+                <p>Then take derivatives down the "D" column and antiderivatives in the "I" column. You may stop when you know how to integrate a row.</p>
+                <table>
+                    <tr>
+                        <th></th><th>D</th><th>I</th>
+                    </tr>
+                    <tr>
+                        <td>\(+\)</td><td>\(x^2\)</td><td>\(\sin(4x)\)</td>
+                    </tr>
+                    <tr>                       
+                        <td>\(-\)</td><td>\(2x\)</td><td>\(-\frac{1}{4}\cos(4x)\)</td>
+                    </tr>
+                    <tr>
+                        <td>\(+\)</td><td>\(2\)</td><td>\(-\frac{1}{16}\sin(4x)\)</td>
+                    </tr>
+                    <tr>                       
+                        <td>\(-\)</td><td>\(0\)</td><td>\(\frac{1}{64}\cos(4x)\)</td>
+                    </tr>
+                </table>
+                <p>Apply the alternating sign to "D" column. Then, read off your answer as the sum of the product of &searr; diagonals, plus the integral of the last row. Here, this yields
+                \begin{align*}
+                    \int x^2 \sin(4x) \: dx &= x^2 \cdot (-\frac{1}{4}\cos(4x)) + (-2x) \cdot (-\frac{1}{16}\sin(4x)) + 2 \cdot (\frac{1}{64}\cos(4x)) + \int (-0) \cdot (\frac{1}{64}\cos(4x))\: dx\\
+                    &= -\frac{1}{4} x^2 \cos(4x) + \frac{1}{8}x\sin(4x) + \frac{1}{32}\cos(4x) + \int 0\: dx\\
+                    &= -\frac{1}{4} x^2 \cos(4x) + \frac{1}{8}x\sin(4x) + \frac{1}{32}\cos(4x) + 0 + C\\
+                    &= -\frac{1}{4} x^2 \cos(4x) + \frac{1}{8}x\sin(4x) + \frac{1}{32}\cos(4x) + C\\
+                \end{align*}
+                </p>
+
+                <div class="example">
+                <p>Integrate \(\int \sin(2x) \cdot e^x \: dx\).</p>
+                <div class="solution">
+                    <p>Using the DI table:</p>
+                    
+                    <table>
+                        <tr>
+                            <th></th><th>D</th><th>I</th>
+                        </tr>
+                        <tr>
+                            <td>\(+\)</td><td>\(\sin(2x)\)</td><td>\(e^x\)</td>
+                        </tr>
+                        <tr>                       
+                            <td>\(-\)</td><td>\(2\cos(2x)\)</td><td>\(e^x\)</td>
+                        </tr>
+                        <tr>
+                            <td>\(+\)</td><td>\(-4\sin(2x)\)</td><td>\(e^x\)</td>
+                        </tr>
+                    </table>
+                    <p>
+                        Here we stop since the last row is a multiple of the first row, and we can solve for the original integral. From the DI table, we read
+                        \begin{align*}
+                        \int \sin(2x) \cdot e^x \: dx = \sin(2x) \cdot e^x - 2\cos(2x) \cdot e^x - 4 \int \sin(2x) \cdot e^x \: dx
+                        \end{align*}
+                        Solve for the original integral \(\int \sin(2x) \cdot e^x \: dx\).
+                        \begin{align*}
+                        \int \sin(2x) \cdot e^x \: dx &= \sin(2x) \cdot e^x - 2\cos(2x) \cdot e^x - 4 \int \sin(2x) \cdot e^x \: dx\\
+                            5\int \sin(2x) \cdot e^x \: dx &= \sin(2x) \cdot e^x - 2\cos(2x) \cdot e^x\\
+                            \int \sin(2x) \cdot e^x \: dx &= \frac{1}{5} \sin(2x) \cdot e^x - \frac{2}{5} \cos(2x) \cdot e^x + C
+                        \end{align*}
+                    </p>
+                    
+                </div>
+            </div>
+
+
+            <h2 id="Ch7.4">7.4 Algebraic Identities and Trigonometric Substitutions</h2>
+
+            <h3>Partial Fraction Decomposition</h3>
+
+            <p><strong>Rational functions</strong> are a ratio of polynomials. Like with ordinary fractions, to add or subtract two rational functions, you must have a common denominator. For example:
+            \[\frac{1}{x+2} + \frac{3}{x+5} = \frac{1(x+5)}{(x+2)(x+5)} + \frac{3(x+2)}{(x+2)(x+5)} = \frac{(x+5)+3(x+2)}{(x+2)(x+5)} = \frac{4x+11}{(x+2)(x+5)} = \frac{4x+11}{x^2 + 7x + 10}\]
+            Analyze this computation in reverse; we have converted one fraction \(\frac{4x+11}{x^2 + 7x + 10}\) into two fractions \(\frac{1}{x+2}\) and \(\frac{3}{x+5}\) with simpler denominators.
+
+            Summing the fractions is easy, but doing it in reverse is more challenging. If you had started from \(\frac{4x+11}{x^2 + 7x + 10}\), how would you find \(\frac{1}{x+2}\) and \(\frac{3}{x+5}\)? The algorithm to do so is called Partial Fraction Decomposition.
+            </p>
+
+            <p>First, we examine the simplest case, when the denominator has distinct linear factors.</p>
+            <div class="algorithm">
+                <p>Partial Fraction Decomposition with Distinct Linear Factors.</p>
+                
+                <p>
+                Consider the rational function \(\frac{p(x)}{q(x)}\) where \(p(x)\) and \(q(x)\) are polynomials.
+                </p>
+                <p>
+                Suppose that
+                <ul>
+                    <li>the degree of the numerator is smaller than the denominator \(\deg p(x) < \deg q(x)\), and</li>
+                    <li>the denominator factors into <strong>distinct</strong> linear factors \[q(x) = (x-c_1) \cdots (x-c_n)\] i.e. no two of \(c_1, \dots, c_n\) are the same</li>
+                </ul>
+                then there are unique real numbers \(A_1, \dots, A_n\), such that there is a decomposition
+                \[\frac{p(x)}{q(x)} = \frac{A_1}{(x-c_1)} + \cdots + \frac{A_n}{(x-c_n)}\]
+                
+                and you can solve for \(A_1, \dots, A_n\) by clearing denominators (multiply both sides by \(q(x)\)) and equating the resulting polynomials.
+                </p>
+            </div>
+            
+            <p>Partial Fraction Decomposition is useful for integration because the partial fractions have simple antiderivatives.</p>
+
+            <div class="example">
+                <p>
+                    Compute the Partial Fraction Decomposition for \(\frac{1}{(x-2)(x-5)}\).
+                </p>
+<!--                 <div class="solution">
+                    The denominator has distinct linear factors, so the decomposition has form
+                    \[\frac{1}{(x-2)(x-5)} = \frac{A}{x-2} + \frac{B}{x-5}\]
+                    where \(A\) and \(B\) are real numbers. To solve, multiply through by \((x-2)(x-5)\)
+                    \begin{align*}
+                    \frac{1}{(x-2)(x-5)} &= \frac{A}{x-2} + \frac{B}{x-5}\\
+                    1 &= A(x-5) + B(x-2)\\
+                    &= Ax-5A + Bx-2B\\
+                    &= (A + B)x + (-5A -2B)
+                    \end{align*}
+                    the two sides \(1\) and \((A + B)x + (-5A -2B)\) are equal as polynomials in the variable \(x\). Equating coefficients yields a system of linear equations
+                    \begin{align*}
+                        0 &= A+B\\
+                        1 &= -5A-2B
+                    \end{align*}
+                    with solution \(A = -\frac{1}{3}\) and \(B = \frac{1}{3}\). The Partial Fraction Decomposition is
+                    \[\frac{1}{(x-2)(x-5)} = \frac{-\frac{1}{3}}{x-2} + \frac{\frac{1}{3}}{x-5}\]
+                </div> -->
+                <div class="solution">
+                    <p>The denominator has distinct linear factors, so the decomposition has form
+                    \[\frac{1}{(x-2)(x-5)} = \frac{A}{x-2} + \frac{B}{x-5}\]
+                    where \(A\) and \(B\) are real numbers. To solve, multiply through by \((x-2)(x-5)\)
+                    \begin{align*}
+                    \frac{1}{(x-2)(x-5)} &= \frac{A}{x-2} + \frac{B}{x-5}\\
+                    1 &= A(x-5) + B(x-2)
+                    \end{align*}
+                    the two sides are equal as polynomials in the variable \(x\), which means they are equal for any value of \(x\). In particular, plugging in \(x = 5\) kills the first term.
+                    \begin{align*}
+                        1 &= A(5-5) + B(5-2)\\
+                        1 &= 3B\\
+                        B &= \frac{1}{3}
+                    \end{align*}
+                    Plugging in \(x = 2\) kills the first second.
+                    \begin{align*}
+                        1 &= A(2-5) + B(2-2)\\
+                        1 &= -3A\\
+                        A &= -\frac{1}{3}
+                    \end{align*}
+                    The Partial Fraction Decomposition is
+                    \[\frac{1}{(x-2)(x-5)} = \frac{-\frac{1}{3}}{x-2} + \frac{\frac{1}{3}}{x-5}\]</p>
+                </div>
+                <p>Integrate \(\int \frac{1}{(x-2)(x-5)} \: dx\)</p>
+                <div class="solution">
+                    <p>Using the Partial Fraction Decomposition
+                    \begin{align*} 
+                    \int \frac{1}{(x-2)(x-5)} \: dx &= \int \frac{-\frac{1}{3}}{x-2} + \frac{\frac{1}{3}}{x-5} \: dx\\
+                    &= -\frac{1}{3}\int \frac{1}{x-2} \: dx + \frac{1}{3} \int \frac{1}{x-5} \: dx\\
+                    &= -\frac{1}{3}\ln|x-2| + \frac{1}{3} \ln|x-5| + C
+                    \end{align*}</p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>
+                    Compute the Partial Fraction Decomposition for \(\frac{x + 2}{x^2 + x}\).
+                </p>
+                <div class="solution">
+                    <p>The denominator factors into distinct linear factors \(x^2 + x = x(x+1)\), so the decomposition has form
+                    \[\frac{x + 2}{x^2 + x} = \frac{A}{x} + \frac{B}{x+1}\]
+                    where \(A\) and \(B\) are real numbers. To solve, multiply through by \(x^2 + x = x(x+1)\)
+                    \begin{align*}
+                    \frac{x + 2}{x^2 + x} = \frac{A}{x} + \frac{B}{x+1}\\
+                    x + 2 &= A(x+1) + Bx
+                    \end{align*}
+                    the two sides are equal as polynomials in the variable \(x\), which means they are equal for any value of \(x\). Plugging in \(x = -1\):
+                    \begin{align*}
+                        -1 + 2 &= A(-1+1) + B(-1)\\
+                        1 &= -B\\
+                        B &= -1
+                    \end{align*}
+                    Plugging in \(x = 0\):
+                    \begin{align*}
+                        0 + 2 &= A(0+1) + B(0)\\
+                        2 &= A\\
+                        A &= 2
+                    \end{align*}
+                    The Partial Fraction Decomposition is
+                    \[\frac{x + 2}{x^2 + x} = \frac{2}{x} + \frac{-1}{x+1}\]</p>
+                </div>
+                <p>Integrate \(\int \frac{x + 2}{x^2 + x} \: dx\)</p>
+                <div class="solution">
+                    <p>Using the Partial Fraction Decomposition
+                    \begin{align*} 
+                    \int \frac{x + 2}{x^2 + x} \: dx &= \int \frac{2}{x} + \frac{-1}{x+1} \: dx\\
+                    &= 2\int \frac{1}{x} \: dx - \int \frac{1}{x+1} \: dx\\
+                    &= 2\ln|x| - \ln|x+1| + C
+                    \end{align*}</p>
+                </div>
+            </div>
+
+            <p>Some modification to the decomposition form when the denominator has repeated linear factors.</p>
+            <div class="algorithm">
+                <p>Partial Fraction Decomposition with (Repeat) Linear Factors.</p>
+                
+                <p>
+                Consider the rational function \(\frac{p(x)}{q(x)}\) where \(p(x)\) and \(q(x)\) are polynomials.
+                </p>
+                <p>
+                Suppose that
+                <ul>
+                    <li>the degree of the numerator is smaller than the denominator \(\deg p(x) < \deg q(x)\), and</li>
+                    <li>the denominator \(q(x)\) factors into (possibly repeated) linear factors </li>
+                </ul>
+                <strong>for each</strong> factor \((x-c)\) of \(q(x)\) with multiplicity \(r\) (i.e. repeated \(r\) times), the decomposition has partial fractions of the form
+                \[\frac{A_1}{(x-c)^1} + \frac{A_2}{(x-c)^2} + \cdots + \frac{A_r}{(x-c)^r}\]
+                where \(A_1, \dots, A_r\) are unique real numbers.
+                </p>
+            </div>
+
+            <div class="example">
+                <p>
+                    Compute the Partial Fraction Decomposition for \(\frac{10x - 2x^2}{(x-1)^2(x+3)}\).
+                </p>
+                <div class="solution">
+                    <p>The denominator has linear factors \((x-1)\) with multiplicity \(2\) and \((x+3)\) with multiplicity \(1\), so the decomposition has form
+                    \[\frac{10x - 2x^2}{(x-1)^2(x+3)} = \frac{A}{x-1} + \frac{B}{(x-1)^2} + \frac{C}{x+3}\]
+                    where \(A,B,C\) are real numbers. To solve, multiply through by \((x-1)^2(x+3)\)
+                    \begin{align*}
+                    \frac{10x - 2x^2}{(x-1)^2(x+3)} &= \frac{A}{x-1} + \frac{B}{(x-1)^2} + \frac{C}{x+3}\\
+                    10x - 2x^2 &= A(x-1)(x+3) + B(x+3) + C(x-1)^2
+                    \end{align*}
+                    Plugging in \(x = 1\) kills the first and third term:
+                    \begin{align*}
+                        10(1) - 2(1)^2 &= A(1-1)(1+3) + B(1+3) + C(1-1)^2\\
+                        8 &= 4B\\
+                        B &= 2
+                    \end{align*}
+                    Plugging in \(x = -3\) kills the first and second term:
+                    \begin{align*}
+                        10(-3) - 2(-3)^2 &= A(-3-1)(-3+3) + B(-3+3) + C(-3-1)^2\\
+                        -48 &= 16C\\
+                        C &= -3
+                    \end{align*}
+                    There is no way to directly kill the second and third term. In this case, choose any other value for \(x\). Plugging in \(x = 0\):
+                    \begin{align*}
+                        10(0) - 2(0)^2 &= A(0-1)(0+3) + B(0+3) + C(0-1)^2\\
+                        0 &= -3A + 3B + C\\
+                        0 &= -3A + 3(2) + -3\\
+                        3A &= 3\\
+                        A &= 1
+                    \end{align*}
+                    The Partial Fraction Decomposition is
+                    \[\frac{10x - 2x^2}{(x-1)^2(x+3)} = \frac{1}{x-1} + \frac{2}{(x-1)^2} + \frac{-3}{x+3}\]</p>
+                </div>
+                <p>Integrate \(\int \frac{10x - 2x^2}{(x-1)^2(x+3)} \: dx\)</p>
+                <div class="solution">
+                    <p>Using the Partial Fraction Decomposition
+                    \begin{align*} 
+                    \int \frac{10x - 2x^2}{(x-1)^2(x+3)} \: dx &= \int \frac{1}{x-1} + \frac{2}{(x-1)^2} + \frac{-3}{x+3} \: dx\\
+                    &= \int \frac{1}{x-1}\: dx + 2 \int \frac{1}{(x-1)^2}\: dx -3 \int \frac{1}{x+3} \: dx\\
+                    &= \ln|x-1| - \frac{2}{x-1} - 3 \ln|x+3| + C
+                    \end{align*}</p>
+                </div>
+            </div>
+
+            Some polynomials cannot be factored into linear factors over the real numbers. For example, quadratic polynomials \(ax^2 + bx + c\) are not factorable if the discriminant \(b^2 - 4ac\) is negative, as they have no real roots. In the case of an irreducible quadratic factor, the numerators of the corresponding partial fractions can be degree 1, i.e. the form \(Ax+B\).
+
+            <div class="algorithm">
+                <p>Partial Fraction Decomposition with Irreducible Quadratic Factors.</p>
+                
+                <p>
+                Consider the rational function \(\frac{p(x)}{q(x)}\) where \(p(x)\) and \(q(x)\) are polynomials.
+                </p>
+                <p>
+                Suppose that
+                <ul>
+                    <li>the degree of the numerator is smaller than the denominator \(\deg p(x) < \deg q(x)\), and</li>
+                    <li>the denominator \(q(x)\) has an irreducible quadratic factor \((x^2 + bx + c)\) of multiplicity \(r\).</li>
+                </ul>
+                (in addition to the partial fractions for the previous case of linear factors,)
+                <strong>for each</strong> factor \((x^2 + bx + c)\) of \(q(x)\) with multiplicity \(r\) (i.e. repeated \(r\) times), the decomposition has partial fractions of the form
+                \[\frac{A_1x + B_1}{(x^2 + bx + c)^1} + \frac{A_2x + B_2}{(x^2 + bx + c)^2} + \cdots + \frac{A_rx + B_r}{(x^2 + bx + c)^r}\]
+                where \(A_1, \dots, A_r, B_1, \dots, B_r \) are unique real numbers.
+                </p>
+            </div>
+
+            <div class="example">
+                <p>Compute the Partial Fraction Decomposition for \(\frac{2x^2-x-1}{(x^2+1)(x-2)}\).</p>
+                <div class="solution">
+                    \(x^2+1\) is an irreducible quadratic factor. The decomposition has form
+                    \[\frac{2x^2-x-1}{(x^2+1)(x-2)} = \frac{Ax+B}{x^2+1} + \frac{C}{x-2}\]
+                    where \(A,B,C\) are real numbers. To solve, multiply through by \((x^2+1)(x-2)\)
+                    \begin{align*}
+                    \frac{2x^2-x-1}{(x^2+1)(x-2)} = \frac{Ax+B}{x^2+1} + \frac{C}{x-2}\\
+                    2x^2-x-1 &= (Ax+B)(x-2) + C(x^2 + 1)
+                    \end{align*}
+                    Plugging in \(x = 2\) kills the first term:
+                    \begin{align*}
+                        2(2)^2-(2)-1 &= (2A+B)(2-2) + C(2^2 + 1)\\
+                        5 &= 5C\\
+                        C &= 1
+                    \end{align*}
+                    Simplify using \(C = 1\):
+                    \begin{align*}
+                        2x^2-x-1 &= (Ax+B)(x-2) + 1(x^2 + 1)\\
+                        x^2-x-2 &= (Ax+B)(x-2)\\
+                        (x-1)(x-2) &= (Ax+B)(x-2)\\
+                        x-1 &= Ax + B
+                    \end{align*}
+                    Equating coefficients gives \(A = 1\) and \(B = -1\). The Partial Fraction Decomposition is
+                    \[\frac{2x^2-x-1}{(x^2+1)(x-2)} = \frac{x-1}{x^2+1} + \frac{1}{x-2}\]</p>
+                </div>
+                <p>Integrate \(\int \frac{2x^2-x-1}{(x^2+1)(x-2)} \: dx\).</p>
+                <div class="solution">
+                    <p>Using the Partial Fraction Decomposition
+                    \begin{align*} 
+                    \int \frac{2x^2-x-1}{(x^2+1)(x-2)} \: dx &= \int \frac{x-1}{x^2+1} + \frac{1}{x-2} \: dx\\
+                    &= \int \frac{x}{x^2+1} \: dx - \int \frac{1}{x^2+1} \: dx + \int \frac{1}{x-2} \: dx\\
+                    \end{align*}
+                    The first integral can be solved by substitution \(u = x^2 + 1\), \(du = 2x \: dx\). The second has antiderivative \(\arctan(x)\).
+                    \begin{align*}
+                    \int \frac{2x^2-x-1}{(x^2+1)(x-2)} \: dx &= \int \frac{x}{x^2+1} \: dx - \int \frac{1}{x^2+1} \: dx + \int \frac{1}{x-2} \: dx\\
+                    &= \frac{1}{2}\ln|x^2+1| - \arctan(x) + \ln|x-2| + C
+                    \end{align*}</p>
+                </div>
+            </div>
+
+            <p>Finally, if the numerator has degree equal to or larger than the denominator, use polynomial long division to reduce it to the remainder.</p>
+
+            <div class="algorithm">
+                <p>Polynomial Long Division.</p>
+                
+                <p>
+                Consider the rational function \(\frac{p(x)}{q(x)}\) where \(p(x)\) and \(q(x)\) are polynomials.
+                </p>
+                <p>
+                Suppose that the degree of the numerator is equal to or larger than the denominator \(\deg p(x) \geq \deg q(x)\). Then there is a unique quotient \(E(x)\) and remainder \(r(x)\) polynomial with \(\deg(r(x)) < \deg(q(x))\) such that
+
+                \[\frac{p(x)}{q(x)} = E(x) + \frac{r(x)}{q(x)}\]
+
+                The partial fraction decomposition may then be applied to the remainder term \(\frac{r(x)}{q(x)}\).
+                </p>
+            </div>
+
+            <div class="example">
+                <p>Compute the Partial Fraction Decomposition for \(\frac{x^3-7x^2+10x+1}{x^2-7x+10}\).</p>
+                <div class="solution">
+                    By polynomial long division, we get quotient \(x\) and remainder \(1\). 
+                    \(\frac{x^3-7x^2+10x+1}{x^2-7x+10} = x + \frac{1}{x^2-7x+10}\)
+                    
+                    The denominator has distinct linear factors \(x^2-7x+10 = (x - 2)(x - 5)\). The decomposition of the remainder has form
+                    \[\frac{1}{x^2-7x+10} = \frac{A}{x-2} + \frac{B}{x-5}\]
+                    where \(A,B\) are real numbers. This is the same as the first example, in which we obtained \(A = -\frac{1}{3}\) and \(B = \frac{1}{3}\). The Partial Fraction Decomposition is
+                    \[\frac{x^3-7x^2+10x+1}{x^2-7x+10} = x + \frac{1}{x^2-7x+10} = x + \frac{-\frac{1}{3}}{x-2} + \frac{\frac{1}{3}}{x-5}\]</p>
+                </div>
+                <p>Integrate \(\int \frac{x^3-7x^2+10x+1}{x^2-7x+10} \: dx\).</p>
+                <div class="solution">
+                    <p>Using the Partial Fraction Decomposition
+                    \begin{align*} 
+                    \int \frac{x^3-7x^2+10x+1}{x^2-7x+10} \: dx &= \int x + \frac{-\frac{1}{3}}{x-2} + \frac{\frac{1}{3}}{x-5} \: dx\\
+                    &= \int x \: dx -\frac{1}{3} \int \frac{1}{x-2} \: dx + \frac{1}{3}\int \frac{1}{x-5} \: dx\\
+                    &= \frac{1}{2}x^2 -\frac{1}{3} \ln|x-2| + \frac{1}{3} \ln|x-5| + C
+                    \end{align*}</p>
+                </div>
+            </div>
+
+            <p>To summarize the entire Partial Fraction Decomposition algorithm, for rational function \(\frac{p(x)}{q(x)}\):</p>
+            <ul>
+                <li>If the degree of the numerator is equal to or larger than the denominator \(\deg p(x) \geq \deg q(x)\), perform long division, then do partial fractions to the remainder.</li>
+                <li>For each linear factor \((x-c)\) of \(q(x)\) with multiplicity \(r\) use partial fractions of the form
+                \[\frac{A_1}{(x-c)^1} + \frac{A_2}{(x-c)^2} + \cdots + \frac{A_r}{(x-c)^r}\]</li>
+                <li>For each irreducible quadratic factor \((x^2 + bx + c)\) of \(q(x)\) with multiplicity \(r\) (i.e. repeated \(r\) times), use partial fractions of the form
+                \[\frac{A_1x + B_1}{(x^2 + bx + c)^1} + \frac{A_2x + B_2}{(x^2 + bx + c)^2} + \cdots + \frac{A_rx + B_r}{(x^2 + bx + c)^r}\]</li>
+            </ul>
+            <p>The total number of unknown constants in the partial fraction decomposition equals the degree of \(q(x)\).</p>
+
+            <div class="example">
+                <p>Write the form of the decomposition for \(\frac{1}{(x-1)(x+2)(x+7)^2(x^2+4)}\). You do not need to determine the unknown constants.</p>
+                <div class="solution">
+                    <ul>
+                        <li>\(x-1\) is a linear factor \(\implies \frac{A}{x-1}\)</li>
+                        <li>\(x+2\) is a linear factor \(\implies \frac{A}{x-1}\)</li>
+                        <li>\(x+7\) is a repeated linear factor with multiplicity 2 \(\implies \frac{C}{x+7} + \frac{D}{(x+7)^2}\)</li>
+                        <li>\(x^2+4\) is an irreducible quadratic \(\implies \frac{Ex+F}{x^2+4}\)</li>
+                    </ul>
+                    <p>The decomposition is \[\frac{1}{(x-1)(x+2)(x+7)^2(x^2+4)} = \frac{A}{x-1} + \frac{B}{x+1} + \frac{C}{x+7} + \frac{D}{(x+7)^2} + \frac{Ex+F}{x^2+4}\] 
+                    The denominator has degree 6, and there are 6 unknown constants \(A,B,C,D,E,F\)</p>
+                </div>
+            </div>
+
+            <h3>Trigonometric Substitution</h3>
+
+            <p>Special substitutions of \(\sin(\theta)\) and \(\tan(\theta)\) may be used to solve integrals involving certain quadratic expressions.</p>
+
+            <p>Recall the Pythagorean identity \(\cos^2(\theta) + \sin^2(\theta) = 1\). Consider the expression \(\sqrt{a^2 - x^2}\). If we substitute \(x = a\sin(\theta)\), this becomes \[\sqrt{a^2 - [a\sin(\theta)]^2} = \sqrt{a^2(1-\sin^2(\theta))} = \sqrt{a^2 \cos^2(\theta)} = a\cos(\theta)\]</p>
+
+            <p>Recall the Pythagorean identity \(1 + \tan^2(\theta) = \sec^2(\theta)\). Consider the expression \(\sqrt{a^2 + x^2}\). If we substitute \(x = a\tan(\theta)\), this becomes \[\sqrt{a^2 + [a\tan(\theta)]^2} = \sqrt{a^2(1+\tan^2(\theta))} = \sqrt{a^2 \sec^2(\theta)} = a\sec(\theta)\]</p>
+            
+            <p>So if you see expressions of the form \(\sqrt{a^2 - x^2}\) or \(\sqrt{a^2 - x^2}\) (or any power of these) in the integrand, the corresponding substitution may convert it to a potentially easier integral involving trigonometric functions.</p>
+
+            <p>As always, don't forget that the infinitesimal part changes as well. If \(x = a\sin(\theta)\), then \(dx = a\cos(\theta) \: d\theta\). If \(x = a\tan(\theta)\), then \(dx = a\sec^2(\theta) \: d\theta\).</p>
+            <table>
+                <tr>
+                    <th>using substitution,</th><th>expression</th><th>becomes</th><th>Pythagorean identity</th>
+                </tr>
+                <tr>
+                    <td>\(x = a\sin(\theta)\), \(dx = a\cos(\theta) \: d\theta\)</td><td>\(\sqrt{a^2 - x^2}\)</td><td>\(= a\cos(\theta)\)</td><td>\(1-\sin^2(\theta)=\cos^2(\theta)\)</td>
+                </tr>
+                <tr>
+                    <td>\(x = a\sin(\theta)\), \(dx = a\cos(\theta) \: d\theta\)</td><td>\(a^2 - x^2\)</td><td>\(= a^2\cos^2(\theta)\)</td><td>\(1-\sin^2(\theta)=\cos^2(\theta)\)</td>
+                </tr>
+                <tr>
+                    <td>\(x = a\tan(\theta)\), \(dx = a\sec^2(\theta) \: d\theta\)</td><td>\(\sqrt{a^2 + x^2}\)</td><td>\( = a\sec(\theta)\)</td><td>\(1+\tan^2(\theta)=\sec^2(\theta)\)</td>
+                </tr>
+                <tr>
+                    <td>\(x = a\tan(\theta)\), \(dx = a\sec^2(\theta) \: d\theta\)</td><td>\(a^2 + x^2\)</td><td>\( = a^2\sec^2(\theta)\)</td><td>\(1+\tan^2(\theta)=\sec^2(\theta)\)</td>
+                </tr>
+            </table>
+            <div class="example">
+                <p>Integrate \(\int\frac{1}{\sqrt{1-x^2}}\: dx\).</p>
+                <div class="solution">
+                    Use substitution \(x = \sin(\theta)\) and \(dx = \cos(\theta) \: d\theta\). The expression becomes \(\sqrt{1-x^2} = 1\cos(\theta)\)
+                    \begin{align*}
+                        \int\frac{1}{\sqrt{1-x^2}}\: dx &= \int\frac{1}{\cos(\theta)} \cdot \cos(\theta) \: d\theta\\
+                        &= \int 1 \: d\theta\\
+                        &= \theta + C\\
+                        &= \arcsin(x) + C
+                    \end{align*}
+                    In the last line, \(x = \sin(\theta) \implies \theta = \arcsin(x)\).
+                </div>
+            </div>
+            <div class="example">
+                <p>Integrate \(\int\frac{1}{\sqrt{4-x^2}}\: dx\).</p>
+                <div class="solution">
+                    Use substitution \(x = 2\sin(\theta)\) and \(dx = 2\cos(\theta) \: d\theta\). The expression becomes \(\sqrt{4-x^2} = 2\cos(\theta)\)
+                    \begin{align*}
+                        \int\frac{1}{\sqrt{4-x^2}}\: dx &= \int\frac{1}{2\cos(\theta)} \cdot 2\cos(\theta) \: d\theta\\
+                        &= \int 1 \: d\theta\\
+                        &= \theta + C\\
+                        &= \arcsin(x/2) + C
+                    \end{align*}
+                    In the last line, \(x = 2\sin(\theta) \implies \theta = \arcsin(x/2)\).
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Integrate \(\int \sqrt{9 - 4x^2} \: dx\).</p>
+                <div class="solution">
+                    By factorization, \(\sqrt{9 - 4x^2} = \sqrt{4(\frac{9}{4} - x^2)} = 2\sqrt{\frac{9}{4} - x^2}\)
+                    Use substitution \(x = \frac{3}{2}\sin(\theta)\) and \(dx = \frac{3}{2}\cos(\theta) \: d\theta\). The expression becomes \(\sqrt{\frac{9}{4}-x^2} = \frac{3}{2}\cos(\theta)\).
+                    \begin{align*}
+                        \int\sqrt{9 - 4x^2} \: dx = \int 2\sqrt{\frac{9}{4} - x^2} \: dx &= \int 2 \cdot \frac{3}{2}\cos(\theta) \cdot \frac{3}{2}\cos(\theta) \: d\theta\\
+                        &= \frac{9}{2}\int \cos^2(\theta) \: d\theta\\
+                    \end{align*}
+                    We encountered \(\int \cos^2(\theta) \: d\theta\) in Section 7.2, where we solved by Integration by Parts and solve for the original integral. The solution is \(\int \cos^2(\theta) \: d\theta = \frac{1}{2}\sin(\theta)\cos(\theta) + \frac{1}{2}\theta + C\)
+                    \begin{align*}
+                        &= \frac{9}{2}\left[\frac{1}{2}\sin(\theta)\cos(\theta) + \frac{1}{2}\theta\right] + C\\
+                        &= \frac{9}{4}\sin(\theta)\cos(\theta) + \frac{9}{4}\theta + C\\
+                        &= \frac{9}{4}\left(\frac{2}{3}x\right)\left(\frac{2}{3}\sqrt{\frac{9}{4}-x^2}\right) + \frac{9}{4}\arcsin\left(\frac{2}{3}x\right) + C\\
+                        &= x\sqrt{\frac{9}{4}-x^2} + \frac{9}{4}\arcsin\left(\frac{2}{3}x\right) + C\\
+                    \end{align*}
+                    To rewrite the original variable, \(x = \frac{3}{2}\sin(\theta)\) implies \(\sin(\theta) = \frac{2}{3}x\) and \(\theta = \arcsin(\frac{2}{3}x)\); \(\sqrt{\frac{9}{4}-x^2} = \frac{3}{2}\cos(\theta)\) implies \(\cos(\theta) = \frac{2}{3}\sqrt{\frac{9}{4}-x^2}\).
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Integrate \(\int\frac{1}{x^2 + 9}\: dx\).</p>
+                <div class="solution">
+                    Use substitution \(x = 3\tan(\theta)\) and \(dx = 3\sec^2(\theta) \: d\theta\). The expression becomes \(x^2 + 9 = 9\sec^2(\theta)\)
+                    \begin{align*}
+                        \int\frac{1}{x^2 + 9}\: dx &= \int\frac{1}{9\sec^2(\theta)} \cdot 3\sec^2(\theta) \: d\theta\\
+                        &= \int \frac{1}{3} \: d\theta\\
+                        &= \frac{1}{3}\theta + C\\
+                        &= \frac{1}{3}\arctan\left(\frac{x}{3}\right) + C
+                    \end{align*}
+                    In the last line, \(x = 3\tan(\theta) \implies \theta = \arctan\left(\frac{x}{3}\right)\).
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Use substitution to show that \(\int_0^1 \sqrt{1 + x^2}\: dx\) and \(\int_{0}^{\pi/4} \sec^3(\theta) \: d\theta\) are equal.</p>
+                <div class="solution">
+                    <p>Use substitution \(x = \tan(\theta)\) and \(dx = \sec^2(\theta) \: d\theta\). The expression becomes \(\sqrt{1 + x^2} = \sec(\theta)\). The upper bound transforms \(x = 1 \implies \theta = \arctan(1) = \frac{\pi}{4}\) and the lower bound \(x = 0 \implies \theta = \arctan(0) = 0\). By substitution
+                    \begin{align*}
+                        \int_0^1 \sqrt{1 + x^2}\: dx &= \int_0^{\pi/4} \sec(\theta) \cdot \sec^2(\theta) \: d\theta\\
+                        &= \int_{0}^{\pi/4} \sec^3(\theta) \: d\theta
+                    \end{align*}</p>
+                </div>
+            </div>
+
+            <p>The quadratic polynomial \(ax^2 + bx + c\) can be converted to vertex form by completing the square \(ax^2 + bx + c = a(x - h)^2 + k\). (Or use the formula \(h = -\frac{b}{2a}\) and \(k = -\frac{b^2-4ac}{4a}\)). Thus by shifting using the substitution \(u = x-h\), and \(du = dx\), can convert quadratic to one of the expressions for trigonometric substitution.</p>
+
+            <div class="example">
+                <p>Integrate \(\int \frac{3}{\sqrt{2x-x^2}} \: dx\).</p>
+                <div class="solution">
+                    <p>
+                        Convert to vertex form \(2x - x^2 = -(x-1)^2 + 1 = 1 - (x - 1)^2\). Then use substitution \(x - 1 = u\), and trigonometric substituion \(u = \sin(\theta)\). If you are brave you can do both substitutions in one step \(x-1 = \sin(\theta)\).
+                        \begin{align*}
+                            x-1 = u &= \sin(\theta)\\
+                            dx = du &= \cos(\theta) \: d\theta\\
+                            \sqrt{2x-x^2} = \sqrt{1-(x-1)^2} = \sqrt{1-u^2} &= \cos(\theta)
+                        \end{align*}
+                        then the integral becomes
+                        \begin{align*}
+                            \int \frac{3}{\sqrt{2x-x^2}} \: dx &= \int \frac{3}{\sqrt{1-(x-1)^2}} \: dx \\
+                            &= \int \frac{3}{\sqrt{1-u^2}} \: du \\
+                            &= \int \frac{3}{\cos(\theta)} \cdot \cos(\theta) \: d\theta\\
+                            &= \int 3 \: d\theta\\
+                            &= 3\theta + C\\
+                            &= 3\arcsin(x-1) + C
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+            <p>The integral of the reciprocal of irreducible quadratic can be solved this way by converting to vertex form.</p>
+            <div class="example">
+                <p>Integrate \(\int \frac{1}{x^2 + x + 1} \: dx\).</p>
+                <div class="solution">
+                    <p>
+                        Convert to vertex form \(x^2 + x + 1 = (x + \frac{1}{2})^2 + \frac{3}{4}\). Then use substitution \(x + \frac{1}{2} = u\), and trigonometric substituion \(u = \frac{\sqrt{3}}{2}\tan(\theta)\).
+                        \begin{align*}
+                            x + \frac{1}{2} = u &= \frac{\sqrt{3}}{2}\tan(\theta)\\
+                            dx = du &= \frac{\sqrt{3}}{2}\sec^2(\theta) \: d\theta\\
+                            x^2 + x + 1 = (x + \frac{1}{2})^2 + \frac{3}{4} = \frac{3}{4} + u^2 &= \frac{3}{4}\sec^2(\theta)
+                        \end{align*}
+                        then the integral becomes
+                        \begin{align*}
+                            \int \frac{1}{x^2 + x + 1} \: dx &= \int \frac{1}{(x + \frac{1}{2})^2 + \frac{3}{4}} \: dx \\
+                            &= \int \frac{1}{u^2 + \frac{3}{4}} \: du \\
+                            &= \int \frac{1}{\frac{3}{4}\sec^2(\theta)} \cdot \frac{\sqrt{3}}{2}\sec^2(\theta) \: d\theta\\
+                            &= \int \frac{2}{\sqrt{3}} \: d\theta\\
+                            &= \frac{2}{\sqrt{3}}\theta + C\\
+                            &= \frac{2}{\sqrt{3}}\arctan\left(\frac{2}{\sqrt{3}}\left(x + \frac{1}{2}\right)\right) + C
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Integrate \(\int \frac{1}{x^2 \sqrt{1 + x^2}} \: dx\).</p>
+                <div class="hint">
+                    Use tangent substitution. For the resulting integral, remember the derivative formula for \(\csc(\theta)\)
+                    \[\frac{d}{d\theta}(\csc(\theta)) = -\csc(\theta)\cot(\theta)\]
+                </div>
+                <div class="solution">
+                    <p>
+                        Use the substitution
+                        \begin{align*}
+                            x &= \tan(\theta)\\
+                            dx &= \sec^2(\theta) \: d\theta\\
+                            \sqrt{1 + x^2} &= \sec(\theta)
+                        \end{align*}
+                        then the integral becomes
+                        \begin{align*}
+                            \int \frac{1}{x^2 \sqrt{1 + x^2}} \: dx &= \int \frac{1}{\tan^2(\theta) \sec(\theta)} \cdot \sec^2(\theta) \: d\theta\\
+                            &= \int \frac{\sec(\theta)}{\tan^2(\theta)} \: d\theta\\
+                            &= \int \frac{1/\cos(\theta)}{\sin^2(\theta)/\cos^2(\theta)} \: d\theta\\
+                            &= \int \frac{1}{\sin(\theta)}\frac{\cos(\theta)}{\sin(\theta)} \: d\theta\\
+                            &= \int \csc(\theta)\cot(\theta) \: d\theta\\
+                            &= -\csc(\theta) + C\\
+                            &= -\frac{\sec(\theta)}{\tan(\theta)} + C\\
+                            &= -\frac{\sqrt{1 + x^2}}{x} + C
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            <h2 id="Ch7.5">7.5 Numerical Methods for Definite Integrals</h2>
+
+            <p>As mentioned in the introduction, some elementary functions do not have elementary antiderivatives. We can't evaluate the definite integral exactly. However, we can at least approximate the value to a desired level of accuracy; these are refered to as <strong>numerical methods</strong>. You have already encountered the left and right Riemann sum. In this section we will discuss these, plus some more accurate approximation methods.</p>
+
+            <h3>Left, Right, and Midpoint Riemann Sum</h3>
+
+            <p>
+                Suppose, for a function \(f(x)\) and an interval \([a,b]\) in the domain, we wish to approximate the integral 
+                \[\int_a^b f(x) \: dx\]
+                Partition the interval \([a,b]\) into \(n\) many equal subintervals. Each subinterval will have length \(\Delta x := \frac{b - a}{n}\). Number the subintervals from left to right with \(i = 1,\dots, n\). Let \(x_i^*\) be the left endpoint of the \(i\)-th subinterval. Then the left Riemann sum, denoted \(\mathrm{LEFT}(n)\), is given by 
+                \[\sum_{i=1}^n f(x_i^*) \Delta x = f(x_1^*) \Delta x + \cdots + f(x_n^*) \Delta x\]
+                The same expression is called the right Riemann sum, denoted \(\mathrm{RIGHT}(n)\), when \(x_i^*\) is the right endpoint of the \(i\)-th subinterval instead. Similarly, the the midpoint Riemann sum, denoted \(\mathrm{MID}(n)\), is when \(x_i^*\) is the midpoint of the \(i\)-th subinterval.
+            </p>
+
+            <p>On the graph, this represents the total area of \(n\) many vertical rectangular strips of width \(\Delta x\) and height \(f(x_i^*)\) touching the function curve at the left, right, or midpoint of each subinterval, which is approximating the area under the curve.</p>
+
+            <p>The notation \(\mathrm{LEFT}(n)\), \(\mathrm{RIGHT}(n)\), \(\mathrm{MID}(n)\) is used by our textbook, but this is not standard. Other authors may use different notation.</p>
+
+            <div class="formula">
+                <p>
+                    The left (respectively, right, midpoint) Riemann sum approximating the definite integral \(\int_a^b f(x) \: dx\) with \(n\) many equal subintervals, denoted \(\mathrm{LEFT}(n)\) (resp. \(\mathrm{RIGHT}(n)\), \(\mathrm{MID}(n)\)), is 
+                    \[\sum_{i=1}^n f(x_i^*) \Delta x = f(x_1^*) \Delta x + \cdots + f(x_n^*) \Delta x\]
+                    where \(\Delta x := \frac{b - a}{n}\) is the length of each subinterval, and \(x_i^*\) is left endpoint (respectively, right endpoint, midpoint) of the \(i\)-th subinterval.
+                </p>
+            </div>
+            <div class="example">
+                <p>
+                    Approximate the integral \(\int_1^2 \frac{1}{x} \: dx\) using \(\mathrm{LEFT}(2)\), \(\mathrm{RIGHT}(2)\), and \(\mathrm{MID}(2)\). Compare your approximation with the exact value.
+                </p>
+                <div class="solution">
+                    <p>
+                        The interval \([1,2]\) partitions into \(n=2\) equal subintervals \([1,1.5]\), \([1.5,2]\) with width \(\Delta x = 0.5\). The left endpoints are \(1, 1.5\). The right endpoints are \(1.5, 2\). The midpoints are \(1.25, 1.75\).
+                        \begin{align*}
+                            \mathrm{LEFT}(2) &= \frac{1}{1} \cdot 0.5 + \frac{1}{1.5} \cdot 0.5 &\approx 0.8333\\
+                            \mathrm{RIGHT}(2) &= \frac{1}{1.5} \cdot 0.5 + \frac{1}{2} \cdot 0.5 &\approx 0.5833\\
+                            \mathrm{MID}(2) &= \frac{1}{1.25} \cdot 0.5 + \frac{1}{1.75} \cdot 0.5 &\approx 0.6857\\
+                        \end{align*}
+                        The exact value is
+                        \[\int_1^2 \frac{1}{x} \: dx = [\ln(x)]_{1}^2 = \ln(2) - \ln(1) = \ln(2) \approx 0.6931 \]
+                    </p>
+                </div>
+            </div>
+
+            <p>The midpoint Riemann sum tends to be more accurate than the left and right because the error to the left of the midpoint tends to cancel with the error to the right of the midpoint.</p>
+
+            <h3>Trapezoidal Rule</h3>
+            <p>
+                The trapezoidal rule, denoted \(\mathrm{TRAP}(n)\), is the average of the left and right Riemann sum.
+            </p>
+            <div class="formula">
+                <p>
+                    The trapezoidal rule approximating the definite integral \(\int_a^b f(x) \: dx\) with \(n\) many equal subintervals, denoted \(\mathrm{TRAP}(n)\) is 
+                    \[\mathrm{TRAP}(n) = \frac{\mathrm{LEFT}(n) + \mathrm{RIGHT}(n)}{2}\]
+                </p>
+            </div>
+            <p>
+                As the name suggests, this represents the total area of \(n\) many vertical trapezoidal strips of width \(\Delta x\) which meet the function curve at both left and right endpoints of each subinterval. The area of each trapezoid is the average of the area of its bounding left and right rectangles.
+            </p>
+            <div class="example">
+                <p>
+                    Approximate the integral \(\int_1^2 \frac{1}{x} \: dx\) using \(\mathrm{TRAP}(2)\). Compare your approximation with the exact value.
+                </p>
+                <div class="solution">
+                    <p>
+                        As calculated in the previous example, \(\mathrm{LEFT}(2) \approx 0.8333\) and \(\mathrm{RIGHT}(2) \approx 0.5833\).
+                        \[\mathrm{TRAP}(2) = \frac{\mathrm{LEFT}(2) + \mathrm{RIGHT}(2)}{2} \approx \frac{0.8333 + 0.5833}{2} = 0.7083\]
+                        The exact value is
+                        \[\int_1^2 \frac{1}{x} \: dx = [\ln(x)]_{1}^2 = \ln(2) - \ln(1) = \ln(2) \approx 0.6931 \]
+                    </p>
+                </div>
+            </div>
+
+            <p>
+                The trapezoid sum tends to be more accurate than the left and right because the error in the left Riemann sum tends to balance out with the error of the right Riemann sum.
+            </p>
+
+            <h3>Is the Approximation Underestimate or Overestimate?</h3>
+
+            <p>
+                If the integrand function \(f(x)\) is <strong>increasing</strong> on \([a,b]\), then on each subinterval, \(f(x)\) achieves its minimum value at the left endpoint, and achieves its maximum value at the right endpoint. Therefore, the left Riemann sum is an underestimate and the right Riemann sum is an overestimate of the actual value of \(\int_a^b f(x) \: dx\).
+            </p>
+            
+            <p>
+                If the integrand function \(f(x)\) is <strong>decreasing</strong> on \([a,b]\), then on each subinterval, \(f(x)\) achieves its maximum value at the left endpoint, and achieves its minimum value at the right endpoint. Therefore, the left Riemann sum is an overestimate and the right Riemann sum is an underestimate of the actual value of \(\int_a^b f(x) \: dx\).
+            </p>
+
+            <table>
+                <tr>
+                    <th>on \([a,b]\)</th><th>\(\mathrm{LEFT}(n)\)</th><th>\(\mathrm{RIGHT}(n)\)</th>
+                </tr>
+                <tr>
+                    <td>\(f\) is increasing \(\nearrow\)</td><td>\(\leq \int_a^b f(x) \: dx\)</td><td>\(\geq \int_a^b f(x) \: dx\)</td>
+                </tr>
+                <tr>
+                    <td>\(f\) is decreasing \(\searrow\)</td><td>\(\geq \int_a^b f(x) \: dx\)</td><td>\(\leq \int_a^b f(x) \: dx\)</td>
+                </tr>
+            </table>
+            
+            <p>
+                For the midpoint and trapezoid rule, the inequality depends on the concavity of the integrand function. We remark that the midpoint rectangle has the same area as a trapezoid whose slanted side is tangent to the function curve at the midpoint (this is different from the trapezoids\ in the trapezoid rule!). The trapezoidal rule uses trapezoids whose slanted side meets the function curve at the left and right endpoint (forming a secant line).
+            </p>
+
+            <p>
+                When \(f(x)\) is <strong>concave up</strong> on \([a,b]\), then on each subinterval, \(f(x)\) curves up above any tangent lines, and below any secant lines. Therefore, the midpoint sum is an underestimate and the trapezoidal rule sum is an overestimate.
+            </p>
+                
+            <p>
+                When \(f(x)\) is <strong>concave down</strong> on \([a,b]\), then on each subinterval, \(f(x)\) curves below above any tangent lines, and above any secant lines. Therefore, the midpoint sum is an overestimate and the trapezoidal rule sum is an underestimate.
+            </p>
+            
+            <table>
+                <tr>
+                    <th>on \([a,b]\)</th><th>\(\mathrm{MID}(n)\)</th><th>\(\mathrm{TRAP}(n)\)</th>
+                </tr>
+                <tr>
+                    <td>\(f\) is concave up \(\cup\)</td><td>\(\leq \int_a^b f(x) \: dx\)</td><td>\(\geq \int_a^b f(x) \: dx\)</td>
+                </tr>
+                <tr>
+                    <td>\(f\) is concave down \(\cap\)</td><td>\(\geq \int_a^b f(x) \: dx\)</td><td>\(\leq \int_a^b f(x) \: dx\)</td>
+                </tr>
+            </table>
+
+            <h3>Simpson's Rule</h3>
+
+            <p>
+                You can think of the left and right Riemann sum as approximating \(f(x)\) by piecewise constant functions on each subinterval (the constant value at the left or right endpoint). The midpoint and trapezoid sums approximate f(x) by piecewise linear functions on each subinterval (the tangent line at the midpoint or the secant line at the enpoints). The next step up is to approximate by piecewise quadratic functions, i.e. pieces of a parabola which meet the function at left endpoint, midpoint and right endpoint. This is known as Simpson's rule, denoted \(\mathrm{SIMP}(n)\). The Simpson's rule approximation may be computed as a weighted average of midpoint and trapezoid sums (with weight 2:1), or by equivalently a weighted average of left, midpoint, and right sums (with weight 1:4:1). 
+            </p>
+
+            <div class="formula">
+                <p>
+                    Simpson's rule approximating the definite integral \(\int_a^b f(x) \: dx\) with \(n\) many equal subintervals, denoted \(\mathrm{SIMP}(n)\) is 
+                    \[\mathrm{SIMP}(n) = \frac{2\mathrm{MID}(n) + \mathrm{TRAP}(n)}{3} = \frac{\mathrm{LEFT}(n) + 4\mathrm{MID}(n) + \mathrm{RIGHT}(n)}{6}\]
+                </p>
+            </div>
+
+            <p>
+                The reason for the 2:1 weighted average comes from a fact of geometry: the area of a parabolic sector is exactly two-thirds of the bounding parallelogram formed by the secant line and the tangent line at the midpoint. Thus, the 2:1 weighted average of midpoint and trapezoidal sum produces exactly the area under the quadratic approximation.
+            </p>
+
+            <div class="example">
+                <p>
+                    Approximate the integral \(\int_1^2 \frac{1}{x} \: dx\) using \(\mathrm{SIMP}(2)\). Compare your approximation with the exact value.
+                </p>
+                <div class="solution">
+                    <p>
+                        As calculated in the previous examples, \(\mathrm{MID}(2) \approx 0.6857\) and \(\mathrm{TRAP}(2) = 0.7083\). 
+                        \[\mathrm{SIMP}(2) = \frac{2\mathrm{MID}(2) + \mathrm{TRAP}(2)}{3} \approx \frac{2 \cdot 0.6857 + 0.7083}{3} = 0.6932\]
+                        The exact value is
+                        \[\int_1^2 \frac{1}{x} \: dx = [\ln(x)]_{1}^2 = \ln(2) - \ln(1) = \ln(2) \approx 0.6931 \]
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>
+                    Approximate the integral \(\int_0^4 x^2 \: dx\) using \(\mathrm{LEFT}(2), \mathrm{RIGHT}(2), \mathrm{MID}(2), \mathrm{TRAP}(2)\). Determine if each is an underestimate or overestimate of the actual value. Compare your approximation with the exact value.
+                </p>
+                <div class="solution">
+                    <p>
+                        The interval \([0,4]\) partitions into \(n = 2\) subintervals \([0,2], [2,4]\) with length \(\Delta x = 2\). The left endpoints are 0 and 2, the right endpoints are 2 and 4, the midpoints are 1 and 3.
+                        \begin{align*}
+                            \mathrm{LEFT}(2) &= 0^2 \cdot 2 + 2^2 \cdot 2 = 8\\
+                            \mathrm{RIGHT}(2) &= 2^2 \cdot 2 + 4^2 \cdot 2 = 40\\
+                            \mathrm{MID}(2) &= 1^2 \cdot 2 + 3^2 \cdot 2 = 20\\
+                            \mathrm{TRAP}(2) &= \frac{\mathrm{LEFT}(2) + \mathrm{RIGHT}(2)}{2} = \frac{8 + 40}{2} = 24
+                        \end{align*}
+                    </p>
+                    <p>
+                        Since \(x^2\) is increasing on \([0,4]\), \(\mathrm{LEFT}(2)\) is an underestimate and \(\mathrm{RIGHT}(2)\) is an overestimate.
+                    </p>
+                    <p>
+                        Since \(x^2\) is concave up on \([0,4]\), \(\mathrm{MID}(2)\) is an underestimate and \(\mathrm{TRAP}(2)\) is an overestimate.
+                    </p>
+                    <p>
+                        The actual value is
+                        \begin{align*}
+                            \int_0^4 x^2 \: dx = \left[\frac{1}{3}x^3\right]_0^4 = \frac{1}{3} \cdot 4^3 - \frac{1}{3} \cdot 0^3 = \frac{64}{3} = 21.3333\ldots
+                        \end{align*}
+                    </p>
+                </div>
+                <p>
+                    Approximate the integral \(\int_0^4 x^2 \: dx\) using \(\mathrm{SIMP}(2)\). Compare your approximation with the exact value.
+                </p>
+                <div class="solution">
+                        The Simpson's rule approximation is
+                        \begin{align*}
+                            \mathrm{SIMP}(2) &= \frac{2\mathrm{MID}(2) + \mathrm{TRAP}(2)}{3} = \frac{2 \cdot 20 + 24}{3} = \frac{64}{3} = 21.3333\ldots
+                        \end{align*}
+                        The actual value is
+                        \begin{align*}
+                            \int_0^4 x^2 \: dx = \left[\frac{1}{3}x^3\right]_0^4 = \frac{1}{3} \cdot 4^3 - \frac{1}{3} \cdot 0^3 = \frac{64}{3} = 21.3333\ldots
+                        \end{align*}
+                        Remarkably, the Simpson's rule approximation already gives the exact value of the integral! This is because the integrand \(x^2\) is a quadratic function, and so it is identical to its piecewise quadratic approximation.
+                </div>
+            </div>
+
+
+            <h2 id="Ch7.6">7.6 Improper Integrals</h2>
+
+            <h2 id="Ch7.7">7.7 Comparison of Improper Integrals</h2>
+
+            <h1 id="Ch8">Chapter 8. Using the Definite Integral</h1>
+
+            <h2 id="Ch8.1">8.1 Areas and Volumes</h2>
+
+            <h2 id="Ch8.2">8.2 Application to Geometry</h2>
+
+            <h2 id="Ch8.4">8.4 Density and Center of Mass</h2>
+
+            <h1 id="Ch9">Chapter 9. Sequences and Series</h1>
+
+            <h2 id="Ch9.1">9.1 Sequences</h2>
+
+            <h2 id="Ch9.2">9.2 Geometric Series</h2>
+
+            <h2 id="Ch9.3">9.3 Convergence of Series</h2>
+
+            <h2 id="Ch9.4">9.4 Tests for Convergence</h2>
+
+            <h2 id="Ch9.5">9.5 Powers Series and Interval of Convergence</h2>
+
+            <h1 id="Ch10">Chapter 10. Approximating Functions Using Series</h1>
+
+            <h2 id="Ch10.1">10.1 Taylor Polynomials</h2>
+
+            <h2 id="Ch10.2">10.2 Taylor Series</h2>
+
+            <h2 id="Ch10.3">10.3 Finding and Using Taylor Series</h2>
+
+            <h2 id="Ch10.4">10.4 The Error in Taylor Polynomial Approximations</h2>
+
+            <h1 id="Ch11">Chapter 11. Differential Equations</h1>
+
+            <h2 id="Ch11.1">11.1 What is a Differential Equation?</h2>
+
+            <h2 id="Ch11.2">11.2 Slope Fields</h2>
+
+            <h2 id="Ch11.3">11.3 Euler's Method</h2>
+
+            <h2 id="Ch11.4">11.4 Separation of Variables</h2>
+
+            <h2 id="Ch11.5">11.5 Growth and Decay</h2>
+
+            <h2 id="Ch11.6">11.6 Applications and Modeling</h2>
+        </div>
+    </body>
+
+    <script>
+        function generateTableOfContents() {
+            let ToC = document.getElementById('tableOfContents');
+            let content = document.getElementById('content')
+
+            const chapters = content.getElementsByTagName('h1');
+            const sections = content.getElementsByTagName('h2');
+
+            for (let i = 0; i < chapters.length; i++) {
+                const chapter = chapters[i];
+                
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                const ul = document.createElement("ul")
+                a.href = `#${chapter.id}`;
+                a.textContent = chapter.textContent;
+
+                for (let j = 0; j < sections.length; j++) {
+                    const section = sections[j];
+
+                    if (!section.id.search(chapter.id)) {
+                        const sli = document.createElement("li");
+                        const sa = document.createElement("a");
+                        sa.href = `#${section.id}`;
+                        sa.textContent = section.textContent;
+                        sli.appendChild(sa);
+                        ul.appendChild(sli);
+                    }
+                }
+
+                li.appendChild(a);
+                li.appendChild(ul);
+                ToC.appendChild(li);
+            }
+        }
+
+        function generateExampleBlocks() {
+            const environments = ['example', 'solution', 'definition', 'theorem','formula','hint','tip','algorithm']
+            for (const environment of environments) {
+                const examples = document.getElementsByClassName(environment);
+                for (let i = 0; i < examples.length; i++) {
+                    const example = examples[i];
+
+                    if (environment == 'solution' || environment == 'tip' || environment == 'hint') {
+                        const exampleHeader = document.createElement('input');
+                        exampleHeader.type = 'button';
+                        //exampleHeader.className = 'environmentheader';
+                        exampleHeader.value = environment.toUpperCase();
+                        exampleHeader.textContent = environment.toUpperCase();
+                        const parent = example.parentNode;
+                        parent.insertBefore(exampleHeader, example);
+                        exampleHeader.addEventListener('click', (event)=>{
+                            let panel = example;
+                            if (panel.style.display === "block") {
+                                panel.style.display = "none";
+                            } else {
+                                panel.style.display = "block";
+                            }
+                        })
+                        example.style.display = 'none';
+                    } else {
+                        const exampleHeader = document.createElement('strong');
+                        //exampleHeader.className = 'environmentheader';
+                        exampleHeader.textContent = environment.toUpperCase() + '.';
+                        //const parent = example.parentNode;
+                        example.insertBefore(exampleHeader, example.firstChild);
+                    }
+
+                }
+            }
+        }
+
+        function toggle() {
+
+
+        }
+        
+
+        generateTableOfContents()
+        generateExampleBlocks()
+    </script>
+</html>
