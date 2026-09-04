@@ -134,20 +134,17 @@
                         Check your answer by taking the derivative again. Here, by the chain rule,
                         \[\frac{d}{dx}(-\cos(x^3)) =  \sin(x^3) \cdot \frac{d}{dx}(x^3) = \sin(x^3) \cdot 3x^2\]
                     </p>
-                    
                 </div>
             </div>
 
             <p>
                 To facilitate using this technique, we may introduce a new variable for the inside function \(u = g(x)\). As before, choose \(u\) so that its derivative \(\frac{du}{dx} = g'(x)\) appears as another factor. Then, the relation between infinitesimals \(du\) and \(dx\) is \(du = g'(x) \: dx\). Then, rewrite the integral in terms of the new variable \(u\) and its infinitesimal \(du\). Don't forget to also substitute the infinitesimal part! 
                 
-                \[
                 \begin{align*}
                 \int F'(g(x)) \cdot g'(x) \: dx &= \int F'(u) \: du &\text{substitute} \begin{cases} u = g(x) \\ du = g'(x) \: dx \end{cases}\\ 
                 &= F(u) + C &\text{antiderivative}\\
                 &= F(g(x)) + C &\text{rewrite in original variable}
                 \end{align*}
-                \]
 
                 This technique is called Integration by Substitution.
             </p>
@@ -169,13 +166,11 @@
                 <div class="solution">
                     <p>In the integrand \(3x^2 \cdot \sin(x^3) \), the derivative of \(x^3\) appears as a factor \(3x^2\). Substitute \(u = x^3\) and \(du = 3x^2 \: dx\). Then,
 
-                        \[
                         \begin{align*}
                         \int 3x^2 \cdot \sin(x^3) \: dx = \int \sin(x^3) \cdot 3x^2 \: dx &= \int \sin(u) \: du &\text{substitute} \begin{cases} u = x^3 \\  du = 3x^2 \: dx \end{cases}\\ 
                         &= -\cos(u) + C &\text{core antiderivative}\\
                         &= -\cos(x^3) + C &\text{rewrite in original variable}
                         \end{align*}
-                        \]
                     </p>
                 </div>
             </div>
@@ -208,6 +203,7 @@
                     \[\int f(ax + b) \: dx = \int f(u) \cdot \frac{1}{a} \: du = \frac{1}{a} \int f(u) \: du\]
             </p>
             
+            <p>The trigonometic function \(\tan(x)\) has an antiderivative which can be solved by substitution if rewritten as \(\tan(x) = \frac{\sin(x)}{\cos(x)}\)</p>
 
             <div class="example">
                 <p>
@@ -901,11 +897,11 @@
                     \begin{align*}
                         2x^2-x-1 &= (Ax+B)(x-2) + 1(x^2 + 1)\\
                         x^2-x-2 &= (Ax+B)(x-2)\\
-                        (x-1)(x-2) &= (Ax+B)(x-2)\\
-                        x-1 &= Ax + B
+                        (x+1)(x-2) &= (Ax+B)(x-2)\\
+                        x+1 &= Ax + B
                     \end{align*}
-                    Equating coefficients gives \(A = 1\) and \(B = -1\). The Partial Fraction Decomposition is
-                    \[\frac{2x^2-x-1}{(x^2+1)(x-2)} = \frac{x-1}{x^2+1} + \frac{1}{x-2}\]</p>
+                    Equating coefficients gives \(A = 1\) and \(B = 1\). The Partial Fraction Decomposition is
+                    \[\frac{2x^2-x-1}{(x^2+1)(x-2)} = \frac{x+1}{x^2+1} + \frac{1}{x-2}\]</p>
                 </div>
                 <p>Integrate \(\int \frac{2x^2-x-1}{(x^2+1)(x-2)} \: dx\).</p>
                 <div class="solution">
@@ -916,8 +912,8 @@
                     \end{align*}
                     The first integral can be solved by substitution \(u = x^2 + 1\), \(du = 2x \: dx\). The second has antiderivative \(\arctan(x)\).
                     \begin{align*}
-                    \int \frac{2x^2-x-1}{(x^2+1)(x-2)} \: dx &= \int \frac{x}{x^2+1} \: dx - \int \frac{1}{x^2+1} \: dx + \int \frac{1}{x-2} \: dx\\
-                    &= \frac{1}{2}\ln|x^2+1| - \arctan(x) + \ln|x-2| + C
+                    \int \frac{2x^2-x-1}{(x^2+1)(x-2)} \: dx &= \int \frac{x}{x^2+1} \: dx + \int \frac{1}{x^2+1} \: dx + \int \frac{1}{x-2} \: dx\\
+                    &= \frac{1}{2}\ln|x^2+1| + \arctan(x) + \ln|x-2| + C
                     \end{align*}</p>
                 </div>
             </div>
@@ -1361,7 +1357,264 @@
 
             <h2 id="Ch7.6">7.6 Improper Integrals</h2>
 
+            <p>Our original discussion of the definite integral \(\int_a^b f(x) \: dx\) assumed that the interval \([a,b]\) was finite and that \(f\) was continuous. By a limiting process, the integral may be extended to the case for which either boundary of integration is infinite, or the integrand is unbounded. These integrals are called <strong>improper</strong>.</p>
+
+            <h3>When the Limit of Integration is Infinite</h3>
+
+            <div class="definition">
+                <p>
+                    Suppose \(f(x)\) is positive on the interval \([a,\infty)\). Define
+                    \begin{align*}
+                        \int_a^{\infty} f(x) \: dx := \lim_{b \rightarrow \infty} \int_a^b f(x) \: dx
+                    \end{align*}
+                    We say that the integral \(\int_a^{\infty} f(x) \: dx\) <strong>converges</strong> if the limit exists and is a finite number. Otherwise, we say that \(\int_a^{\infty} f(x) \: dx\) <strong>diverges</strong>.
+                </p>
+                <p>
+                    Similarly, given \(f(x)\) is positive on the interval \((-\infty,b]\), 
+                    \begin{align*}
+                        \int_{-\infty}^{b} f(x) \: dx := \lim_{a \rightarrow -\infty} \int_a^b f(x) \: dx
+                    \end{align*}
+                </p>
+                <p>
+                    In the case that both boundaries of integration are infinite, pick any number \(c\) and
+                    \begin{align*}
+                        \int_{-\infty}^{\infty} f(x) \: dx := \int_{-\infty}^{c} f(x) \: dx + \int_{c}^{\infty} f(x) \: dx
+                    \end{align*}
+                    If either of the two new improper integrals diverges, we say the original integral diverges. Only if both new integrals converge to a finite value, the original integral equals their sum.
+                </p>
+            </div>
+
+            <div class="example">
+                <p>
+                    Compute the exact value of the improper integral \(\int_1^\infty \frac{1}{x^2} \: dx\) if it converges, or show that it diverges.
+                </p>
+                <div class="solution">
+                    <p>
+                        \begin{align*}
+                            \int_1^\infty \frac{1}{x^2} \: dx &= \lim_{b \rightarrow \infty} \int_1^b \frac{1}{x^2} \: dx\\
+                            &= \lim_{b \rightarrow \infty} [-\frac{1}{x}]_{1}^b \\
+                            &= \lim_{b \rightarrow \infty} [(-\frac{1}{b}) - (-\frac{1}{1})] \\
+                            &= \lim_{b \rightarrow \infty} 1 - \frac{1}{b} \\
+                            &= 1
+                        \end{align*}
+                        The improper integral converges to \(1\).
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>
+                    Compute the exact value of the improper integral \(\int_1^\infty \frac{1}{\sqrt{x}} \: dx\) if it converges, or show that it diverges.
+                </p>
+                <div class="solution">
+                    <p>
+                        \begin{align*}
+                            \int_1^\infty \frac{1}{\sqrt{x}} \: dx &= \lim_{b \rightarrow \infty} \int_1^b \frac{1}{\sqrt{x}} \: dx\\
+                            &= \lim_{b \rightarrow \infty} [2\sqrt{x}]_{1}^b \\
+                            &= \lim_{b \rightarrow \infty} [2\sqrt{b} - 2\sqrt{1}] \\
+                            &= \lim_{b \rightarrow \infty} 2\sqrt{b} - 2 \\
+                            &= \infty
+                        \end{align*}
+                        The improper integral diverges.
+                    </p>
+                </div>
+            </div>
+
+            Although both functions \(\frac{1}{x^2}\) and \(\frac{1}{\sqrt{x}}\) are decreasing on \([1, \infty)\) and approach a horizontal asymptote \(y = 0\) as \(x \rightarrow \infty\), our calculation shows that the area under the function curve is finite for \(\frac{1}{x^2}\) and infinite for \(\frac{1}{\sqrt{x}}\)! The difference is that \(\frac{1}{\sqrt{x}}\) does not decrease "fast enough". 
+            <div class="example">
+                <p>
+                    Determine for which values of the power \(p\) the improper integral \(\int_1^\infty \frac{1}{x^p} \: dx\) converges and diverges.
+                </p>
+                <div class="solution">
+                    <p>The antiderivative of \(\frac{1}{x^p}\) may be computed using the power rule, except for when \(p = 1\), where the antiderivative of \(\frac{1}{x}\) is \(\ln|x|\). We split into cases \(p > 1\), \(p = 1\), \(p < 1\)</p>
+                    <p>
+                        If \(p > 1\):
+                        \begin{align*}
+                            \int_1^\infty \frac{1}{x^p} \: dx &= \lim_{b \rightarrow \infty} \int_1^b \frac{1}{x^p} \: dx \\
+                            &= \lim_{b \rightarrow \infty} \left[\frac{1}{-p+1}x^{-p+1}\right]_1^{b}\\
+                            &= \lim_{b \rightarrow \infty} \frac{1}{-p+1}\left[b^{-p+1} - 1\right]\\
+                            &= \frac{1}{-p+1}\left[0 - 1\right]\\
+                            &= \frac{1}{p-1}\\\
+                        \end{align*}
+                        The improper integral converges to \(\frac{1}{p-1}\).
+                    </p>
+                    <p>
+                        If \(p = 1\):
+                        \begin{align*}
+                            \int_1^\infty \frac{1}{x} \: dx &= \lim_{b \rightarrow \infty} \int_1^b \frac{1}{x} \: dx \\
+                            &= \lim_{b \rightarrow \infty} \left[\ln|x|\right]_1^{b}\\
+                            &= \lim_{b \rightarrow \infty} \left[\ln(b) - \ln(1)\right]\\
+                            &= \infty - 0\\
+                            &= \infty\\
+                        \end{align*}
+                        The improper integral diverges.
+                    </p>
+                    <p>
+                        If \(p < 1\):
+                        \begin{align*}
+                            \int_1^\infty \frac{1}{x^p} \: dx &= \lim_{b \rightarrow \infty} \int_1^b \frac{1}{x^p} \: dx \\
+                            &= \lim_{b \rightarrow \infty} \left[\frac{1}{-p+1}x^{-p+1}\right]_1^{b}\\
+                            &= \lim_{b \rightarrow \infty} \frac{1}{-p+1}\left[b^{-p+1} - 1\right]\\
+                            &= \frac{1}{-p+1}\left[\infty - 1\right]\\
+                            &= \infty\\
+                        \end{align*}
+                        The improper integral diverges.
+                    </p>
+                    <p>To summarize, \(\int_1^\infty \frac{1}{x^p} \: dx\) converges if \(p < 1\) and diverges if \(p \geq 1\)</p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>
+                    Compute the exact value of the improper integral \(\int_0^\infty e^{-5x} \: dx\) if it converges, or show that it diverges.
+                </p>
+                <div class="solution">
+                    <p>
+                        \begin{align*}
+                            \int_0^\infty e^{-5x} \: dx &= \lim_{b \rightarrow \infty} \int_0^b e^{-5x} \: dx\\
+                            &= \lim_{b \rightarrow \infty} [-\frac{1}{5}e^{-5x}]_{0}^b \\
+                            &= \lim_{b \rightarrow \infty} [(-\frac{1}{5}e^{-5b}) - (-\frac{1}{5}e^{-5\cdot 0})] \\
+                            &= \lim_{b \rightarrow \infty} \frac{1}{5}-\frac{1}{5} e^{-5b}) \\
+                            &= \frac{1}{5} - 0\\
+                            &= \frac{1}{5}
+                        \end{align*}
+                        The improper integral converges to \(\frac{1}{5}\).
+                    </p>
+                </div>
+            </div>
+
+            <h3>When the Integrand Becomes Infinite</h3>
+
+            <div class="definition">
+                <p>
+                    Suppose \(f(x)\) is positive and continuous on the interval \([a, b)\) and tends to infinity as \(x \rightarrow b^{-}\) (i.e. it has a vertical asymptote at \(x=b\)). Define
+                    \begin{align*}
+                        \int_a^{b} f(x) \: dx := \lim_{t \rightarrow b^-} \int_a^t f(x) \: dx
+                    \end{align*}
+                </p>
+                <p>
+                    Similarly, if \(f(x)\) is positive and continuous on the interval \((a, b]\) and tends to infinity as \(x \rightarrow a^{+}\) (i.e. it has a vertical asymptote at \(x = a\)),
+                    \begin{align*}
+                        \int_a^{b} f(x) \: dx := \lim_{t \rightarrow a^+} \int_t^b f(x) \: dx
+                    \end{align*}
+                </p>
+                <p>As before, we say the improper integral converges if the limit is a finite number, and diverges otherwise.</p>
+                <p>
+                    If \(f(x)\) tends to infinity as \(x \rightarrow c\) at some point \(c\) in the interior, break up the integral into two
+                    \begin{align*}
+                        \int_a^{b} f(x) \: dx := \int_a^c f(x) \: dx + \int_c^b f(x) \: dx
+                    \end{align*}
+                    If either of the two new improper integrals diverges, we say the original integral diverges. Only if both new integrals converge to a finite value, the original integral equals their sum.
+                </p>
+            </div>
+
+            <div class="example">
+                <p>
+                    Compute the exact value of the improper integral \(\int_0^1 \frac{1}{\sqrt{x}} \: dx\) if it converges, or show that it diverges.
+                </p>
+                <div class="solution">
+                    <p>
+                        \(\frac{1}{\sqrt{x}}\) has a vertical asymptote at the lower boundary \(x = 0\).
+                        \begin{align*}
+                            \int_0^1 \frac{1}{\sqrt{x}} \: dx &= \lim_{a \rightarrow 0^+} \int_a^1 \frac{1}{\sqrt{x}} \: dx\\
+                            &= \lim_{a \rightarrow 0^+} [2\sqrt{x}]_a^1\\
+                            &= \lim_{a \rightarrow 0^+} [2\sqrt{1} - 2\sqrt{a}]\\
+                            &= 2 - 0 \\
+                            &= 2
+                        \end{align*}
+                        The improper integral converges to \(2\).
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>
+                    Compute the exact value of the improper integral \(\int_0^2 \frac{1}{(x-2)^2} \: dx\) if it converges, or show that it diverges.
+                </p>
+                <div class="solution">
+                    <p>
+                        \(\frac{1}{(x-2)^2}\) has a vertical asymptote at the upper boundary \(x = 2\).
+                        \begin{align*}
+                            \int_0^2 \frac{1}{(x-2)^2} \: dx &= \lim_{b \rightarrow 2^-} \int_0^b \frac{1}{(x-2)^2} \: dx\\
+                            &= \lim_{b \rightarrow 2^-} \left[-\frac{1}{x-2}\right]_0^b\\
+                            &= \lim_{b \rightarrow 2^-} \left[\left(-\frac{1}{b-2}\right) - \left(-\frac{1}{0-2}\right)\right]\\
+                            &= \lim_{b \rightarrow 2^-} \left[\frac{1}{2 - b} - \frac{1}{2}\right]\\
+                            &= \infty - \frac{1}{2}\\
+                            &= \infty
+                        \end{align*}
+                        The improper integral diverges.
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>
+                    Compute the exact value of the improper integral \(\int_0^6 \frac{1}{(x-4)^{2/3}} \: dx\) if it converges, or show that it diverges.
+                </p>
+                <div class="solution">
+                    <p>
+                        \(\frac{1}{(x-4)^{2/3}}\) has a vertical asymptote in the interior of the interval at \(x = 4\).
+                        \begin{align*}
+                            \\int_0^6 \frac{1}{(x-4)^{2/3}} \: dx &= \int_0^4 \frac{1}{(x-4)^{2/3}} \: dx + \int_4^6 \frac{1}{(x-4)^{2/3}} \: dx\\
+                            &= \lim_{b \rightarrow 4^-} \int_0^b \frac{1}{(x-4)^{2/3}} \: dx + \lim_{a \rightarrow 4^+} \int_a^6 \frac{1}{(x-4)^{2/3}} \: dx\\
+                            &= \lim_{b \rightarrow 4^-} [3(x-4)^{1/3}]_0^b  + \lim_{a \rightarrow 4^+} [3(x-4)^{1/3}]_a^6\\
+                            &= \lim_{b \rightarrow 4^-} [3(b-4)^{1/3} - 3(0-4)^{1/3}]  + \lim_{a \rightarrow 4^+} [3(6-4)^{1/3}-3(a-4)^{1/3}]\\
+                            &= [0 - 3(-4)^{1/3}] + [3(2)^{1/3} - 0]\\
+                            &= 3\cdot 4^{1/3} + 3 \cdot 2^{1/3}
+                        \end{align*}
+                        The improper integral converges to \(3\cdot 4^{1/3} + 3 \cdot 2^{1/3}\).
+                    </p>
+                </div>
+            </div>
+
+            If the integral is improper at both boundaries, split the integral into to at any interior point.
+            <div class="example">
+                <p>
+                    Compute the exact value of the improper integral \(\int_0^\infty \frac{1}{x^2} \: dx\) if it converges, or show that it diverges.
+                </p>
+                <div class="solution">
+                    <p>
+                        \(\frac{1}{x^2}\) has a vertical asymptote at the lower boundary \(x = 0\), and the upper boundary is infinite. Split at any interior point \(x = 1\).
+                        \begin{align*}
+                            \int_0^\infty \frac{1}{x^2} \: dx &= \int_0^1 \frac{1}{x^2} \: dx + \int_1^\infty \frac{1}{x^2} \: dx\\
+                            &= \lim_{a \rightarrow 0^+} \int_a^1 \frac{1}{x^2} \: dx + \lim_{b \rightarrow \infty} \int_1^b \frac{1}{x^2} \: dx\\
+                            &= \lim_{a \rightarrow 0^+} \left[-\frac{1}{x}\right]_a^1 + \lim_{b \rightarrow \infty} \left[-\frac{1}{x}\right]_1^b \\
+                            &= \lim_{a \rightarrow 0^+} \left[\left(-\frac{1}{1}\right) - \left(-\frac{1}{a}\right)\right] + \lim_{b \rightarrow \infty} \left[\left(-\frac{1}{b}\right) - \left(-\frac{1}{1}\right)\right] \\
+                            &= [-1 - (-\infty)] + [0 - (-1)]\\
+                            &= \infty
+                        \end{align*}
+                        The improper integral diverges.
+                    </p>
+                </div>
+            </div>
+
             <h2 id="Ch7.7">7.7 Comparison of Improper Integrals</h2>
+
+            <p>
+                Sometimes it is difficult to find the exact value of an improper integral by antidifferentiation, but it may be possible to determine whether it converges or diverges by comparing it to a known improper integral.
+            </p>
+
+            <p>
+                Suppose \(f(x)\) and \(g(x)\) are integrable functions on the interval \([a,\infty)\), and we have inequality \(0 \leq f(x) \leq g(x)\) for all \(x \geq a\). Then the same inequality applies to the integral:
+                \[0 \leq \int_a^b f(x) \: dx \leq \int_a^b g(x) \: dx\]
+                The inequality also holds in the limit as \(b \rightarrow \infty\), where both sides are a finite number or \(\infty\) if it diverges. 
+                \[0 \leq \int_a^\infty f(x) \: dx \leq \int_a^\infty g(x) \: dx\]
+                If the greater integral is finite, so must the lesser. If the lesser integral is infinite, then the greater integral is also infinite.
+            </p>
+            <div class="theorem">
+                Comparison Test for Improper Integrals.
+                <p>
+                    Suppose \(f(x)\) and \(g(x)\) are positive integrable functions on the interval \([a,\infty)\).
+                </p>
+                <ul>
+                    <li>
+                        If \(f(x) \leq g(x)\), and \(\int_a^\infty g(x) \: dx\) converges, then \(\int_a^\infty f(x) \: dx\) also converges.
+                    </li>
+                    <li>
+                        If \(f(x) \leq g(x)\), and \(\int_a^\infty f(x) \: dx\) diverges, then \(\int_a^\infty g(x) \: dx\) also diverges.
+                    </li>
+                </ul>
+            </div>
 
             <h1 id="Ch8">Chapter 8. Using the Definite Integral</h1>
 
