@@ -1594,6 +1594,8 @@
                 Sometimes it is difficult to find the exact value of an improper integral by antidifferentiation, but it may be possible to determine whether it converges or diverges by comparing it to a known improper integral.
             </p>
 
+            <p>In this section we will only consider improper integrals whose upper boundary is \(\infty\), e.g. \(\int_a^\infty f(x) \: dx\). Similar results apply for improper integrals whose lower boundary is \(-\infty\).</p>
+
             <p>
                 Suppose \(f(x)\) and \(g(x)\) are integrable functions on the interval \([a,\infty)\), and we have inequality \(0 \leq f(x) \leq g(x)\) for all \(x \geq a\). Then the same inequality applies to the integral:
                 \[0 \leq \int_a^b f(x) \: dx \leq \int_a^b g(x) \: dx\]
@@ -1604,21 +1606,264 @@
             <div class="theorem">
                 Comparison Test for Improper Integrals.
                 <p>
-                    Suppose \(f(x)\) and \(g(x)\) are positive integrable functions on the interval \([a,\infty)\).
+                    Suppose \(f(x)\) and \(g(x)\) are non-negative integrable functions on the interval \([a,\infty)\).
                 </p>
                 <ul>
                     <li>
-                        If \(f(x) \leq g(x)\), and \(\int_a^\infty g(x) \: dx\) converges, then \(\int_a^\infty f(x) \: dx\) also converges.
+                        If \(f(x) \leq g(x)\), and the larger integral \(\int_a^\infty g(x) \: dx\) converges, then the smaller integral \(\int_a^\infty f(x) \: dx\) also converges.
                     </li>
                     <li>
-                        If \(f(x) \leq g(x)\), and \(\int_a^\infty f(x) \: dx\) diverges, then \(\int_a^\infty g(x) \: dx\) also diverges.
+                        If \(f(x) \leq g(x)\), and the smaller integral \(\int_a^\infty f(x) \: dx\) diverges, then the larger integral \(\int_a^\infty g(x) \: dx\) also diverges.
                     </li>
                 </ul>
+            </div>
+
+            <p>
+                It is helpful to have some standard functions in your toolbox to which to compare. Using section 7.6, we computed the integral for the reciprocal power function \(\frac{1}{x^p}\) and exponential decay function \(e^{-kx}\).
+            </p>
+            <ul>
+                <li>\(\int_a^\infty \frac{1}{x^p} \: dx\) converges if \(p > 1\) and diverges if \(p \leq 1\)</li>
+                <li>\(\int_a^\infty e^{-kx} \: dx\) converges if \(k > 0\)</li>
+            </ul>
+
+            <div class="example">
+                <p>
+                    Determine whether the improper integral converges or diverges. \(\int_{1}^{\infty} \frac{1}{\sqrt{x^3 + 5}} \: dx\)
+                </p>
+                <div class="hint">
+                    <p>
+                        How does \(\frac{1}{\sqrt{x^3 + 5}}\) compare to \(\frac{1}{\sqrt{x^3}} = \frac{1}{x^{3/2}}\)?
+                    </p>
+                </div>
+                <div class="solution">
+                    <p>
+                        For \(x \in [1,\infty)\), we have the inequality
+                        \begin{align*}
+                            0 \leq x^3  &\leq x^3 + 5\\
+                            0 \leq x^{3/2} &\leq \sqrt{x^3 + 5}\\
+                            0 \leq \frac{1}{\sqrt{x^3 + 5}} &\leq \frac{1}{x^{3/2}} &(\text{reciprocal reverses order})
+                        \end{align*}
+                        Since \(\frac{1}{\sqrt{x^3 + 5}} \leq \frac{1}{x^{3/2}}\) and the larger integral \(\int_1^\infty \frac{1}{x^{3/2}} \: dx\) converges (power \(\frac{3}{2} > 1\)), 
+                        \[\int_{1}^{\infty} \frac{1}{\sqrt{x^3 + 5}} \: dx\]
+                        also converges by the Comparison Test.
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>
+                    Determine whether the improper integral converges or diverges. \(\int_{4}^{\infty} \frac{1}{\ln(t) - 1} \: dt\)
+                </p>
+                <div class="hint">
+                    <p>
+                        How does \(\frac{1}{\ln(t) - 1}\) compare to \(\\frac{1}{t}\)?
+                    </p>
+                </div>
+                <div class="solution">
+                    <p>
+                        For \(x \in [4,\infty)\), we have the inequality
+                        \begin{align*}
+                            0 \leq \ln(t) - 1 \leq \ln(t)  &\leq t\\
+                            0 \leq \frac{1}{t} &\leq \frac{1}{\ln(t) - 1} &(\text{reciprocal reverses order})
+                        \end{align*}
+                        Since \(\frac{1}{t} \leq \frac{1}{\ln(t) - 1}\) and the smaller integral \(\int_4^\infty \frac{1}{t} \: dt\) diverges (power \(1 \leq 1\)), 
+                        \[\int_{4}^{\infty} \frac{1}{\ln(t) - 1} \: dt\]
+                        also diverges by the Comparison Test.
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>
+                    Determine whether the improper integral converges or diverges. \(\int_{1}^{\infty} \frac{\sin(x) + 3}{\sqrt{x}} \: dx\)
+                </p>
+                <div class="hint">
+                    <p>
+                        \(\sin(x)\) is bounded by \(1\) and \(-1\).
+                    </p>
+                </div>
+                <div class="solution">
+                    <p>
+                        For \(x \in [1,\infty)\), we have the inequality
+                        \begin{align*}
+                            -1 &\leq \sin(x)\\
+                            2 &\leq \sin(x) + 3\\
+                            \frac{2}{\sqrt{x}} &\leq \frac{\sin(x) + 3}{\sqrt{x}}
+                        \end{align*}
+                        Since \(\frac{2}{\sqrt{x}} \leq \frac{sin(x) + 3}{\sqrt{x}}\) and the smaller integral \(\int_1^\infty \frac{1}{\sqrt{x}} \: dx\) diverges (power \(\frac{1}{2} \leq 1\)), 
+                        \[\int_{1}^{\infty} \frac{\sin(x) + 3}{\sqrt{x}} \: dx\]
+                        also diverges by the Comparison Test.
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>
+                    Determine whether the improper integral converges or diverges. \(\int_{1}^{\infty} e^{-\frac{x^2}{2}} \: dx\)
+                </p>
+                <div class="hint">
+                    <p>
+                        How does \(e^{-\frac{x^2}{2}}\) compare with \(e^{-\frac{x}{2}}\)?
+                    </p>
+                </div>
+                <div class="solution">
+                    <p>
+                        For \(x \in [1,\infty)\), we have the inequality
+                        \begin{align*}
+                            x &\leq x^2\\
+                            \frac{x}{2} &\leq \frac{x^2}{2}\\
+                            -\frac{x^2}{2} &\leq -\frac{x}{2} & (\text{negative reverses order})\\
+                            0 \leq e^{-\frac{x^2}{2}} &\leq e^{-\frac{x}{2}}
+                        \end{align*}
+                        Since \(e^{-\frac{x^2}{2}} \leq e^{-\frac{x}{2}}\) and the larger integral \(\int_1^\infty e^{-\frac{x}{2}} \: dx\) converges (exponential decay), 
+                        \[\int_{1}^{\infty} e^{-\frac{x^2}{2}} \: dx\]
+                        also converges by the Comparison Test.
+                    </p>
+                </div>
             </div>
 
             <h1 id="Ch8">Chapter 8. Using the Definite Integral</h1>
 
             <h2 id="Ch8.1">8.1 Areas and Volumes</h2>
+
+            <p>
+                You have seen how definite integrals graphically represent the area under the integrand function curve. In this section, we calculate the area of 2D regions or the volume of 3D regions by slicing along an axis and integrating the cross sections.
+            </p>
+
+            <p>
+                For 2D regions:
+                <ul>
+                    <li>
+                        Choose an axis to integrate along. Assign it a variable (we will use \(x\) for this example), and coordinates along the axis.
+                    </li>
+                    <li>
+                        We assume the region is bounded. Find the lower bound \(x = a\) and upper bound \(x = b\) in the coordinate system.
+                    </li>
+                    <li>
+                        Slice the region perpendicular to the chosen axis. In the limit, as the slices become thinner and thinner, the width of the slices become infinitesmal (\(dx\)).</li>
+                    <li>
+                        Express the perpendicular length of each slice in terms of the \(x\) coordinate. (Denote this by \(L(x)\).)
+                    </li>
+                    <li>
+                        Then, each slice is an infinitesimally thin rectangle by with area \[(\text{area}) = (\text{length}) \cdot (\text{width}) = L(x) \: dx\].
+                    </li>
+                    <li>
+                        The total area is found by summing (integrating) the area of the slices within the boundary interval \([a,b]\) \[(\text{total area}) = \int_{a}^{b} (\text{area}) = \int_{a}^{b} L(x) \: dx\].
+                    </li>
+                </ul>
+            </p>
+
+            <div class="example">
+                <p>
+                    Set up an integral to calculate the area of a isoceles triangle with base 10 cm and height 5 cm, using the slices parallel to the base. Check your answer using the usual triangle area formula.
+                </p>
+                <div class="solution">
+                    <p>
+                        Set up a coordinate axis perpendicular to the base, with variable \(h\) representing the height in centimeters going from \(h = 0\) at the apex to \(h = 5\) at the base. Make slices parallel to the base.
+                    </p>
+
+                    <p>
+                        Each slice has thickness \(dh\) (units: \(\text{cm}\)).
+                    </p>
+
+                    <p>
+                        Each slice forms a smaller triangle which has height \(h\). Since the slice is parallel to the base, this triangle is similar to the original triangle, and has the same base to height ratio. Therefore, the length of each slice \(L\) satisfies 
+                        \begin{align*}
+                        \frac{L}{h} &= \frac{10}{5}\\
+                        L &= 2h
+                        \end{align*}
+                        (units: \(\text{cm}\))
+                    </p>
+
+                    <p>
+                        The area of the slice at coordinate \(h\) is \[(\text{area}) = (\text{length}) \cdot (\text{thickness}) = L \: dh = 2h \: dh.\]
+                        (units: \(\text{cm} \cdot \text{cm} = \text{cm}^2\))
+                    </p>
+
+                    <p>
+                        The total area is given by the integrating over the boundary interval \([0,5]\)
+                        \[(\text{total area}) = \int_0^5 2h \: dh = [h^2]_0^5 = 25.\]
+                        (units: \(\text{cm}^2\))
+                    </p>
+
+                    <p>
+                        This matches the result given by the area formula
+                        \[\frac{1}{2}(\text{base}) \cdot (\text{height}) = \frac{1}{2} \cdot 10 \cdot 5 = 25.\]
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>
+                    Set up an integral to calculate the area of a semicircle of radius 7 cm, using the slices parallel to the diameter. Check your answer using the usual semicircle area formula.
+                </p>
+                <div class="solution">
+                    <p>
+                        Set up a coordinate axis perpendicular to the diameter, with variable \(h\) cm representing the height in centimeters going from \(h = 0\) at the circle's center to \(h = 7\) at the edge. Make slices parallel to the diameter.
+                    </p>
+
+                    <p>Each slice has thickness \(dh\). (units: \(\text{cm}\))</p>
+
+                    <p>
+                        Draw a radial line from the center to the point the slice intersects the semicircle. A right triangle is formed: the hypotenuese is the radial line with length 7, one leg is lies on the axis line with length \(h\). The length of each slice \(L\) is double the length of the other leg and hence by the Pythagorean theorem,
+                        \begin{align*}
+                        (L/2)^2 + h^2 &= 7^2\\
+                        L/2 &= \sqrt{7^2 - h^2}\\
+                        L &= 2\sqrt{7^2 - h^2}
+                        \end{align*}
+                        (units: \(\text{cm}\))
+                    </p>
+
+                    <p>
+                        The area of the slice at coordinate \(h\) is \[(\text{area}) = (\text{length}) \cdot (\text{thickness}) = L \: dh = 2\sqrt{7^2 - h^2} \: dh.\]
+                        (units: \(\text{cm}^2\))
+                    </p>
+
+                    <p>
+                        The total area is given by the integrating over the boundary interval \([0,7]\), which can be solved with trigonometric substitution \(h = 7 \sin(\theta), dh = 7\cos(\theta) \: d\theta\)
+                        \begin{align*}
+                            (\text{total area}) &= \int_0^7 2\sqrt{7^2 - h^2} \: dh\\
+                            &= \int_0^{\pi/2} 2 \cdot 7\cos(\theta) \cdot 7\cos(\theta) \: d\theta\\
+                            &= 2 \cdot 7^2 \int_0^{\pi/2} \cos^2(\theta) \: d\theta\\
+                            &= 2 \cdot 7^2 \left[\frac{1}{2}\cos(\theta)\sin(\theta) + \frac{1}{2}\theta \right]_0^{\pi/2} \\
+                            &= 2 \cdot 7^2 \left[\frac{1}{2}\cos(\pi/2)\sin(\pi/2) + \frac{1}{2}\cdot \frac{\pi}{2} \right]-2 \cdot 7^2\left[\frac{1}{2}\cos(0)\sin(0) + \frac{1}{2}\cdot 0 \right] \\
+                            &= 2 \cdot 7^2 \left[\frac{1}{2}\cdot 0 \cdot 1 + \frac{1}{2} \cdot \frac{\pi}{2} \right]- 2 \cdot 7^2\left[\frac{1}{2} \cdot 1 \cdot 0 + \frac{1}{2}\cdot 0 \right] \\
+                            &= 2 \cdot 7^2 \cdot \frac{1}{2} \cdot \frac{\pi}{2}\\
+                            &= \frac{49\pi}{2}\\
+                        \end{align*}
+                        (units: \(\text{cm}^2\))
+                    </p>
+
+                    <p>
+                        This matches the result given by half of the circle area formula
+                        \[\frac{1}{2}\pi(\text{radius})^2 = \frac{1}{2} \pi \cdot 7^2 = \frac{49\pi}{2}.\]
+                    </p>
+                </div>
+            </div>
+
+            <p>
+                For 3D regions, the method is the same, except the slice length is replaced by the cross sectional area:
+                <ul>
+                    <li>
+                        Choose an axis to integrate along. Assign it a variable (we will use \(x\) for this example), and coordinates along the axis.
+                    </li>
+                    <li>
+                        We assume the region is bounded. Find the lower bound \(x = a\) and upper bound \(x = b\) in the coordinate system.
+                    </li>
+                    <li>
+                        Slice the region perpendicular to the chosen axis. In the limit, as the slices become thinner and thinner, the width of the slices become infinitesmal (\(dx\)).</li>
+                    <li>
+                        Express the cross sectional area of each slice in terms of the \(x\) coordinate. (Denote this by \(A(x)\).)
+                    </li>
+                    <li>
+                        Then, each slice is an infinitesimally thin prism over the cross section base with volume \[(\text{volume}) = (\text{cross section area}) \cdot (\text{width}) = A(x) \: dx\].
+                    </li>
+                    <li>
+                        The total area is found by summing (integrating) the volume of the slices within the boundary interval \([a,b]\) \[(\text{total volume}) = \int_{a}^{b} (\text{volume}) = \int_{a}^{b} A(x) \: dx\].
+                    </li>
+                </ul>
+            </p>
+
 
             <h2 id="Ch8.2">8.2 Application to Geometry</h2>
 
