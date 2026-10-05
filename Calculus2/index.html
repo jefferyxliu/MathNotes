@@ -2151,6 +2151,25 @@
             </div>
             Note that a graph is just a special case of the parametric function when \(x\)-coordinate is identical to the parameter, \(x = t\). In this case, \(x'(t) = 1\), so the parametric arclength formula becomes the graph arclength formula.
 
+            <div class="example">
+                <p>
+                    Compute the length of the curve traced by the parametric equations \(x = 2\cos(t)\), \(y = 2\sin(t)\) from \(x=0\) to \(x=2\pi\).
+                </p>
+                <div class="solution">
+                    The derivatives are \(x'(t) = -2\sin(t)\) and \(y'(t) = 2\cos(t)\). The arclength is given by integrating the element \(ds = \sqrt{[x'(t)]^2 + [y'(t)]^2} \: dt\) over the given bound \(t=0\) to \(t=2\pi\).
+                    \begin{align*}
+                        (\text{arclength on graph of $f(x)$ }) &= \int_{0}^{2\pi} \sqrt{[x'(t)]^2 + [y'(t)]^2} \: dt\\
+                        &= \int_{0}^{2\pi} \sqrt{[-2\sin(t)]^2 + [2\cos(t)]^2} \: dt\\
+                        &= \int_{0}^{2\pi} \sqrt{4\sin^2(t) + 4\cos^2(t)} \: dt\\
+                        &= \int_{0}^{2\pi} \sqrt{4(\sin^2(t) + \cos^2(t))} \: dt\\
+                        &= \int_{0}^{2\pi} \sqrt{4} \: dt\\
+                        &= \int_{0}^{2\pi} 2 \: dt\\
+                        &= [2t]_0^{2\pi}\\
+                        &= 4\pi
+                    \end{align*}
+                </div>
+            </div>
+
             <h2 id="Ch8.4">8.4 Density and Center of Mass</h2>
 
             <h3>Mass and Density</h3>
@@ -2202,14 +2221,190 @@
                     </div>
                 </div>
 
-                <h3>Center of Mass</h3>
-                The center of mass of a system of point masses \(m_1, \dots, m_k\) located at positions \(x_1, \dots, x_k\) along the \(x\)-axis can be calculated by
-                \[\bar{x} = \frac{m_1 x_1 + \dots + m_k x_k}{m_1 + \dots + m_k}\]
+                <h3>Moment and Center of Mass</h3>
 
+                <p>
+                    The center of mass of a system of point masses is an weighted average of the positions of the individual points, weighted by the mass of the individual points. The center of mass \(\bar{x}\) of a system of point masses \(m_1, \dots, m_k\) located at positions \(x_1, \dots, x_k\) along the \(x\)-axis can be calculated by
+                    \[\bar{x} = \frac{m_1 x_1 + \dots + m_k x_k}{m_1 + \dots + m_k}\]
+                    or in summation notation,
+                    \[= \frac{\sum_{i=1}^k m_i x_i}{\sum_{i=1}^k m_i}\]
+                </p>
+                <p>
+                    The product mass times position \(m_i \cdot x_i\) is a physical quantity known as the (first) <strong>moment of mass</strong>. Using this terminology, the center of mass can also be describe by the total moment divided by the the total mass.
+                </p>
 
+                <div class="example">
+                    <p>Weights of 1 g, 1 g, 1 g, and 2 g are suspended from a massless rod at 0 cm, 1 cm, 2 cm, 5 cm from the left end of the rod. At which point is the rod exactly balanced? (What is the center of mass?)</p>
+                    <div class="solution">
+                        <p>
+                            The center of mass can be calculated by an average of the positions of the individual points, weighted by the mass of the individual points.
+                            \[\frac{1 \text{g} \cdot 0 \text{cm} + 1 \text{g} \cdot 1 \text{cm} + 1 \text{g} \cdot 2 \text{cm} + 2 \text{g} \cdot 5 \text{cm}}{1\text{g}+1\text{g}+1\text{g}+2\text{g}} = \frac{13 \text{g}\
+                        \cdot \text{cm}}{5 \text{g}} = 2.6 \text{cm}\]
+                            The center of mass is \(2.6 \text{cm}\) from the left end of the rod.
+                        </p>
+                    </div>
+                </div>
+
+                <p>
+                    Let's upgrade this to a continuous version. Suppose the mass is distributed according a density function \(\delta(x)\) along a one dimensional interval \([a,b]\). As before, partition the object into infinitesimal pieces of length \(dx\) on which density is approximately constant, calculate the moment on each piece, then integrate to get the total moment.
+
+                    The moment of the piece at position \(x\) is given by
+                    \begin{align*}
+                        (\text{moment of piece}) &= (\text{mass})(\text{position}) \\
+                        &= (\text{density})(\text{length})(\text{position})\\
+                        &= \delta(x) \: dx \cdot x\\
+                        &= x \cdot \delta(x) \: dx\\
+                    \end{align*}
+                    The total moment is given by integrating the moments of the pieces along the specified interval from \(x=a\) to \(x=b\):
+                    \begin{align*}
+                        (\text{total moment}) &= \int_a^b (\text{moment of piece}) \\
+                        &= \int_a^b x \cdot \delta(x) \: dx\\
+                    \end{align*}
+                    The center of mass is given by the total moment divided by total mass
+                    \begin{align*}
+                        \text{center of mass } \bar{x} &= \frac{(\text{total moment})}{(\text{total mass})} \\
+                        &= \frac{\int_a^b x \cdot \delta(x) \: dx}{\int_a^b \delta(x) \: dx}\\
+                    \end{align*}
+                    Comparing this with the formula for point masses, \(\frac{\sum_{i=1}^k m_i x_i}{\sum_{i=1}^k m_i}\), the sum has been upgraded to an integral, and the mass is calculated by density times length \(\delta(x) \: dx\).
+                </p>
+                
+                <div class="example">
+                    <p>Find the center of mass of a \(2 \:\text{cm}\) long rod, if its density is given by density function \(\delta(x) = 15x^2 \text{ g}/\text{cm}\) where \(x\) is the distance from the left end.</p>
+                    <div class="solution">
+                        <p>
+                            \begin{align*}
+                                \text{center of mass } \bar{x} &= \frac{(\text{total moment})}{(\text{total mass})} \\
+                                &= \frac{\int_0^2 x \cdot \delta(x) \: dx}{\int_0^2 \delta(x) \: dx}\\
+                                &= \frac{\int_0^2 x \cdot 15x^2 \: dx}{\int_0^2 15x^2 \: dx}\\
+                                &= \frac{\int_0^2 15x^3 \: dx}{\int_0^2 15x^2 \: dx}\\
+                                &= \frac{[\frac{15}{4}x^4]_0^2}{[5x^3]_0^2}\\
+                                &= \frac{\frac{15}{4}(2)^4}{5(2)^3}\\
+                                &= \frac{60}{40}\\
+                                &= 1.5
+                            \end{align*}
+                            The center of mass is \(1.5 \:\text{cm}\) from the left end.
+                        </p>
+                    </div>
+                </div>
+
+                <p>
+                    In 2D, the center of mass has two components \((\bar{x},\bar{y})\), and in 3D, three components, \((\bar{x},\bar{y}, \bar{z})\). Each coordinate of the center of mass \(\bar{x}\),\(\bar{y}\), \(\bar{z}\) can be calculated by slicing the region perpendicular to the \(x\),\(y\) and \(z\) axis respectively.
+                </p>
+                <p>Look out for symmetries to simplify the calculation.</p>
+
+                <div class="example">
+                    <p>Find the center of mass of triangle in the \(x,y\)-plane, bounded below the line \(y = \frac{1}{2} - \frac{1}{2}x\), above \(y = -\frac{1}{2} + \frac{1}{2}x\), and between \(x=0\) and \(x=1\), assuming it has constant density \(\delta \: \text{g}/\text{units}^2\).</p>
+                    <div class="solution">
+                        <p>
+                            The triangle is symmetric across the line \(y=0\). Therefore, the \(y\)-coordinate of the center of mass is \(\bar{y} = 0\). It remains to find the \(x\)-coordinate of the center of mass. By slicing perpendicular to the \(x\)-axis, we get vertical strips of cross sectional length
+                            \[L(x) = \left(\frac{1}{2} - \frac{1}{2}x\right) - \left(-\frac{1}{2} + \frac{1}{2}x\right) = 1-x\]
+                            and width \(dx\).
+                            The mass of each strip is
+                            \begin{align*}
+                                (\text{mass of strip}) &= (\text{density})(\text{area of strip}) \\
+                                &= (\text{density})(\text{length of strip})(\text{width of strip}) \\
+                                &= \delta \cdot L(x) \: dx\\
+                                &= \delta \cdot (1-x) \: dx\\
+                            \end{align*}
+                            The moment of each strip with respect to the \(x\)-axis is the mass multiplied by the \(x\)-coordinate position
+                            \begin{align*}
+                                (\text{moment of strip}) &= (\text{position})(\text{moment of strip}) \\
+                                &= x \cdot \delta \cdot (1-x) \: dx
+                            \end{align*}
+                            The total mass is given by integrating the mass of each strip from \(x=0\) to \(x=1\). The total moment is given by integrating the moment of each strip from \(x=0\) to \(x=1\). The center of mass is the total moment divided by total mass
+                            \begin{align*}
+                                \text{center of mass } \bar{x} &= \frac{(\text{total moment})}{(\text{total mass})} \\
+                                &= \frac{\int_0^1 (\text{moment of strip})}{\int_0^1 (\text{mass of strip})}\\
+                                &= \frac{\int_0^1 x \cdot \delta \cdot (1-x) \: dx}{\int_0^1 \delta \cdot (1-x) \: dx}\\
+                                &= \frac{\int_0^1 \delta (x-x^2) \: dx}{\int_0^2 \delta \cdot (1-x)\: dx}\\
+                                &= \frac{\delta [\frac{1}{2}x^2 - \frac{1}{3}x^3]_0^1}{\delta [x - \frac{1}{2}x^2]_0^1}\\
+                                &= \frac{\delta[\frac{1}{2} - \frac{1}{3}]}{\delta [1- \frac{1}{2}]}\\
+                                &= \frac{\delta \frac{1}{6}}{\delta \frac{1}{2}}\\
+                                &= \frac{1}{3}
+                            \end{align*}
+                            The center of mass has coordinates \((\bar{x},\bar{y}) = (\frac{1}{3}, 0)\).
+                        </p>
+                    </div>
+                </div>
             <h1 id="Ch9">Chapter 9. Sequences and Series</h1>
 
             <h2 id="Ch9.1">9.1 Sequences</h2>
+
+            <p>
+                A <strong>sequence</strong> is an infinite ordered list of numbers \(s_1, s_2, s_3, \dots\). \(s_1\) is the first term, \(s_2\) is the first term, and in general \(s_n\) is the \(n\)-th term,. More precisely, a sequence is a function whose domain is the set of whole numbers \(\{1,2,3,\dots\}\). The domain of the sequence is called the <strong>index</strong>, which keeps track of the position of the terms. Typically, the index notation \(s_n\) is used instead of function notation \(s(n)\). Sometimes it may be convenient to start the index from \(0\), i.e. \(s_0, s_1, s_2, s_3, \dots\).
+            </p>
+
+            <h3>Explicit Sequences</h3>
+
+            <p>Like a function, a sequence can be explicitly specified by an expression involving the index variable \(n\). For example, the expression \(s_n := n^2\) specifies the sequence \(1,4,9,16, \dots\).</p>
+
+            <div class="example">
+                <p>Give the first \(4\) terms, \(s_1, \dots, s_4\) of the sequence \(s_n := \frac{n(n+1)}{2}\).</p>
+                <div class="solution">
+                    <p>
+                        \[s_1 = \frac{1(1+1)}{2} = 1\]
+                        \[s_2 = \frac{2(2+1)}{2} = 3\]
+                        \[s_3 = \frac{3(3+1)}{2} = 6\]
+                        \[s_4 = \frac{4(4+1)}{2} = 10\]
+                        The seqence begins \(1,3,6,10,\dots\)
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Give the first \(4\) terms, \(s_1, \dots, s_4\) of the sequence \(s_n := (-1)^n\).</p>
+                <div class="solution">
+                    \[s_1 = (-1)^1 = -1\]
+                    \[s_2 = (-1)^2 = 1\]
+                    \[s_3 = (-1)^3 = -1\]
+                    \[s_4 = (-1)^4 = 1\]
+                    The seqence begins \(-1,1,-1,1,\dots\). It alternates signs depending on the whether the index is even or odd.
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Give the a general expression for the sequence which begins \(1, 2, 4, 8, 16, \dots\)</p>
+                <div class="solution">
+                    The sequence is powers of two
+                    \begin{align*}
+                        &s_1, s_2, s_3, s_4, s_5, \dots \\
+                        =& 1, 2, 4, 8, 16, \dots \\
+                        =& 2^0, 2^1, 2^2, 2^3, 2^4, \dots
+                    \end{align*}
+                    note that the exponent is the part which is incrementing by one each time, and is exactly one less then the index.
+                    \begin{align*}
+                        &s_1, s_2, s_3, s_4, s_5, \dots \\
+                        =& 1, 2, 4, 8, 16, \dots \\
+                        =& 2^0, 2^1, 2^2, 2^3, 2^4, \dots \\
+                        =& 2^{1-1}, 2^{2-1}, 2^{3-1}, 2^{4-1}, 2^{5-1}, \dots 
+                    \end{align*}
+                    Therefore, the general term of the seqence is given by \(s_n = 2^{n-1}\).
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Give the a general expression for the sequence which begins \(\frac{7}{2}, \frac{7}{5}, \frac{7}{8}, \frac{7}{11}, \frac{7}{14}, \dots\)</p>
+                <div class="solution">
+                    Notice the denominator is incrementing by \(+3\).
+                    \begin{align*}
+                        &s_1, s_2, s_3, s_4, s_5, \dots \\
+                        =& \frac{7}{2}, \frac{7}{5}, \frac{7}{8}, \frac{7}{11}, \frac{7}{14}, \dots \\
+                        =& \frac{7}{2}, \frac{7}{2 + 3}, \frac{7}{2+3+3}, \frac{7}{2+3+3+3}, \frac{7}{2+3+3+3+3}, \dots \\
+                        =& \frac{7}{2+0\cdot 3}, \frac{7}{2 + 1\cdot 3}, \frac{7}{2+2\cdot 3}, \frac{7}{2+3\cdot 3}, \frac{7}{2+4\cdot 3}, \dots \\
+                    \end{align*}
+                    Note that the number of times three is added is incrementing by one each time, and is exactly one less then the index.
+                    \begin{align*}
+                        &s_1, s_2, s_3, s_4, s_5, \dots \\
+                        =& \frac{7}{2}, \frac{7}{5}, \frac{7}{8}, \frac{7}{11}, \frac{7}{14}, \dots \\
+                        =& \frac{7}{2}, \frac{7}{2 + 3}, \frac{7}{2+3+3}, \frac{7}{2+3+3+3}, \frac{7}{2+3+3+3+3}, \dots \\
+                        =& \frac{7}{2+0\cdot 3}, \frac{7}{2 + 1\cdot 3}, \frac{7}{2+2\cdot 3}, \frac{7}{2+3\cdot 3}, \frac{7}{2+4\cdot 3}, \dots \\
+                        =& \frac{7}{2+(1-1)\cdot 3}, \frac{7}{2 + (2-1)\cdot 3}, \frac{7}{2+(3-1)\cdot 3}, \frac{7}{2+(4-1)\cdot 3}, \frac{7}{2+(5-1)\cdot 3}, \dots \\
+                    \end{align*}
+                    Therefore, the general term of the seqence is given by \(s_n = \frac{7}{2+(n-1)\cdot 3} = \frac{7}{3n-1}\).
+                </div>
+            </div>
+
+            
 
             <h2 id="Ch9.2">9.2 Geometric Series</h2>
 
