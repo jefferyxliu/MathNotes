@@ -2334,9 +2334,13 @@
                 A <strong>sequence</strong> is an infinite ordered list of numbers \(s_1, s_2, s_3, \dots\). \(s_1\) is the first term, \(s_2\) is the first term, and in general \(s_n\) is the \(n\)-th term,. More precisely, a sequence is a function whose domain is the set of whole numbers \(\{1,2,3,\dots\}\). The domain of the sequence is called the <strong>index</strong>, which keeps track of the position of the terms. Typically, the index notation \(s_n\) is used instead of function notation \(s(n)\). Sometimes it may be convenient to start the index from \(0\), i.e. \(s_0, s_1, s_2, s_3, \dots\).
             </p>
 
+            <p>
+                A sequence may be visualized by its graph by plotting in the plane the coordinates \((n, s_n)\) for \(n = 1, 2, 3, \dots\). Since the sequence is only defined at the whole numbers, the graph will look like a discrete set of points trailing off to the right.
+            </p>
+
             <h3>Explicit Sequences</h3>
 
-            <p>Like a function, a sequence can be explicitly specified by an expression involving the index variable \(n\). For example, the expression \(s_n := n^2\) specifies the sequence \(1,4,9,16, \dots\).</p>
+            <p>Like a function, a sequence can be <strong>explicitly</strong> specified by an expression involving the index variable \(n\). For example, the expression \(s_n := n^2\) specifies the sequence \(1,4,9,16, \dots\).</p>
 
             <div class="example">
                 <p>Give the first \(4\) terms, \(s_1, \dots, s_4\) of the sequence \(s_n := \frac{n(n+1)}{2}\).</p>
@@ -2404,7 +2408,49 @@
                 </div>
             </div>
 
-            
+            <h3>Recursive Sequences</h3>
+
+            <p>
+                A sequence can be specified <strong>recursively</strong> by a rule relating each term to previous term(s), and specifying the first few terms as necessary to start. If \(s_n\) represents an arbitrary term, then \(s_{n-1}\) is the previous term, \(s_{n-2}\) is the previous previous term, and so on
+                \[s_1, s_2, s_3, \dots, s_{n-2}, s_{n-1}, s_{n}, s_{n+1}, \dots\]
+                Warning: \(s_{n-1} \neq s_n - 1\) The subtraction happens in the subscript index, meaning the position is decreased by one.
+            </p>
+
+            <div class="example">
+                <p>Give the first \(5\) terms, \(s_1, \dots, s_5\), of the sequence: \[\begin{cases} s_1 = 4\\ s_n = s_{n-1} + 3 &\text{for $n>1$}\end{cases}\]</p>
+                <div class="solution">
+                    The initial term is given \(s_1 = 4\). The recursive relation \(s_n = s_{n-1} + 3\) means each term is the previous term plus three.  Therefore, seqence begins \(4,7,10,13,16,\dots\).
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Give the first \(5\) terms, \(s_1, \dots, s_5\), of the sequence: \[\begin{cases} s_1 = 0\\ s_2 = 1\\ s_n = \frac{1}{2}(s_{n-1} + s_{n-2}) &\text{for $n>2$}\end{cases}\]</p>
+                <div class="solution">
+                    The initial two terms are given \(s_1 = 0\) and \(s_2 = 1\). The recursive relation \(s_n = s_n = \frac{1}{2}(s_{n-1} + s_{n-2})\) means each term half the sum of the previous term plus the previous previous term (i.e. the average of the previous two terms).
+                    \begin{align*}
+                        s_1 &= 0\\
+                        s_2 &= 1\\
+                        s_3 &= \frac{1}{2}(1 + 0) = \frac{1}{2}\\
+                        s_4 &= \frac{1}{2}\left(\frac{1}{2} + 1\right) = \frac{3}{4}\\
+                        s_5 &= \frac{1}{2}\left(\frac{3}{4} + \frac{1}{2}\right) = \frac{5}{8}\\
+                    \end{align*}
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Give the first \(5\) terms, \(s_1, \dots, s_5\), of the sequence: \[\begin{cases} s_1 = 1\\ s_n = n\cdot s_{n-1}  &\text{for $n>1$}\end{cases}\]</p>
+                <div class="solution">
+                    The initial term are given \(s_1 = 1\). The recursive relation \(n\cdot s_{n-1}\) specifies each term is the index number times the previous term
+                    \begin{align*}
+                        s_1 &= 1\\
+                        s_2 &= 2\cdot 1 = 2\\
+                        s_3 &= 3 \cdot 2 = 6\\
+                        s_4 &= 4 \cdot 6 = 24\\
+                        s_5 &= 5 \cdot 24 = 120
+                    \end{align*}
+                </div>
+            </div>
+
 
             <h2 id="Ch9.2">9.2 Geometric Series</h2>
 
