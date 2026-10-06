@@ -2451,6 +2451,117 @@
                 </div>
             </div>
 
+            The previous example is the sequence of factorials. \(n\) factorial, denoted \(n!\) is the product of all positive integers less than or equal to \(n\).
+            \[n! := n \cdots 3 \cdot 2 \cdot 1\]
+            The empty product is the multiplicative identity, so \(0! = 1\).
+
+            <div class="example">
+                <p>Give a recursive relation for a sequence which begins \(1,3,7,15,31,63, \cdots\)</p>
+                <div class="solution">
+                    <p>
+                        Each term is one more than double the previous term, so
+                        \[\begin{cases} s_1 = 1\\ s_n = 2 s_{n-1} + 1  &\text{for $n>1$}\end{cases}\]
+                        (Other solutions are also possible.)
+                    </p>
+                </div>
+            </div>
+
+            <h3>Convergence of Sequences</h3>
+
+            A sequence \(s_1, s_2, s_3, \dots\) converges to a number \(L\) denoted \(\lim_{n\rightarrow \infty} s_n = L\), if \(s_n\) gets close to \(L\), for all \(n\) "sufficiently large". If no such number \(L\) exists, the sequence is said to diverge.
+
+            This matches with the limit of functions, i.e. if function \(f(x)\) defined on an interval \([a,\infty)\) converges at infinity, \(\lim_{x \rightarrow \infty} f(x) = L\), and a sequence is defined as the integer points of the function\(s_n := f(n)\), then the sequence has the same limit \(\lim_{n \rightarrow \infty} s_n = L\).
+
+            The usual limit laws apply. If \(\lim_{n \rightarrow \infty} s_n = S\) and \(\lim_{n \rightarrow \infty} t_n = T\), then 
+            \[\lim_{n \rightarrow \infty} (s_n \pm t_n) = S \pm T\]
+            \[\lim_{n \rightarrow \infty} (s_n \cdot t_n) = S \cdot T\]
+            If \(f\) is a continuous function at \(S\), then 
+            \[\lim_{n \rightarrow \infty} f(s_n) = f(S)\]
+
+            <div class="example">
+                <p>
+                    Using your knowledge about the behavior of power, exponential, and logarithm functions, determine if the following sequences converge or diverge. If they converge, find the limit.
+                    <ul>
+                        <li> (positive powers) \(s_n = n^p\) where \(p > 0\).</li>
+                        <li> (negative powers) \(s_n = \frac{1}{n^p}\) where \(p > 0\).</li>
+                        <li> (exponential growth) \(s_n = r^n \) where \(|r| > 1 \)</li>
+                        <li> (exponential decay) \(s_n = r^n \) where \(|r| < 1 \)</li>
+                        <li> (logarithm) \(s_n = \log_b(n) \) where \(b > 1\)</li>
+                    </ul>
+                </p>
+                <div class="solution">
+                    <ul>
+                        <li> (positive powers) for \(p > 0\), \(\lim_{n \rightarrow \infty} n^p\) diverges to \(\infty\).</li>
+                        <li> (negative powers) for \(p > 0\), \(\lim_{n \rightarrow \infty} \frac{1}{n^p} = 0\).</li>
+                        <li> (exponential growth) for \(r > 1 \), \(\lim_{n \rightarrow \infty} r^n \) diverges to \(\infty\).</li>
+                        <li> (exponential decay) for \(0 < r < 1 \), \(\lim_{n \rightarrow \infty} r^n = 0\)</li>
+                        <li> (logarithm) for \(b > 1\), \(\lim_{n \rightarrow \infty} \log_b(n) \) diverges</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p>The exponential function \(f(x) = r^x\) is not so well defined for negative bases \(r < 0\) at fractional points, for example \((-2)^{x}\) has no real value at \(x = 0.5\). But whole number exponents are perfectly fine, the sequence \(s_n = r^n\) works for negative values of \(r\). Since \((-r)^n = (-1)^n r^n\), the sequence of exponent with negative base has the same magnitude, but alternates in sign. For example,</p>
+            \begin{align*}
+                (-2)^n &= -2, 4, -8, 16, \dots\\
+                (-\frac{1}{2})^n &= -\frac{1}{2}, \frac{1}{4}, -\frac{1}{8}, \frac{1}{16}, \dots
+            \end{align*}
+            from this we can conclude that 
+            <ul>
+                <li>
+                    for \(-1 < r < 0 \), \(\lim_{n \rightarrow \infty} r^n = 0\) (by squeeze theorem \(-|r|^n \leq r^n \leq |r|^n\))
+                </li>
+                <li>
+                    for \(r < -1 \), \(\lim_{n \rightarrow \infty} r^n\) diverges. The sequence is not bounded on either side, i.e. the even terms diverge to \(\infty\) and the odd terms diverge to \(-\infty\).
+                </li>
+            </ul>
+
+            <div class="example">
+                <p>
+                    Determine if the following sequences converge or diverge. If they converge, find the limit.
+                    <ul>
+                        <li> \(s_n = (-0.8)^n\)</li>
+                        <li> \(s_n = \frac{1-e^{-n}}{1+e^n}\)</li>
+                        <li> \(s_n = \frac{n^2 + 1}{n}\)</li>
+                        <li> \(s_n = \frac{(-1)^n}{n}\)</li>
+                        <li> \(s_n = (-1)^n\)</li>
+                    </ul>
+                </p>
+                <div class="solution">
+                    <ul>
+                        <li> \(\lim_{n\rightarrow \infty} (-0.8)^n = 0\). Exponential decay \(-1 < r < 0\).</li>
+                        <li> \(\lim_{n\rightarrow \infty} \frac{1-e^{-n}}{1+e^n} = \frac{1-0}{1+0} = 1\). Here we are using limit laws.</li>
+                        <li> \(\lim_{n\rightarrow \infty} \frac{n^2 + 1}{n} = \lim_{n\rightarrow \infty} n + \frac{1}{n} = \infty + 0 = \infty\) diverges.</li>
+                        <li> \(\lim_{n\rightarrow \infty} \frac{(-1)^n}{n} = 0\). This is like the sequence \(\frac{1}{n}\), but alternating in sign. Converges by applying squeeze theorem \(\frac{-1}{n} < \frac{(-1)^n}{n} < \frac{1}{n}\).</li>
+                        <li> \(\lim_{n\rightarrow \infty} (-1)^n\) diverges. The sequence \((-1)^n = -1, 1, -1, 1, \dots\) has two distinct accumulation points \(-1\) and \(1\), hence never approaches any particular value.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="definition">
+                <p>A sequence \(s_n\) is <strong>bounded</strong> if there exists numbers \(N\) and \(M\) with \(N \leq s_n \leq M\) for all terms \(n\). The smallest possible \(M\) is called <strong>least upper bound</strong>. The greatest possible \(N\) is called <strong>greatest upper bound</strong> </p>
+            </div>
+            
+            <p>Every convergent sequence is bounded because the tail end of the sequence can be contained within some finite length interval of the limit value.</p>
+
+            <p>The converse is not true! A counterexample is \(s_n = (-1)^n = -1, 1, -1, 1, \dots\). It is bounded by \(-1\) and \(1\), but does not converge.</p>
+
+            <div class="definition">
+                <p>A sequence \(s_n\) is <strong>monotone increasing</strong> or nondecreasing, if each term is greater than or equal to the previous, i.e. \(s_n \geq s_{n-1}\) for all \(n\).</p>
+                <p>A sequence \(s_n\) is <strong>monotone decreasing</strong> or nonincreasing, if each term is less than or equal to the previous, i.e. \(s_n \leq s_{n-1}\) for all \(n\).</p>
+                <p>A sequence \(s_n\) is <strong>monotone</strong> if it is either monotone increasing or monotone decreasing.</p>
+            </div>
+            
+            <p>For monotone sequences, boundedness implies convergence.</p>
+
+            <div class="theorem">
+                Monotone Convergence Theorem.
+                <p>
+                    If a sequence is monotone and bounded, then it converges.
+                </p>
+                <p>
+                    Additionally, a monotone increasing sequence converges to its least upper bound. A monotone decreasing sequence converges to it greatest lower bound.
+                </p>
+            </div>
 
             <h2 id="Ch9.2">9.2 Geometric Series</h2>
 
