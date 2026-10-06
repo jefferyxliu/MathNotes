@@ -2563,6 +2563,49 @@
                 </p>
             </div>
 
+            <div class="example">
+                <p>
+                    Consider the sequence of nested square roots,
+                    \[\sqrt{1}, \sqrt{1 + \sqrt{1}}, \sqrt{1 + \sqrt{1 + \sqrt{1}}}, \sqrt{1 + \sqrt{1 + \sqrt{1 + \sqrt{1}}}}, \dots\]
+                    i.e. defined by the recursive relation
+                    \[\begin{cases} s_1 = 1\\ s_n = \sqrt{1 + s_{n-1}}  &\text{for $n>1$}\end{cases}.\]
+                    Show that the sequence converges. Extra challenge: find the limit.
+                </p>
+                <div class="solution">
+                    <p>
+                        If \(s_n \leq s_{n+1}\), then
+                        \begin{align*}
+                            s_n &\leq s_{n+1}\\
+                            1+s_n &\leq 1+s_{n+1}\\
+                            \sqrt{1+s_n} &\leq \sqrt{1+s_{n+1}}\\
+                            s_{n+1} &\leq s_{n+2}
+                        \end{align*}
+                        Since the first two terms are increasing \(1= \sqrt{1} \leq \sqrt{1 + \sqrt{1}} = \sqrt{2}\) it follows by induction that the sequence is increasing. 
+                    </p>
+                    <p>
+                        If \(s_n \leq 2\), then
+                        \begin{align*}
+                            s_n &\leq 2\\
+                            1+s_n &\leq 3\\
+                            \sqrt{1+s_n} &\leq \sqrt{3} \leq 2\\
+                            s_{n+1} &\leq 2
+                        \end{align*}
+                        Since the first term is less than \(2\), it follows by induction that the sequence is bounded above by \(2\). Since the sequence is increasing, it is bounded below by the first term \(1\).
+                    </p>
+                    <p>By the Monotone Convergence Theorem, the sequence converges, to some number between \(1\) and \(2\). Denote the limit by \(L := \lim_{n \rightarrow \infty} s_n\)</p>
+                    <p>
+                        Now that we know that the sequence converges, the actual value of \(L\) can be computed from the recurrence relation \(s_n = \sqrt{1 + s_{n-1}}\) by taking the limit as \(n \rightarrow \infty\) on both sides. We get \(s_n \rightarrow L\) and \(s_{n-1} \rightarrow L\) (\(s_{n-1}\) is the same sequence, but index shifted by one term, so it has the same limit.) Thus, \(L\) must satisfy the equation
+                        \begin{align*}
+                            L &= \sqrt{1 + L}\\
+                            L^2 &= 1 + L\\
+                            L^2 - L - 1 &= 0\\
+                            L &= \frac{1 \pm \sqrt{5}}{2} \approx -0.602\ldots, 1.602\ldots
+                        \end{align*}
+                        Since \(1 < L < 2\), it must be the positive solution \(L = \frac{1 + \sqrt{5}}{2} = 1.602\ldots\)
+                    </p>
+                </div>
+            </div>
+
             <h2 id="Ch9.2">9.2 Geometric Series</h2>
 
             <h2 id="Ch9.3">9.3 Convergence of Series</h2>
