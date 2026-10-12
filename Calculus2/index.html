@@ -2484,8 +2484,8 @@
                     <ul>
                         <li> (positive powers) \(s_n = n^p\) where \(p > 0\).</li>
                         <li> (negative powers) \(s_n = \frac{1}{n^p}\) where \(p > 0\).</li>
-                        <li> (exponential growth) \(s_n = r^n \) where \(|r| > 1 \)</li>
-                        <li> (exponential decay) \(s_n = r^n \) where \(|r| < 1 \)</li>
+                        <li> (exponential growth) \(s_n = r^n \) where \(r > 1 \)</li>
+                        <li> (exponential decay) \(s_n = r^n \) where \(0 < r < 1\)</li>
                         <li> (logarithm) \(s_n = \log_b(n) \) where \(b > 1\)</li>
                     </ul>
                 </p>
@@ -2524,6 +2524,7 @@
                         <li> \(s_n = \frac{n^2 + 1}{n}\)</li>
                         <li> \(s_n = \frac{(-1)^n}{n}\)</li>
                         <li> \(s_n = (-1)^n\)</li>
+                        <li> \(s_n = \frac{\sin(n)}{n}\)</li>
                     </ul>
                 </p>
                 <div class="solution">
@@ -2533,6 +2534,8 @@
                         <li> \(\lim_{n\rightarrow \infty} \frac{n^2 + 1}{n} = \lim_{n\rightarrow \infty} n + \frac{1}{n} = \infty + 0 = \infty\) diverges.</li>
                         <li> \(\lim_{n\rightarrow \infty} \frac{(-1)^n}{n} = 0\). This is like the sequence \(\frac{1}{n}\), but alternating in sign. Converges by applying squeeze theorem \(\frac{-1}{n} < \frac{(-1)^n}{n} < \frac{1}{n}\).</li>
                         <li> \(\lim_{n\rightarrow \infty} (-1)^n\) diverges. The sequence \((-1)^n = -1, 1, -1, 1, \dots\) has two distinct accumulation points \(-1\) and \(1\), hence never approaches any particular value.</li>
+
+                        <li> \(\lim_{n\rightarrow \infty} \frac{\sin(n)}{n} = 0\). Converges by applying squeeze theorem \(\frac{-1}{n} < \frac{\sin(n)}{n} < \frac{1}{n}\).</li>
                     </ul>
                 </div>
             </div>
@@ -2608,9 +2611,368 @@
 
             <h2 id="Ch9.2">9.2 Geometric Series</h2>
 
+            <p>
+                A <strong>series</strong> is, roughly speaking, an infinite sum \(a_1 + a_2 + a_3 + \cdots \). What does it mean to add infinitely many things? Similar to improper integrals, we can chop off the tail after \(n\) many terms to get a <strong>partial sum</strong> 
+                \[\sum_{k = 1}^n a_k = a_1 + \cdots + a_n \]
+                Each partial sum is finite sum and has a finite value. To get the value of the series, we take a limit of the sequence of partial sum as \(n \rightarrow \infty\). If the limit converges, we assign the limit value to the infinite sum
+                \[\sum_{k = 1}^\infty a_k := \lim_{n \rightarrow \infty}\sum_{k = 1}^n a_k \]
+                Otherwise, we say infinite sum diverges.
+            </p>
+
+            <p>
+                Warning!: A sequence is an infinite list. A series is an infinite <strong>sum</strong>. Take care to not mix up the two. The infinite sum will be indicated with summation notation \(\sum_{k = 1}^\infty\) or the addition symbol with elipsis \(+ \cdots\).
+            </p>
+
+            <div class="example">
+                <p>
+                    Write out the first 4 terms of the series given in summation notation by
+                    \[\sum_{k = 1}^\infty 3^{k-1}\]
+                    use addition symbol with elipsis \(+ \cdots\).
+                </p>
+                <div class="solution">
+                    <p>\[\sum_{k = 1}^\infty 3^{k-1} = 1 + 3 + 9 + 27 + \cdots\]</p>
+                </div>
+            </div>
+
+            <h3>Geometric Series</h3>
+
+            <p>
+                Examine the following series: 
+                \[\sum_{k = 1}^\infty 3^{k-1} = 1 + 3 + 9 + 27 + \cdots\]
+                \[\sum_{k = 1}^\infty \left(\frac{1}{2}\right)^{k-1} = 1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \cdots\]
+                Notice that ratio between successive terms is constant, \(3\) in the first series, and \(\frac{1}{2}\) in the second. Series for which the ratio between successive terms is constant are called <strong>geometric series</strong>. All geometric series have the form
+                \[\sum_{k = 1}^\infty a \cdot r^{k-1} = a + ar + a r^2 + a r^3 + \cdots\]
+                and are completely determined by choice of their initial term \(a\) and common ratio \(r\).
+            </p>
+
+            <p>
+                In general, the exact value of the infinite may be hard to compute. However, geometric series are particularly nicely behaved, and we can compute the exact value as follows:
+            </p>
+
+            <p>
+                By definition, first we must compute the partial sum of the geometric series, which we denote by \(S_n\)
+                \[S_n := \sum_{k = 1}^n a \cdot r^{k-1} = a + ar + a r^2 + a r^3 + \cdots + ar^{n-1}\]
+                By multiplying \(S_n\) by the common ratio, and subtracting it from itself, there is a nice cancellation:
+                \begin{align*}
+                    S_n &= a + ar + a r^2 + a r^3 + \cdots + ar^{n-1}\\
+                    r \cdot S_n &= ar + ar^2 + a r^3 + a r^4 + \cdots + ar^{n}\\
+                    S_n - r\cdot S_n &= (a + ar + a r^2 + a r^3 + \cdots + ar^{n-1}) \\
+                                        &\hspace{0.8cm}- (ar + ar^2 + a r^3 + \cdots + ar^{n-1} + ar^{n})\\
+                    S_n - r\cdot S_n &= a - ar^{n}
+                \end{align*}
+                all but the two terms are eliminated. Then solving for \(S_n\),
+                \begin{align*}
+                    S_n - r\cdot S_n &= a - ar^{n}\\
+                    (1-r)S_n &= a (1 - r^{n})\\
+                    S_n &= \frac{a (1 - r^{n})}{1-r}\\
+                \end{align*}
+                Thus, we have a closed form formula (without \(\cdots\)) for the partial sum of the geometric series. This undefined for the special case \(r = 1\), for which
+                \[S_n = a + a(1) + a (1)^2 + a (1)^3 + \cdots + a(1)^{n-1} = n \cdot a\]
+            </p>
+            <div class="formula">
+                Partial Sum of Geometric Series.
+                <p>
+                    The partial sum with \(n\) terms of the geometric series with initial term \(a\) and common ratio \(r \neq 1\) is 
+                    \[\sum_{k = 1}^n a \cdot r^{k-1} = a + ar + a r^2 + a r^3 + \cdots + ar^{n-1} = \frac{a (1 - r^{n})}{1-r}\]
+                    Note that the numerator \(a-ar^n\) is the first term minus the term which would follow the last term of the partial sum.
+                </p>
+
+                <p>
+                    Otherwise, if \(r = 1\), 
+                    \[\sum_{k = 1}^n a \cdot 1^{k-1} = n \cdot a\]
+                </p>
+            </div>
+
+            <div class="example">
+                <p>Compute the sum of powers of two: \[1 + 2 + 4 + 8 + \cdots + 1024\] without using a calculator.</p>
+                <div class="solution">
+                    <p>
+                        This is the partial sum of a geometric series with initial term \(a=1\) and common ratio \(r=2\). The term which would follow the last term is \(2048\).
+                        \[1 + 2 + 4 + 8 + \cdots + 1024 = \frac{1-2048}{1-2} = 2047\]
+                        alternatively, you can count the number of terms. There are \(n=11\) terms since they range from \(2^0 = 1\) to \(2^{10} = 1024\). By the formula,
+                        \[1 + 2 + 4 + 8 + \cdots + 1024 = \frac{1(1-2^{11})}{1-2} =\frac{1-2048}{1-2} = 2047\]
+                    </p>
+                </div>
+            </div>
+
+            <p>What is the value of the infinite geometric series? What happens as \(n \rightarrow \infty\)? It depends on the value of common ratio \(r\). We will assume the initial term \(a\) is nonzero, otherwise, we get the zero series, which trivially converges to zero.
+                \[\sum_{k = 1}^\infty 0 \cdot r^{k-1} = 0 + 0 + 0 + \dots = 0\]
+                <ul>
+                    <li>
+                        <p>
+                            If \(|r| < 1\), then \(\lim_{n \rightarrow \infty} r^n = 0\), and by limit laws,
+                            \begin{align*}
+                                \sum_{k = 1}^\infty a \cdot r^{k-1} &= \lim_{n \rightarrow \infty} \sum_{k = 1}^n a \cdot r^{k-1}\\
+                                &= \lim_{n \rightarrow \infty} \frac{a(1-r^n)}{1-r}\\
+                                &= \frac{a(1-0)}{1-r}\\
+                                &= \frac{a}{1-r}
+                            \end{align*}
+                            the geometric series converges to \(\frac{a}{1-r}\).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            If \(|r| > 1\), then the sequence \(r^n\) diverges and is not bounded
+                            \begin{align*}
+                                \sum_{k = 1}^\infty a \cdot r^{k-1} &= \lim_{n \rightarrow \infty} \sum_{k = 1}^n a \cdot r^{k-1}\\
+                                &= \lim_{n \rightarrow \infty} \frac{a(1-r^n)}{1-r}\\
+                                &= \lim_{n \rightarrow \infty} \frac{a}{1-r} - \frac{a}{1-r} \cdot r^n
+                            \end{align*}
+                            the geometric series diverges, since \(\frac{a}{1-r} - \frac{a}{1-r} \cdot r^n\) is also not bounded.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            If \(r = -1\), then 
+                            \begin{align*}
+                                \sum_{k = 1}^\infty a \cdot r^{k-1} &= a - a + a - a \pm \dots
+                            \end{align*}
+                            The partial sums alternate between \(a\) and \(0\), and since there are two distinct accumulation points, it diverges.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            If \(r = 1\), then 
+                            \begin{align*}
+                                \sum_{k = 1}^\infty a \cdot r^{k-1} &= \lim_{n \rightarrow \infty} \sum_{k = 1}^n a \cdot r^{k-1}\\
+                                &= \lim_{n \rightarrow \infty} n \cdot a
+                            \end{align*}
+                            the geometric series diverges (to \(\infty\) or \(-\infty\) depending on the sign of \(a\)).
+                        </p>
+                    </li>
+                </ul>
+                </p>
+
+                We summarize in the follow formula
+                <div class="formula">
+                    Geometric Series.
+                    
+                    <p>
+                        Consider the geometric series \[\sum_{k = 1}^\infty a \cdot r^{k-1} = a + ar + a r^2 + a r^3 + \cdots\] with first term \(a \neq 0\) and common ratio \(r\)
+                        <ul>
+                            <li>If \(|r| < 1\), then the geometric series converges to \(\frac{a}{1-r}\).</li>
+                            <li>If \(|r| \geq 1\), then the geometric series diverges.</li>
+                        </ul>
+                    </p>
+                </div>
+
+                Warning!: Always check the condition \(|r|< 1\) before applying the formula \(\frac{a}{1-r}\)! The expression \(\frac{a}{1-r}\) will still yield a number even when the geometric series diverges. For example, for \(a=1, r=2\), the formula yields \(\frac{a}{1-r} = -1\). But the series \[1 + 2 + 4 + 8 + \dots\] does not converge to \(-1\); it clearly diverges to infinity because its terms are all positive and getting bigger and bigger.
+
+                <div class="example">
+                    <p>
+                        Determine if the geometric series converges or diverges. If it converges, determine its exact value.
+                        \[\sum_{k = 1}^\infty 2^{k-1} = 1+\frac{1}{2}+\frac{1}{4}+\frac{1}{8}+\cdots\]
+                    </p>
+                    <div class="solution">
+                        Since the common ratio is \(r = \frac{1}{2}\), and \(|\frac{1}{2}| < 1\), the series converges. The first term is \(a=1\). The series converges to \(\frac{1}{1-\frac{1}{2}} = 2\).
+                    </div>
+                </div>
+
+                <div class="example">
+                    <p>
+                        Determine if the geometric series converges or diverges. If it converges, determine its exact value.
+                        \[\sum_{k = 1}^\infty 9\left(-\frac{5}{3}\right)^{k-1} = 9-15+25-\frac{125}{3}+\cdots\]
+                    </p>
+                    <div class="solution">
+                        Since the common ratio is \(r = -\frac{5}{3}\), and \(|-\frac{5}{3}| \geq 1\), the series diverges.
+                    </div>
+                </div>
+
+                <h3>Applications of Geometric Series</h3>
+
+                <p>
+                    Geometric series, or their partial sums, may be used to model a situation where a quantity is growing or decaying exponentially over time, but a fixed amount is added or removed every period of time.
+                </p>
+                <div class="example">
+                    <p>\(\$1000\) is depositied yearly into a savings account which earns \(5\%\) interest every year. What is the balance of the account right after the \(n\)-th deposity?</p>
+                    <div class="solution">
+                        <p>
+                            First, consider each of the \(n\) many deposits separately. The last deposit is \(\$1000\) (it has not had a chance to earn any interest yet). The second-to-last has earned one period of interest, making for \(\$1000 \cdot (1.05)\). The third-to-last has earned two periods of interest, (\$1000 \cdot (1.05)^2\). And so on, up to the \(n\)-th-to-last deposit, (i.e. first deposit), which has earned \(n - 1\) periods of interest, (\$1000 \cdot (1.05)^{n-1}\). Then the total balance is the sum
+                            \[1000 + 1000(1.05) + 1000(1.05)^2 + \cdots + 1000 (1.05)^{n-1}\]
+                            This is the partial sum with \(n\) terms of a geometric series with initial term \(a = 1000\) and common ratio \(r = 1.05\), and hence has value
+                            \[\frac{1000(1-1.05^{n-1})}{1-1.05}\]
+                        </p>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <p>A patient takes a \(250\) mg dose of a drug every month. After every month, \(96\%\) of the amount of drug is removed from the body by natural processes (so that \(4\%\) remains). What quantity of the drug remains after the 10th dose? What quantity of the drug remains in the body in the long run, if the patient continues the same treatment?</p>
+                    <div class="solution">
+                        <p>
+                            We will calculate the amount after the \(n\)-th dose. As in the previous example, consider each dose separately. The latest dose is \(250\) mg (it has not had a chance to decay yet). The second-to-last has decayed for one month, for \(250(0.04)\) mg. etc. The \(n\)-th-to-last dose has decayed for \(n - 1\) months, for \(250(0.04)^{n-1}\) mg. The total amount after \(n\)-th doses is the sum
+                            \[250 + 250(0.04) + 250(0.04)^2 + \cdots + 250 (0.04)^{n-1}\]
+                            This is the partial sum with \(n\) terms of a geometric series with initial term \(a = 250\) and common ratio \(r = 0.04\), and hence has value
+                            \[\frac{250(1-0.04^{n-1})}{1-0.04}\]
+                            After the \(n = 10\)th dose, 
+                            \[\frac{250(1-0.04^{10-1})}{1-0.04} \approx 260.41 \:\text{mg}\]
+                            Since \(|0.04| < 1\), in the long run, the series converges to 
+                            \[\frac{250}{1-0.04} \approx 260.41 \:\text{mg}\]
+                            Notice, since the value \(-0.04^{10-1}\) is so small, the amount after \(10\) doses is already very close to the limiting value.
+                        </p>
+                    </div>
+                </div>
+
             <h2 id="Ch9.3">9.3 Convergence of Series</h2>
 
+            <p>
+                As a recap of last section, a series is an infinite sum, which is defined in terms of the limit of its partial sums. If the limit converges, we assign the limit value to the infinite sum.
+                \[\sum_{k = 1}^\infty a_k := \lim_{n \rightarrow \infty}\sum_{k = 1}^n a_k \]
+                Otherwise, we say infinite sum diverges.
+            </p>
+
+            <div class="example">
+                <p>
+                    Consider the series
+                    \[\sum_{k=1}^\infty \frac{1}{k(k+1)} = \frac{1}{1\cdot 2} + \frac{1}{2\cdot 3} + \frac{1}{3\cdot 4} + \cdots\]
+                    Write out the partial sum of the first \(n\) terms of the series.
+                    Find a closed form expression (meaning without using \(\sum\) or \(\cdots\)) for the partial sum. (Hint: rewrite \(\frac{1}{k(k+1)}\) as the difference of two fractions with smaller denominators. Then a cancellation occurs.)
+                    Compute limit of the closed form expression to determine the exact value of the series.
+                </p>
+                <div class="solution">
+                    <p>
+                        The \(n\)-th partial sum is 
+                         \[S_n = \sum_{k=1}^n \frac{1}{k(k+1)} = \frac{1}{1\cdot 2} + \frac{1}{2\cdot 3} + \frac{1}{3\cdot 4} + \cdots + \frac{1}{n(n+1)}\]
+                         Since
+                         \[\frac{1}{k(k+1)} = \frac{1}{k} - \frac{1}{k+1}\]
+                        we can rewrite the partial sum as
+                        \begin{align*}
+                            \sum_{k=1}^n \frac{1}{k(k+1)} &= \frac{1}{1\cdot 2} + \frac{1}{2\cdot 3} + \frac{1}{3\cdot 4} + \cdots + \frac{1}{n(n+1)}\\
+                            &= \left(\frac{1}{1} - \frac{1}{2}\right) + \left(\frac{1}{2} - \frac{1}{3}\right) + \left(\frac{1}{3} - \frac{1}{4}\right) + \cdots + \left(\frac{1}{n} - \frac{1}{n+1}\right)\\
+                            &= \frac{1}{1} - \frac{1}{n+1}
+                        \end{align*}
+                        Everything cancels its neighbor in the next term, except the first and last, so we have the closed form expression \(\sum_{k=1}^n \frac{1}{k(k+1)} = 1 - \frac{1}{n+1}\).
+                        The exact value of the series is the limit
+                        \begin{align*}
+                            \sum_{k=1}^\infty \frac{1}{k(k+1)} &= \lim_{n \rightarrow \infty}\sum_{k=1}^n \frac{1}{k(k+1)} \\ 
+                            &= \lim_{n \rightarrow \infty} 1 - \frac{1}{n+1}\\
+                            &= 1 - \frac{1}{\infty}\\
+                            &= 1 - 0\\
+                            &= 1
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            <p>
+                In the previous example, and for geometric series, we have a closed form expression for the partial sums so we could compute the limit directly. It is typically difficult to closed form expression. In remainder of this section and the next, we will only focus on tests which can determine if a series converges or diverges, not the exact value.
+            </p>
+
+            <p>Here are some basic properties for summing series or scaling by a constant. These can be deduced from the limit laws:</p>
+            <ul>
+                <li>If \(\sum_{k=1}^\infty a_k\) and \(\sum_{k=1}^\infty b_k\) converge to \(A\) and \(B\) respectively, then \(\sum_{k=1}^\infty (a_k \pm b_k)\) converges to \(A \pm B\).</li>
+                
+                <li>If \(\sum_{k=1}^\infty a_k\) converges to \(A\) and \(c\) is a constant, then \(\sum_{k=1}^\infty c \cdot a_k\) converges to \(c \cdot A\).</li>
+                
+                <li>If \(\sum_{k=1}^\infty a_k\) converges and \(\sum_{k=1}^\infty b_k\) diverges, then \(\sum_{k=1}^\infty (a_k \pm b_k)\) diverges.</li>
+
+                <li>If \(\sum_{k=1}^\infty a_k\) diverges and \(c \neq 0\) is a constant, then \(\sum_{k=1}^\infty c \cdot a_k\) diverges.</li>
+            </ul>
+            <p>
+                The convergence or divergence of a series only depends on its "tail end". For any positive index \(N\), the series 
+                    \[\sum_{k=1}^\infty a_k = a_1 + a_2 + a_3 + \dots \] 
+                    and the series formed by deleting the terms before \(a_N\)
+                    \[\sum_{k=N}^\infty a_k = a_N + a_{N+1} + a_{N+2} + \dots\]
+                    either both converge or both diverge (although they may converge to different values).
+            </p>
+
+            <div class="theorem">
+                The Divergence Test.
+                <p>
+                    If the sequence of terms \(\lim_{n \rightarrow \infty} a_n \neq 0\), then the series \(\sum_{k=1}^\infty a_k\) diverges.
+                </p>
+                <div class="proof">
+                    <p>(You are not required to memorize this proof)</p>
+                    
+                    <p>
+                        We prove the equivalent contrapositive statement: if \(\sum_{k=1}^\infty a_k\) converges, then \(\lim_{n \rightarrow \infty} a_n = 0\).
+                    </p>
+
+                    <p>
+                        Let \(S_n := \sum_{k=1}^n a_k = a_1 + \cdots + a_n\) denote the partial sum. Suppose that \(\sum_{k=1}^\infty a_k\) converges to \(S\). By definition, this means \(\lim_{n \rightarrow \infty} S_n = S\). Also \(\lim_{n \rightarrow \infty} S_{n-1} = S\) since \(S_{n-1}\) is the same sequence, just index shifted. Note that the each term \(a_n\) is the difference of consecutive partial sums \[S_n - S_{n-1} = (a_1 + \cdots + a_{n-1} + a_n) - (a_1 + \cdots + a_{n-1}) = a_n\]
+                        and by the limit laws
+                        \[\lim_{n \rightarrow \infty} a_n = \lim_{n \rightarrow \infty} (S_n - S_{n-1}) = S - S = 0\]
+                    </p>
+
+
+                </div>
+            </div>
+
+            <p>Warning!: the converse statement is not true. The fact that the terms in a series decrease to zero is <strong>not sufficient</strong> to show that the series converges.</p>
+
+            <div class="example">
+                <p>Show that the series \[\sum_{n=1}^\infty \frac{n}{n+1} = \frac{1}{2} + \frac{2}{3} + \frac{3}{4} + \cdots\] diverges.</p>
+                <div class="solution">
+                    The sequence of terms \(\frac{1}{2}, \frac{2}{3}, \frac{3}{4},\ldots\) has limit \[\lim_{n \rightarrow \infty} \frac{n}{n+1} = \lim_{n \rightarrow \infty} 1 - \frac{1}{n+1} = 1\]
+                    since the limit is not zero, the series \[\sum_{n=1}^\infty \frac{n}{n+1} = \frac{1}{2} + \frac{2}{3} + \frac{3}{4} + \cdots\] diverges.
+                </div>
+            </div>
+
+            <p>Series are closely related to improper integrals by the integral test:</p>
+
+            <div class="theorem">
+                The Integral Test. 
+                <p>
+                    Suppose \(f(x)\) is a decreasing and positive continuous function on \([1, \infty)\). Then the improper integral 
+                    \[\int_1^\infty f(x) \: dx\]
+                    and the series
+                    \[\sum_{k=1}^\infty f(n) = f(1) + f(2) + f(3) + \cdots\]
+                    either both converge or both diverge (although they may converge to different values).
+                </p>
+            </div>
+
+            <div class="example">
+                <p>
+                    Show that the series \[\sum_{n=1}^\infty \frac{1}{n} = 1 + \frac{1}{2} + \frac{1}{3} + \cdots\] diverges. This is called the <strong>harmonic series</strong>.
+                </p>
+                <div class="solution">
+                    <p>
+                        \(\frac{1}{x}\) is a positive decreasing continuous function on \([1, \infty)\). The improper integral \(\int_1^\infty \frac{1}{x} \: dx\)
+                        diverges:
+                        \begin{align*}
+                            \int_1^\infty \frac{1}{x} \: dx &= \lim_{b \rightarrow \infty}\int_1^b \frac{1}{x} \: dx\\
+                            &= \lim_{b \rightarrow \infty} [\ln|x|]_1^b\\
+                            &= \lim_{b \rightarrow \infty} \ln(b)\\
+                            &= \infty
+                        \end{align*}
+                        Therefore, by the integral test,
+                        the series \[\sum_{n=1}^\infty \frac{1}{n} = 1 + \frac{1}{2} + \frac{1}{3} + \cdots\] 
+                        also diverges.
+                    </p>
+                </div>
+            </div>
+
+            <p>The previous example provides a counterexample for the converse of the divergence test. The terms \(1,\frac{1}{2}, \frac{1}{3}, \cdots\) decrease to \(0\), yet the series \(1 + \frac{1}{2} + \frac{1}{3} + \cdots\) diverges.</p>
+
+            <div class="example">
+                <p>
+                    Show that the series \[\sum_{n=1}^\infty \frac{1}{n^2} = 1 + \frac{1}{4} + \frac{1}{9} + \cdots\] converges.
+                </p>
+                <div class="solution">
+                    <p>
+                        \(\frac{1}{x^2}\) is a positive decreasing continuous function on \([1, \infty)\). The improper integral \(\int_1^\infty \frac{1}{x^2} \: dx\)
+                        converges:
+                        \begin{align*}
+                            \int_1^\infty \frac{1}{x^2} \: dx &= \lim_{b \rightarrow \infty}\int_1^b \frac{1}{x^2} \: dx\\
+                            &= \lim_{b \rightarrow \infty} \left[-\frac{1}{x}\right]_1^b\\
+                            &= \lim_{b \rightarrow \infty} \left[-\frac{1}{b}\right]-\left[-1\right]\\
+                            &= 1
+                        \end{align*}
+                        Therefore, by the integral test,
+                        the series \[\sum_{n=1}^\infty \frac{1}{n^2} = 1 + \frac{1}{4} + \frac{1}{9} + \cdots\] 
+                        also converges.
+                    </p>
+                    <p>Fun fact!: The exact value of this series was a famous problem known as the Basel problem. It was solved by Leonard Euler in 1734, who determined it to be \(\frac{\pi^2}{6}\).</p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/d-o3eB9sfls?si=LYm1BJsb80zZH2bg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <p>
+                The series that consists of the sum of the reciprocal \(p\)-th powers, \[\sum_{n=1}^\infty \frac{1}{n^p} = \frac{1}{1^p} + \frac{1}{2^p} + \frac{1}{3^p} + \cdots\] are called <strong>\(p\)-series</strong>. The previous two examples were \(p\)-series with \(p = 1\) and \(p = 2\). By the integral test, this series has the convergence parameters as the improper integral \(\int_1^\infty \frac{1}{x^p} \: dx\); the \(p\)-series converges when \(p > 1\) and diverges when \(p \leq 1\).
+            </p>
+
             <h2 id="Ch9.4">9.4 Tests for Convergence</h2>
+
+
 
             <h2 id="Ch9.5">9.5 Powers Series and Interval of Convergence</h2>
 
