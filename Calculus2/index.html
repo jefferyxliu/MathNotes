@@ -2525,17 +2525,20 @@
                         <li> \(s_n = \frac{(-1)^n}{n}\)</li>
                         <li> \(s_n = (-1)^n\)</li>
                         <li> \(s_n = \frac{\sin(n)}{n}\)</li>
+                        <li> \(\begin{cases}s_1 = 1 \\ s_{n+1} = \dfrac{5}{4} \cdot s_n &\text{for $n > 1$}\end{cases}\)</li>
                     </ul>
                 </p>
                 <div class="solution">
                     <ul>
                         <li> \(\lim_{n\rightarrow \infty} (-0.8)^n = 0\). Exponential decay \(-1 < r < 0\).</li>
-                        <li> \(\lim_{n\rightarrow \infty} \frac{1-e^{-n}}{1+e^n} = \frac{1-0}{1+0} = 1\). Here we are using limit laws.</li>
+                        <li> \(\lim_{n\rightarrow \infty} \frac{1-e^{-n}}{1+e^{-n}} = \frac{1-0}{1+0} = 1\). Here we are using limit laws.</li>
                         <li> \(\lim_{n\rightarrow \infty} \frac{n^2 + 1}{n} = \lim_{n\rightarrow \infty} n + \frac{1}{n} = \infty + 0 = \infty\) diverges.</li>
                         <li> \(\lim_{n\rightarrow \infty} \frac{(-1)^n}{n} = 0\). This is like the sequence \(\frac{1}{n}\), but alternating in sign. Converges by applying squeeze theorem \(\frac{-1}{n} < \frac{(-1)^n}{n} < \frac{1}{n}\).</li>
                         <li> \(\lim_{n\rightarrow \infty} (-1)^n\) diverges. The sequence \((-1)^n = -1, 1, -1, 1, \dots\) has two distinct accumulation points \(-1\) and \(1\), hence never approaches any particular value.</li>
 
                         <li> \(\lim_{n\rightarrow \infty} \frac{\sin(n)}{n} = 0\). Converges by applying squeeze theorem \(\frac{-1}{n} < \frac{\sin(n)}{n} < \frac{1}{n}\).</li>
+
+                        <li>The recursively defined sequence \(\begin{cases}s_1 = 1 \\ s_{n+1} = \dfrac{5}{4} \cdot s_n &\text{for $n > 1$}\end{cases}\) is repeated multiplying by \(\dfrac{5}{4}\) and has explicit solution \(s_n = \(\dfrac{5}{4}\)^{n-1}\). Since \(\dfrac{5}{4} > 1\), this diverges (exponential growth).</li>
                     </ul>
                 </div>
             </div>
