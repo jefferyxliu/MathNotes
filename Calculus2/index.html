@@ -2567,6 +2567,17 @@
                 <p>
                     Additionally, a monotone increasing sequence converges to its least upper bound. A monotone decreasing sequence converges to it greatest lower bound.
                 </p>
+
+                <div class="proof">
+                    <p>(You do not need to memorize this proof.)</p>
+                    <p>Suppose a sequence \(s_n\) is monotone increasing and bounded. Let \(L\) be its least upper bound. For any \(\epsilon > 0\), \(L - \epsilon\) is not an upper bound, hence there exists some number \(N\) for which \(s_N\) is not bounded above by \(L - \epsilon\): 
+                        \[L - \epsilon < s_N \leq L\] 
+                    by monotonicity and since \(L\) is an upper bound, the terms after \(s_N\) also satisfy the inequality \[L - \epsilon < s_N \leq s_{N+1} \leq s_{N+2} \leq \dots \leq L\]
+                    Therefore, the entire tail end of the sequence within \(\epsilon\) of \(L\), and by definition the sequence converges to \(L\).
+                    </p>
+
+                    <p>The argument for monotone decreasing sequences is symmetric.</p>
+                </div>
             </div>
 
             <div class="example">
@@ -2895,8 +2906,6 @@
                         and by the limit laws
                         \[\lim_{n \rightarrow \infty} a_n = \lim_{n \rightarrow \infty} (S_n - S_{n-1}) = S - S = 0\]
                     </p>
-
-
                 </div>
             </div>
 
@@ -2921,6 +2930,17 @@
                     \[\sum_{k=1}^\infty f(n) = f(1) + f(2) + f(3) + \cdots\]
                     either both converge or both diverge (although they may converge to different values).
                 </p>
+                <div class="proof">
+                    <p>(You are not required to memorize this proof)</p>
+
+                    <p>The series \(\sum_{k=1}^\infty f(n) = f(1) + f(2) + f(3) + \cdots\) is the left Riemann sum with \(\Delta x = 1\) and \(\sum_{k=2}^\infty f(n) = f(2) + f(3) + f(4) \cdots\) is the right Riemann sum. By hypothesis \(f(x)\) is decreasing, so the left is an overestimate and right is an underestimate:
+                        \[\sum_{k=2}^\infty f(n) \leq \int_1^\infty f(x) \: dx \leq \sum_{k=1}^\infty f(n)\]
+                    </p>
+
+                    <p>
+                        Since \(f(x)\) is positive, the improper integral and series converges if and only if it is bounded, or diverge to infinity. If the improper integral \(\int_1^\infty f(x) \: dx\) converges to a finite number, then the first inequality shows that series is bounded by \(f(1) + \int_1^\infty f(x) \: dx\). If the improper integral \(\int_1^\infty f(x) \: dx\) diverges to infinity, then the second inequality shows that the series is not bounded.
+                    </p>
+                </div>
             </div>
 
             <div class="example">
