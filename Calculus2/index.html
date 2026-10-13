@@ -2544,7 +2544,7 @@
             </div>
 
             <div class="definition">
-                <p>A sequence \(s_n\) is <strong>bounded</strong> if there exists numbers \(N\) and \(M\) with \(N \leq s_n \leq M\) for all terms \(n\). The smallest possible \(M\) is called <strong>least upper bound</strong>. The greatest possible \(N\) is called <strong>greatest upper bound</strong> </p>
+                <p>A sequence \(s_n\) is <strong>bounded</strong> if there exists numbers \(N\) and \(M\) with \(N \leq s_n \leq M\) for all terms \(n\). The smallest possible \(M\) is called <strong>least upper bound</strong>. The greatest possible \(N\) is called <strong>greatest lower bound</strong> </p>
             </div>
             
             <p>Every convergent sequence is bounded because the tail end of the sequence can be contained within some finite length interval of the limit value.</p>
@@ -2565,7 +2565,7 @@
                     If a sequence is monotone and bounded, then it converges.
                 </p>
                 <p>
-                    Additionally, a monotone increasing sequence converges to its least upper bound. A monotone decreasing sequence converges to it greatest lower bound.
+                    Additionally, a monotone increasing sequence converges to its least upper bound. A monotone decreasing sequence converges to its greatest lower bound.
                 </p>
 
                 <div class="proof">
@@ -2775,7 +2775,7 @@
                 <div class="example">
                     <p>
                         Determine if the geometric series converges or diverges. If it converges, determine its exact value.
-                        \[\sum_{k = 1}^\infty 2^{k-1} = 1+\frac{1}{2}+\frac{1}{4}+\frac{1}{8}+\cdots\]
+                        \[\sum_{k = 1}^\infty \left(\frac{1}{2}\right)^{k-1} = 1+\frac{1}{2}+\frac{1}{4}+\frac{1}{8}+\cdots\]
                     </p>
                     <div class="solution">
                         Since the common ratio is \(r = \frac{1}{2}\), and \(|\frac{1}{2}| < 1\), the series converges. The first term is \(a=1\). The series converges to \(\frac{1}{1-\frac{1}{2}} = 2\).
