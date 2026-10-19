@@ -46,6 +46,12 @@
             margin: 4px;
         }
 
+        .proposition {
+            border: 1px solid grey;
+            padding: 4px;
+            margin: 4px;
+        }
+
         .tip {
             border: 1px solid grey;
             padding: 4px;
@@ -2801,10 +2807,10 @@
                     <p>\(\$1000\) is depositied yearly into a savings account which earns \(5\%\) interest every year. What is the balance of the account right after the \(n\)-th deposity?</p>
                     <div class="solution">
                         <p>
-                            First, consider each of the \(n\) many deposits separately. The last deposit is \(\$1000\) (it has not had a chance to earn any interest yet). The second-to-last has earned one period of interest, making for \(\$1000 \cdot (1.05)\). The third-to-last has earned two periods of interest, (\$1000 \cdot (1.05)^2\). And so on, up to the \(n\)-th-to-last deposit, (i.e. first deposit), which has earned \(n - 1\) periods of interest, (\$1000 \cdot (1.05)^{n-1}\). Then the total balance is the sum
+                            First, consider each of the \(n\) many deposits separately. The last deposit is \(\$1000\) (it has not had a chance to earn any interest yet). The second-to-last has earned one period of interest, making for \(\$1000 \cdot (1.05)\). The third-to-last has earned two periods of interest, \(\$1000 \cdot (1.05)^2\). And so on, up to the \(n\)-th-to-last deposit, (i.e. first deposit), which has earned \(n - 1\) periods of interest, \(\$1000 \cdot (1.05)^{n-1}\). Then the total balance is the sum
                             \[1000 + 1000(1.05) + 1000(1.05)^2 + \cdots + 1000 (1.05)^{n-1}\]
                             This is the partial sum with \(n\) terms of a geometric series with initial term \(a = 1000\) and common ratio \(r = 1.05\), and hence has value
-                            \[\frac{1000(1-1.05^{n-1})}{1-1.05}\]
+                            \[\frac{1000(1-1.05^{n})}{1-1.05}\]
                         </p>
                     </div>
                 </div>
@@ -2872,6 +2878,7 @@
             </p>
 
             <p>Here are some basic properties for summing series or scaling by a constant. These can be deduced from the limit laws:</p>
+
             <ul>
                 <li>If \(\sum_{k=1}^\infty a_k\) and \(\sum_{k=1}^\infty b_k\) converge to \(A\) and \(B\) respectively, then \(\sum_{k=1}^\infty (a_k \pm b_k)\) converges to \(A \pm B\).</li>
                 
@@ -2995,9 +3002,410 @@
 
             <h2 id="Ch9.4">9.4 Tests for Convergence</h2>
 
+            <p>
+                In the last section, we saw how series are related to improper integrals. Just as we have comparison test for improper integrals, we have similar comparison test for series.
+            </p>
 
+            <div class="theorem">
+                Comparison Test for Series.
+                <p>
+                    Consider series \(\sum_{n = 1}^\infty a_n\) and \(\sum_{n = 1}^\infty b_n\), and suppose we have the inequality \(0 \leq a_n \leq b_n\) for all \(n\). Then, 
+                    <ul>
+                        <li>If the larger series\(\sum_{n = 1}^\infty b_n\) converges, then the smaller series \(\sum_{n = 1}^\infty a_n\) also converges.</li>
+                        <li>If the smaller series\(\sum_{n = 1}^\infty a_n\) diverges, then the larger series \(\sum_{n = 1}^\infty a_n\) also diverges.</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="theorem">
+                Limit Comparison Test for Series.
+                <p>
+                    Consider series \(\sum_{n = 1}^\infty a_n\) and \(\sum_{n = 1}^\infty b_n\) with non-negative terms, and suppose \(a_n\) has the same growth rate as \(b_n\) (\(a_n \sim b_n\) i.e. meaning \lim_{n \rightarrow \infty} \frac{a_n}{b_n} = 1).
+                </p>
+
+                <p>Then, \(\sum_{n = 1}^\infty a_n\) and \(\sum_{n = 1}^\infty b_n\) either both converge or both diverge. (Although they may converge to different values).</p>
+            </div>
+
+            <p>The core series that we discussed in previous sections will be a useful point of comparison:
+                <ul>
+                    <li>The geometric series \[\sum_{n=1}^\infty ar^{n-1} = a + ar + ar^2 + \cdots\] converges if \(|r| < 1\) and diverges if \(|r| > 1\)</li>
+                    <li>The \(p\)-series \[\sum_{n=1}^\infty \frac{1}{n^p} = \frac{1}{1^p} + \frac{1}{2^p} + \frac{1}{3^p} + \cdots\] converges if \(p > 1\) and diverges if \(p \leq 1\)</li>
+                </ul>
+            </p>
+
+            <div class="example">
+                <p>Determine whether the series converges or diverges. \[\sum_{n=1}^\infty \frac{1}{n^3 + 1}\]</p>
+                <div class="solution">
+                    <p>Since \(n^3 \gg 1\), \(n^3 \sim n^3 + 1\), \(\frac{1}{n^3} \sim \frac{1}{n^3 + 1}\).
+
+                    Since \(\frac{1}{n^3 + 1} \sim \frac{1}{n^3}\) and \(\sum_{n=1}^\infty \frac{1}{n^3}\) converges (\(p\)-series \(p = 3 > 1\)),
+
+                   \[\sum_{n=1}^\infty \frac{1}{n^3 + 1}\] also converges by the limit comparison test.</p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Determine whether the series converges or diverges. \[\sum_{n=1}^\infty \frac{\sin(n)+2}{n}\]</p>
+                <div class="solution">
+                    <p>
+                        Since \(-1 \leq \sin(n) \leq 1\), \(1 \leq \sin(n) + 2 \leq 3\), \(\frac{1}{n} \leq \frac{\sin(n) + 2}{n} \leq \frac{3}{n}\).
+                    </p>
+
+                    <p>Since \(\frac{1}{n} \leq \frac{\sin(n) + 2}{n} \) and \(\sum_{n=1}^\infty \frac{1}{n^3}\) converges (\(p\)-series \(p = 3 > 1\)),
+
+                   \[\sum_{n=1}^\infty \frac{1}{n^3 + 1}\] also converges by the limit comparison test.</p></p>
+                </div>
+            </div>
+
+            <h3>Series with Negative Terms</h3>
+
+            <p>The integral test and comparison test only apply to series with non-negative terms. For the rest of this section, the following tests for convergence also apply to series with negative terms.</p>
+
+            <p>A series whose terms alternate in sign is called an <strong>alternating series</strong>. For example, \[\sum_{n = 1}^\infty (-1)^{n-1} \frac{1}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} \pm \cdots\] is an alternating series.</p>
+            
+            <div class="theorem">
+                Alternating Series Test.
+                <p>
+                    Consider an alternating series of the form 
+                    \[\sum_{n = 1}^\infty (-1)^{n-1} a_n = a_1 - a_2 + a_3 - a_4 \pm \cdots\]
+                    where each \(a_n\) is positive.
+                </p>
+                <p>
+                    If 
+                    <ul>
+                        <li>\(a_n \leq a_{n-1}\) for all \(n > 1\), and</li>
+                        <li>\(\lim_{n \rightarrow \infty} a_n = 0\)</li>
+                    </ul> 
+                    i.e. the terms \(a_n\) decrease monotonically to zero, then the alternating series \[\sum_{n = 1}^\infty (-1)^{n-1} a_n = a_1 - a_2 + a_3 - a_4 \pm \cdots\] converges.
+                </p>
+
+                <div class="proof">
+                    <p>(You do not need to memorize this proof).</p>
+
+                    <p>Denote the partial sum \[S_n = \sum_{k = 1}^n (-1)^{k-1} a_k = a_1 - a_2 + a_3 - a_4 \pm \cdots \pm a_n\]. Consider the even partial sums \(S_{2m}\) and odd partial sums \(S_{2m+1}\).</p>
+                    
+                    <p>
+                        Since the terms decrease monotonically in size, the partial sums are bounded above by by \(a_1\) and bounded below by \(0\).
+                    </p>
+
+                    <p>
+                        The odd partial sums are monotone decreasing, since \(S_{2m+3} = S_{2m+1} - a_{2m+2} + a_{2m+3} \leq S_{2m+1}\).
+                    </p>
+
+                    <p>
+                        The even partial sums are monotone increasing, since \(S_{2m+2} = S_{2m} + a_{2m+1} - a_{2m+2} \geq S_{2m}\).
+                    </p>
+                    <p>   
+                        By the Monotone Convergence Theorem, they converge. Also, they must converge to the same value \(L\) since their difference is 
+                        \[\lim_{m \rightarrow \infty} (S_{2m+1} - S_{2m}) = \lim_{m \rightarrow \infty} a_{2m+1} = 0\]
+                        and \(L\) is the greatest lower bound for the odd sums \(S_{2m+1}\) and the greatest upper bound for the even sums \(S_{2m}\), and we have inequality
+                        \[S_{2m} < L < S_{2m+1}\]
+                    </p>
+
+                    <p>Then, no matter if \(n = 2m\) is even or \(n = 2m + 1\) is odd, \(L\) is between \(S_{n+1}\) and \(S_{n}\) and
+                        \[0 \leq |S_{n} - L| < |S_{n+1} - S_{n}| = a_{n+1}\]
+                    As \(n \rightarrow \infty\), we have  \(a_{n+1} \rightarrow 0\) and \(|S_{n} - L| \rightarrow 0\), and therefore, the series converges to \(L\).
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Show that the series \[\sum_{n = 1}^\infty (-1)^{n-1} \frac{1}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} \pm \cdots\] converges.</p>
+                <div class="solution">
+                    <p>The terms \(1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \cdots\) decrease to zero, so the alternating series test, the series \[\sum_{n = 1}^\infty (-1)^{n-1} \frac{1}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} \pm \cdots\] converges.</p>
+
+                    <p>In the next chapter, we will see that this series converges to \(\ln(2) \approx 0.6931\)</p>
+                </div>
+            </div>
+
+            <p>Given a series \(\sum_{n = 1}^\infty a_n\) with possibly negative terms, we also can study a related series formed by taking the absolute value of each term \(\sum_{n = 1}^\infty |a_n|\). This will be a series with non-negative terms.</p>
+
+            <p>The series \(\sum_{n = 1}^\infty a_n\) is said to be <strong>absolutely convergent</strong> if the modified absolute series \(\sum_{n = 1}^\infty |a_n|\) converges. The following theorem shows that absolute convergence is a <i>stronger</i>  condition than regular convergence:</p>
+
+            <div class="theorem">
+                Absolute Convergence implies Convergence
+                <p>If \(\sum_{n = 1}^\infty |a_n|\) converges, then \(\sum_{n = 1}^\infty a_n\) converges.</p>
+                <div class="proof">
+                    <p>
+                        We have the inequality
+                        \begin{align*}
+                           -|a_n| &\leq a_n \leq |a_n|\\
+                            0 &\leq a_n + |a_n| \leq 2|a_n|
+                        \end{align*}
+                        \(\sum_{n = 1}^\infty (a_n + |a_n|)\) and \(\sum_{n = 1}^\infty 2|a_n|\) have only non-negative terms, so we can apply the comparison test.
+                    </p>
+                    <p>
+                        If the absolute series \(\sum_{n = 1}^\infty |a_n|\) converges, then so does \(\sum_{n = 1}^\infty 2|a_n|\) by scaling by 2. By the comparison test, the smaller integral \(\sum_{n = 1}^\infty (a_n + |a_n|)\) also converges.
+                    </p>
+                    <p>
+                        Note that \(a_n = a_n + |a_n| - |a_n|\). Then, the original series \(\sum_{n = 1}^\infty a_n\) converges since it is the difference of two convergent series:
+                        \begin{align*}
+                           \sum_{n = 1}^\infty a_n = \sum_{n = 1}^\infty (a_n + |a_n|) - \sum_{n = 1}^\infty |a_n|
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            
+
+            <p>The convergent series \(\sum_{n = 1}^\infty a_n\) for which the modified absolute series \(\sum_{n = 1}^\infty |a_n|\) diverges is said to be <strong>conditionally convergent</strong>. Therefore, all series can be partitioned into the categories "absolutely convergent", "conditionally convergent", or "divergent".</p>
+
+            <table>
+                <thead>
+                    <th></th><th>\(\sum_{n = 1}^\infty a_n\) converges?</th><th>\(\sum_{n = 1}^\infty |a_n|\) converges?</th>
+                </thead>
+                <tr>
+                    <td>absolutely convergent</td><td>Yes &checkmark;</td><td>Yes &checkmark;</td>
+                </tr>
+                <tr>
+                    <td>conditionally convergent</td><td>Yes &checkmark;</td><td>No &cross;</td>
+                </tr>
+                <tr>
+                    <td>divergent</td><td>No &cross;</td><td>No &cross;</td>
+                </tr>
+            </table>
+            
+            <div class="example">
+                <p>Classify the following series as "absolutely convergent", "conditionally convergent", or "divergent".</p>
+                <ul>
+                    <li>
+                        \[\sum_{n = 1}^\infty (-1)^{n-1} \frac{1}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} \pm \cdots\]
+                        <div class="solution">
+                            <p>The terms \(1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \cdots\) decrease to zero, so the series \[\sum_{n = 1}^\infty (-1)^{n-1} \frac{1}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} \pm \cdots\] converges by the alternating series test.
+                            </p>
+                             
+                            <p>The absolute series 
+                            \[\sum_{n = 1}^\infty |(-1)^{n-1} \frac{1}{n}| = \sum_{n = 1}^\infty \frac{1}{n} = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \cdots\]
+                            is \(p\)-series with \(p=1 \leq 1\), hence diverges.</p>
+                            
+                            <p>Therefore, the series is conditionally convergent.</p>
+                        </div>
+                    </li>
+                    <li>
+                        \[\sum_{n = 1}^\infty (-1)^{n-1} \frac{1}{n^2} = 1 - \frac{1}{4} + \frac{1}{9} - \frac{1}{16} \pm \cdots\]
+                        <div class="solution">
+                             
+                            <p>The absolute series 
+                            \[\sum_{n = 1}^\infty |(-1)^{n-1} \frac{1}{n^2}| = \sum_{n = 1}^\infty \frac{1}{n^2} = 1 + \frac{1}{4} + \frac{1}{9} + \frac{1}{16} + \cdots\]
+                            is \(p\)-series with \(p=2 > 1\), hence converges.</p>
+                            
+                            <p>Therefore, the series is absolutely convergent.</p>
+                        </div>
+                    </li>
+                    <li>
+                        \[\sum_{n = 1}^\infty (-1)^{n-1} n = 1 - 2 + 3 - 4 \pm \cdots\]
+                            <div class="solution">
+                            <p>
+                                The series \[\sum_{n = 1}^\infty (-1)^{n-1} n = 1 - 2 + 3 - 4 \pm \cdots\] diverges by the divergence test, since the limit \(\lim_{n \rightarrow \infty} (-1)^{n-1} n\) is not zero. (The limit does not exist.)
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        \[\sum_{n = 1}^\infty \frac{\sin(n)}{n^2} = \sin(1) + \frac{\sin(2)}{4} + \frac{\sin(3)}{9} + \frac{\sin(4)}{16} + \cdots\]
+                        <div class="solution">
+                            <p>
+                                Since \(\sin(n)\) may be negative, the series has negative terms, and we can't apply a comparison test directly. However, we can apply comparison test to the absolute series 
+                                \[\sum_{n = 1}^\infty |\frac{\sin(n)}{n^2}| = |\sin(1)| + \frac{|\sin(2)|}{4} + \frac{|\sin(3)|}{9} + \frac{|\sin(4)|}{16} + \cdots\] which has non-negative terms.
+                            </p>
+                            <p>
+                                We have the inequality 
+                                \begin{align*}
+                                    0\leq |\sin(n)| &\leq 1 \\ 
+                                    0 \leq |\frac{\sin(n)}{n^2}| = \frac{|\sin(n)|}{n^2} &\leq \frac{1}{n^2}
+                                \end{align*}
+                                The series \(\sum_{n = 1}^\infty \frac{1}{n^2}\) converges (\(p\)-series with \(p=2 > 1\)).
+                            </p>
+                            <p>
+                                The absolute series 
+                                \[\sum_{n = 1}^\infty |\frac{\sin(n)}{n^2}| = |\sin(1)| + \frac{|\sin(2)|}{4} + \frac{|\sin(3)|}{9} + \frac{|\sin(4)|}{16} + \cdots\]
+                                is smaller, and hence converges by the comparison test.
+                            </p>
+                            <p>Therefore, the series is absolutely convergent.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <p>The ratio test examines the ratio of the size of consecutive terms in a series.</p>
+            <div class="theorem">
+                Ratio Test.
+                <p>
+                    Consider a series \(\sum_{n = 1}^\infty a_n\). Suppose that the limit of the ratio of size of consecutive terms \[\lim_{n \rightarrow \infty} \frac{|a_{n+1}|}{|a_n|} = L\]
+                    <ul>
+                        <li>If \(0 \leq L < 1\), then the series converges (absolutely).</li>
+                        <li>If \(L > 1\), then the series diverges.</li>
+                        <li>If \(L = 1\), then the ratio test is inconclusive.</li>
+                    </ul>
+                </p>
+                <div class="proof">
+                    <p>(You do not need to memorize this proof.)</p>
+                    
+                    <p>Suppose \(0 \leq L < 1\). Choose a number \(R\) between \(L\) and \(1\), so that \(L < R < 1\).</p>
+
+                    <p>Since \(\frac{|a_{n+1}|}{|a_n|}\) approaches \(L\), eventually it is less than \(R\). Since the convergence of a series only depends on the tail end, we may delete any initial terms and assume without loss of generality that 
+                    \(\frac{|a_{n+1}|}{|a_n|} \leq R\) for all \(n\).</p>
+
+                    <p>Then, we have the inequality
+                    \begin{align*}
+                        |a_n| &= |a_1| \cdot \frac{|a_{2}|}{|a_1|}\cdot \frac{|a_{3}|}{|a_2|} \cdots \frac{|a_{n}|}{|a_{n-1}|} \\
+                        &\leq |a_1| \cdot R \cdot R \cdots R\\
+                        &= |a_1| R^{n-1}
+                    \end{align*}
+                    The series \(\sum_{n=1}^\infty |a_1| R^{n-1} \) is geometric with common ratio \(R\). Since \(0 \leq R < 1\), the geometric series converges. By the comparison test, the smaller series \(\sum_{n=1}^\infty |a_n| \) also converges.</p>
+                    
+                    <p>Therefore, \(\sum_{n=1}^\infty a_n\) converges.</p>
+                    
+                    <p>On the other hand, suppose \(L > 1\). Choose a number \(R\) between \(1\) and \(L\), so that \(1 < R < L\).</p>
+
+                    <p>Since \(\frac{|a_{n+1}|}{|a_n|}\) approaches \(L\), eventually it is greater than \(R\). Since the convergence of a series only depends on the tail end, we may delete any initial terms and assume without loss of generality that 
+                    \(\frac{|a_{n+1}|}{|a_n|} \geq R\) for all \(n\).</p>
+
+                    <p>Then, we have the inequality
+                    \begin{align*}
+                        |a_n| &= |a_1| \cdot \frac{|a_{2}|}{|a_1|}\cdot \frac{|a_{3}|}{|a_2|} \cdots \frac{|a_{n}|}{|a_{n-1}|} \\
+                        &\geq |a_1| \cdot R \cdot R \cdots R\\
+                        &= |a_1| R^{n-1}
+                    \end{align*}
+                    Since \(R > 1\), \(\lim_{n \rightarrow \infty} |a_1| R^{n-1} = \infty\), and therefore, the terms \(a_n\) are not bounded, hence do not converge to zero. By the divergence test, \(\sum_{n=1}^\infty a_n\) diverges.</p>
+                </div>
+            </div>
+
+            <p>The ratio test is often useful for series including the expression \(n!\), since the ratio of consecutive factorials produces a cancelation.</p>
+
+            <div class="example">
+                <p>Show that the series \[\sum_{n = 0}^\infty \frac{1}{n!} = 1 + \frac{1}{1!} + \frac{1}{2!} + \frac{1}{3!} + \cdots\] converges.</p>
+                
+                <div class="solution">
+                    <p> 
+                        Examine the limit of the ratio of consecutive terms. Since \(\frac{1}{n!}\) is positive, we may drop absolute value bars.
+                        \begin{align*}
+                            L = \lim_{n \rightarrow \infty} \frac{\frac{1}{(n+1)!}}{\frac{1}{n!}} &= \lim_{n \rightarrow \infty} \frac{n!}{(n+1)!} \\
+                            &= \lim_{n \rightarrow \infty} \frac{1 \cdots n}{1 \cdots n \cdot (n+1)} \\
+                            &= \lim_{n \rightarrow \infty} \frac{1}{n+1}\\ 
+                            &= 0\\
+                        \end{align*}
+                        Since \(L = 0 < 1\), the series \[\sum_{n = 0}^\infty \frac{1}{n!} = 1 + \frac{1}{1!} + \frac{1}{2!} + \frac{1}{3!} + \cdots\] converges by the ratio test.
+                    </p>
+
+                    <p>In the next chapter, we will see that this series converges to \(e \approx 2.718\).</p>
+                </div>
+            </div>
+
+            <p>The ratio test will be inconclusive on \(p\)-series \(\sum_{n = 1}^\infty \frac{1}{n^p}\), which have ratio of consecutive terms approching 1:
+                \begin{align*}
+                    L = \lim_{n \rightarrow \infty} \frac{\frac{1}{(n+1)^p}}{\frac{1}{n^p}} &= \lim_{n \rightarrow \infty} \frac{n^p}{(n+1)^p} \\
+                    &= \lim_{n \rightarrow \infty} \left(\frac{n}{n+1}\right)^p \\
+                    &= 1^p\\ 
+                    &= 1
+                \end{align*}
+                Since \(\sum_{n = 1}^\infty \frac{1}{n^1}\) diverges and \(\sum_{n = 1}^\infty \frac{1}{n^2}\) converges, but both have \(L = \lim_{n \rightarrow \infty} \frac{|a_{n+1}|}{|a_n|} = 1\), this shows that the ratio test cannot be used to make a conclusion in the case \(L = 1\).
+            </p>
 
             <h2 id="Ch9.5">9.5 Powers Series and Interval of Convergence</h2>
+
+            <p>
+                A <strong>power series</strong> centered at \(x=a\) is a series of the form 
+                \[\sum_{n = 0}^\infty c_n (x-a)^n = c_0 + c_1(x-a) + c_2(x-a)^2 + \cdots\]
+                where \(c_n\) and \(a\) are fixed constants. If \(a = 0\), then the power series has form
+                \[\sum_{n = 0}^\infty c_n x^n = c_0 + c_1 x + c_2 x^2 + \cdots\]
+                (For convenience, it is always possible to make a substitution \(x' = x - a\) so that the power series is centered at \(x' = 0\).)
+                Think of a power series as a kind of "infinite polynomial" in the variable \((x-a)\) with coefficients \(c_n\).
+            </p>
+
+            <p>If all the coefficients \(c_n\) are equal then this has the form of a geometric series.</p>
+
+            <p>The convergence of the power series will depend on the value of \(x\).</p>
+
+            <div class="example">
+                <p>Determine whether the power series \[\sum_{n = 0}^\infty \frac{x^n}{2^n} = 1 + \frac{x}{2}+ \frac{x^2}{2^2} + + \frac{x^3}{2^3} + \cdots \] converges or diverges at \(x=-1\) at \(x=3\).</p>
+                <div class="solution">
+                    <p>At \(x = -1\), \[\sum_{n = 0}^\infty \frac{(-1)^n}{2^n} = 1 - \frac{1}{2}+ \frac{1}{2^2} - \frac{1}{2^3} + \cdots \] this is geometric series with common ratio \(\frac{-1}{2}\), which converges, since \(|\frac{-1}{2}|< 1\).</p>
+
+                    <p>At \(x = 3\), \[\sum_{n = 0}^\infty \frac{3^n}{2^n} = 1 + \frac{3}{2} + \frac{3^2}{2^2} + \frac{3^3}{2^3} + \cdots \] this is geometric series with common ratio \(\frac{3}{2}\), which diverges, since \(|\frac{3}{2}| \geq 1\).</p>
+                </div>
+            </div>
+
+            <p>
+                What does the set of points where the power series converges look like? The power series will always at least converge at the center \(x = a\) to its constant term \(c_0\):
+                \[\sum_{n = 0}^\infty c_n (a-a)^n = c_0 + 0 + 0 + 0 + \cdots = c_0\]
+                We will see that the power series converges on an interval containing \(x = a\), and the boundary points of this interval are equidistant to \(a\) on either side.
+            </p>
+
+            <div class="theorem">
+                Radius of Convergence for a Power Series
+                <p>
+                    Consider a power series  
+                    \[\sum_{n = 0}^\infty c_n (x-a)^n = c_0 + c_1(x-a) + c_2(x-a)^2 + \cdots\]
+                    There exists a unique non-negative number \(R\) called the <strong>radius of convergence</strong> for which 
+                    <ul>
+                        <li>the power series converges (absolutely) for all \(x\) with \(|x-a| < R\) (i.e \(a - R < x < a + R\))</li>
+                        <li>the power series diverges for all \(x\) with \(|x-a| > R\) (i.e \(x < a - R\) or \(x > a + R\))</li>
+                    </ul>
+                    \(R\) is permitted to be \(\infty\), in which case, the power series converges for all real numbers \(x\).
+                </p>
+                
+                <div class="proof">
+                    <p>
+                        We will prove a slightly weaker version using the ratio test, which requires the ratio limit to exist: 
+                        \[L := \lim_{n \rightarrow \infty}\frac{|c_{n+1}|}{|c_n|}\]
+                    </p>
+                    <p>
+                        We compute the limit of the ratio of consecutive terms:
+                        \begin{align*}
+                            \lim_{n \rightarrow \infty} \frac{|c_{n+1}(x-a)^{n+1}|}{|c_{n}(x-a)^{n}|} &=  \lim_{n \rightarrow \infty} \frac{|c_{n+1}|}{|c_{n}|}|x-a|\\
+                            &= L|x-a|
+                        \end{align*}
+                        Applying the ratio test, then the power series converges (absolutely) when 
+                        \begin{align*}
+                            L|x-a| &< 1\\
+                            |x-a| &< \frac{1}{L}\\
+                        \end{align*}
+                        and diverges when 
+                        \begin{align*}
+                            L|x-a| &> 1\\
+                            |x-a| &> \frac{1}{L}\\
+                        \end{align*}
+                        Hence \(R = \frac{1}{L}\) is the radius of convergence.
+                    </p>
+                </div>
+            </div>
+
+            <p>We will typically use the ratio test to compute the radius of convergence, as modeled in the proof.</p>
+
+            <p> 
+                At each boundary points \(a + R\) and \(a - R\), the power series may converge absolutely, converge conditionally or diverge, and independently. The ratio test is inconclusive on the boundary point, so a different test for convergence must be used to determine convergence on the boundary.
+                
+                The interval between \(a - R\) and \(a + R\) including any endpoint where the power series converges is called the <strong>interval of convergence</strong>. That is to say the interval of convergence may look like \((a - R,a + R)\), \([a - R,a + R)\), \((a - R,a + R]\), or \([a - R,a + R]\).
+            </p>
+
+            <div class="example">
+                <p>
+                    Determine the radius of convergence and interval of convergence of the power series
+                    \[\sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n \cdot 3^n} (x-1)^n\]
+                </p>
+            </div>
+
+            <div class="example">
+                <p>
+                    Determine the radius of convergence and interval of convergence of the power series
+                    \[\sum_{n = 0}^\infty \frac{x^n}{n!}\]
+                </p>
+            </div>
+
+            <div class="example">
+                <p>
+                    Write the series in summation notation. Determine the radius of convergence and interval of convergence of the power series
+                    \[1+2^2x^2 + 2^4x^4 + 2^6x^6 + \cdots\]
+                </p>
+            </div>
+
+            <div class="example">
+                <p>
+                    Write the series in summation notation. Determine the radius of convergence and interval of convergence of the power series
+                    \[x -\frac{x^3}{3!} + \frac{x^5}{5!}-\frac{x^7}{7!} + \cdots\]
+                </p>
+            </div>
+
 
             <h1 id="Ch10">Chapter 10. Approximating Functions Using Series</h1>
 
@@ -3062,7 +3470,7 @@
         }
 
         function generateExampleBlocks() {
-            const environments = ['example', 'solution', 'definition', 'theorem','formula','hint','tip','algorithm','proof']
+            const environments = ['example', 'solution', 'definition', 'proposition', 'theorem','formula','hint','tip','algorithm','proof']
             for (const environment of environments) {
                 const examples = document.getElementsByClassName(environment);
                 for (let i = 0; i < examples.length; i++) {
