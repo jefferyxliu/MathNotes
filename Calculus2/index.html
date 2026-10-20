@@ -3383,6 +3383,48 @@
                     Determine the radius of convergence and interval of convergence of the power series
                     \[\sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n \cdot 3^n} (x-1)^n\]
                 </p>
+                <div class="solution">
+                    <p>
+                        Compute the limit of ratio of consecutive terms
+                        \begin{align*}
+                            \lim_{n \rightarrow \infty} \frac{|\frac{(-1)^{n}}{(n+1) \cdot 3^{n+1}} (x-1)^{n+1}|}{|\frac{(-1)^{n-1}}{n \cdot 3^n} (x-1)^n|} &= \lim_{n \rightarrow \infty} \frac{n}{(n+1)} \cdot \frac{1}{3} \cdot |x-1|\\
+                            &= \frac{1}{3} |x-1|
+                        \end{align*}
+                        Applying the ratio test, the power series converges when 
+                        \begin{align*}                           
+                            \frac{1}{3} |x-1| &< 1\\
+                             |x-1| &< 3\\
+                             -3 &< x-1 < 3\\
+                             -2 &< x < 4\\
+                        \end{align*}
+                        and diverges when 
+                        \begin{align*}                           
+                            \frac{1}{3} |x-1| &> 1\\
+                             |x-1| &> 3\\
+                             x-1 > 3 \:\text{or}\: x-1 < -3\\
+                             x > 4 \:\text{or}\: x < -2\\
+                        \end{align*}
+                        Therefore, the interval of convergence is centered at \(x=1\) and the radius of convergence is \(3\). The boundary points \(x = -2\) and \(x = 4\) where the ratio test is inconclusive, we check separately:
+                    </p>
+                    <p>
+                        For \(x = -2\),
+                        \begin{align*}
+                            \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n \cdot 3^n} (-2-1)^n &= \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n \cdot 3^n} (-3)^n\\
+                            &= \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n \cdot 3^n} (-1)^n(3)^n\\
+                            &= \sum_{n = 1}^\infty \frac{-1}{n}
+                        \end{align*}
+                        the series diverges since it is a multiple of the \(p\)-series with power \(p = 1 \leq 1\)
+                    </p>
+                    <p>
+                        For \(x = 4\),
+                        \begin{align*}
+                            \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n \cdot 3^n} (4-1)^n &= \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n \cdot 3^n} (3)^n\\
+                            &= \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n}\\
+                        \end{align*}
+                        since the terms are alternating, and size of the terms \(\frac{1}{n}\) are decreasing to zero, the series converges by the alternating series test.
+                    </p>
+                    <p>The final interval of convergence is \((-2,4]\).</p>
+                </div>
             </div>
 
             <div class="example">
@@ -3390,13 +3432,43 @@
                     Determine the radius of convergence and interval of convergence of the power series
                     \[\sum_{n = 0}^\infty \frac{x^n}{n!}\]
                 </p>
+                <div class="solution">
+                    <p>
+                        Compute the limit of ratio of consecutive terms
+                        \begin{align*}
+                            \lim_{n \rightarrow \infty} \frac{|\frac{x^{n+1}}{(n+1)!}|}{|\frac{x^n}{n!}|} &= \lim_{n \rightarrow \infty} \frac{n!}{(n+1)!}|x|\\
+                            &= \lim_{n \rightarrow \infty} \frac{1}{n+1}|x|\\
+                            &= 0
+                        \end{align*}
+                        Applying the ratio test, the power series converges when \(0 < 1\), which is true for all \(x\). The radius of convergence is \(\infty\). The interval of convergence is \((-\infty, \infty)\).
+                    </p>
+                </div>
             </div>
-
+            <p>For power series with only even or only odd terms, since every other term is zero, the ratio \(\frac{|a_{n+1}|}{|a_n|}\) is undefined infinitely often. However, we can still apply the ratio test by reindexing for only the even powers \(\sum_{n=0}^\infty c_n(x-a)^{2n}\) or only odd powers \(\sum_{n=0}^\infty c_n(x-a)^{2n+1}\).</p>
             <div class="example">
                 <p>
                     Write the series in summation notation. Determine the radius of convergence and interval of convergence of the power series
                     \[1+2^2x^2 + 2^4x^4 + 2^6x^6 + \cdots\]
                 </p>
+                <div class="solution">
+                    The power series has only even powers, so it can be indexed by powers \(x^{2n}\), where \(n=0,1,2,\ldots\). In summation notation,
+                    \[\sum_{n=0}^\infty 2^{2n}x^{2n} = 1+2^2x^2 + 2^4x^4 + 2^6x^6 + \cdots\]
+                    This is a geometric series with common ratio \(2^2x^2\), so it onverges when 
+                        \begin{align*}                           
+                            |2^2x^2| = 4|x|^2 &< 1\\
+                             |x|^2 &< \frac{1}{4}\\
+                             |x| &< \frac{1}{2}\\
+                             -\frac{1}{2} &< x < \frac{1}{2}
+                        \end{align*}
+                        and diverges when 
+                        \begin{align*}                           
+                            |2^2x^2| = 4|x|^2 &\geq 1\\
+                             |x|^2 &\geq \frac{1}{4}\\
+                             |x| &\geq \frac{1}{2}\\
+                             x geq \frac{1}{2} \:\text{or}\: x \leq -\frac{1}{2}
+                        \end{align*}
+                        The radius of convergence is \(\frac{1}{2}\) and the interval of convergence is \(\(-\frac{1}{2}, \frac{1}{2}\)\).
+                </div>
             </div>
 
             <div class="example">
@@ -3404,6 +3476,20 @@
                     Write the series in summation notation. Determine the radius of convergence and interval of convergence of the power series
                     \[x -\frac{x^3}{3!} + \frac{x^5}{5!}-\frac{x^7}{7!} + \cdots\]
                 </p>
+                <div class="solution">
+                    <p>The power series has only odd powers, so it can be indexed by powers \(x^{2n+1}\), where \(n=0,1,2,\ldots\). In summation notation,
+                    \[\sum_{n=0}^\infty (-1)^{n}\frac{x^{2n+1}}{(2n+1)!} = x -\frac{x^3}{3!} + \frac{x^5}{5!}-\frac{x^7}{7!} + \cdots\]</p>
+                    
+                    <p>
+                        Compute the limit of ratio of consecutive terms
+                        \begin{align*}
+                            \lim_{n \rightarrow \infty} \frac{|(-1)^{n+1}\frac{x^{2n+3}}{(2n+3)!}|}{|(-1)^{n}\frac{x^{2n+1}}{(2n+1)!}|} &= \lim_{n \rightarrow \infty} \frac{(2n+1)!}{(2n+3)!}|x|^2\\
+                            &= \lim_{n \rightarrow \infty} \frac{1}{(2n+2)(2n+3)}|x|^2\\
+                            &= 0
+                        \end{align*}
+                        Applying the ratio test, the power series converges when \(0 < 1\), which is true for all \(x\). The radius of convergence is \(\infty\). The interval of convergence is \((-\infty, \infty)\).
+                    </p>
+                </div>
             </div>
 
 
