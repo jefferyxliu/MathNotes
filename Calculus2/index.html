@@ -3444,6 +3444,27 @@
                     </p>
                 </div>
             </div>
+
+            <div class="example">
+                <p>
+                    Suppose that a power series
+                    \[\sum_{n = 0}^\infty c_n (x-5)^n\]
+                    converges when \(x = 9\). At what other points is the power series guaranteed to converge by theorem about radius of convergence?
+                </p>
+                <div class="solution">
+                    <p>
+                        The power series is centered at \(x = 5\). Since it converges at \(x = 9\), the radius of convergence is at least \(R \geq |9-5| = 4\). Therefore, the interval of convergence guaranteed contains the interval
+                        \begin{align*}                           
+                            |x-5| &< 4\\
+                             -4 &< x-5 < 4\\
+                             1 &< x < 9\\
+                        \end{align*}
+                        so the power series is guaranteed to converge at any point in the open interval \((1,9)\).
+                    </p>
+                </div>
+            </div>
+
+
             <p>For power series with only even or only odd terms, since every other term is zero, the ratio \(\frac{|a_{n+1}|}{|a_n|}\) is undefined infinitely often. However, we can still apply the ratio test by reindexing for only the even powers \(\sum_{n=0}^\infty c_n(x-a)^{2n}\) or only odd powers \(\sum_{n=0}^\infty c_n(x-a)^{2n+1}\).</p>
             <div class="example">
                 <p>
