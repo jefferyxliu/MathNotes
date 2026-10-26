@@ -3518,7 +3518,280 @@
 
             <h2 id="Ch10.1">10.1 Taylor Polynomials</h2>
 
+            <p>
+                Polynomials are super nice. Their values can be computed with basic arithmetic operations, and their derivatives and antiderivatives are easily calculated by the power rule. For this reason, it is desireable to approximate function by polynomials. Suppose we want to approximate a function \(f(x)\) by a polynomial near a point \(x = a\). We will assume that the function is smooth at that point, meaning all the higher order derivatives \(f'(a), f''(a), f'''(a), \dots\) exist.
+            </p>
+
+            <p>
+                Let's begin with an example. Suppose we want to approximate \(f(x)\) near \(x=0\) by a degree 1 polynomial, i.e. a line. An arbitrary line has equation in the form \(p_1(x) = c_0 + c_1 x\) where \(c_0, c_1\) are real numbers. How can we make an approximation? A natural condition to ask is for \(f(x)\) and \(p_1(x)\) to have the same value and same slope at \(x=0\). i.e. \(f(0) = p_1(0)\) and \(f'(0) = p_1'(0)\). 
+                \begin{align*}
+                    f(0) &= p_1(0) = c_0\\
+                    f'(0) &= p_1'(0) = c_1
+                \end{align*}
+                So, our approximation has the form \(p_1(x) = f(0) + f'(0) x\). 
+            </p>
+
+            <p>
+                By making a change of coordinates, it is easy to see that the approximation near \(x=a\) is instead \[p_1(x) = f(a) + f'(a) (x-a)\]
+                This is the equation of the tangent line.
+            </p>
+
+            <p>
+                Let's increase. Suppose we want to approximate \(f(x)\) near \(x=0\) by a degree 2 polynomial, i.e. a quadratic. This has equation in the form \(p_2(x) = c_0 + c_1 x + c_2x^2\) where \(c_0, c_1, c_2\) are real numbers. By the power rule, the derivatives are
+                \begin{align*}
+                    p_2(x) &= c_0 + c_1 x + c_2 x^2\\
+                    p_2'(x) &= c_1 + 2 \cdot c_2x\\
+                    p_2''(x) &= 2 \cdot c_2
+                \end{align*}
+                We require for \(f(x)\) and \(p_2(x)\) to have the same value and same slope and same concavity at \(x=0\). i.e. \(f(0) = p_2(0)\) and \(f'(0) = p_2'(0)\) and \(f''(0) = p_2''(0)\). 
+                \begin{align*}
+                    f(0) &= p_2(0) = c_0\\
+                    f'(0) &= p_2'(0) = c_1\\
+                    f''(0) &= p_2''(0) = 2 \cdot c_2
+                \end{align*}
+                So, our approximation has the form \(p_2(x) = f(0) + f'(0) x + \frac{f''(0)}{2} x^2\).
+            </p>
+
+            <p>
+                By making a change of coordinates, it is easy to see that the approximation near \(x=a\) is instead \[p_2(x) = f(a) + f'(a) (x-a) + \frac{f''(a)}{2} (x-a)^2\]
+            </p>
+
+            <p>
+                Continue this pattern to degree \(n\) polynomial \(p_n(x) = \sum_{k=0}^n c_k(x-a)^k = c_0 + c_1 (x-a) + \cdots + c_n(x-a)^n\). The constant term of the \(k\)-th derivative is \(p_n^{(k)}(a) = k! \cdot c_k\). The factor \(k!\) comes from applying the power rule \(k\) times on \((x-a)^k\).
+                By requiring all the derivatives up to the \(n\)-th order to match, the coefficients must satisfy
+                \begin{align*}
+                    f^{(k)}(a) = p_n^{(k)}(a) &= k! \cdot c_k\\
+                    c_k &= \frac{f^{(k)}(a)}{k!}
+                \end{align*}
+                for \(k = 0, \ldots, n\). The resulting polynomial approximating \(f(x)\) is called the Taylor polynomial (after English mathematician Brook Taylor).
+            </p>
+
+            <div class="formula">
+                <p>
+                    Suppose \(f(x)\) is a smooth function at \(x = a\). The degree \(n\) <strong>Taylor polynomial</strong> approximating \(f(x)\) near \(x = a\) is 
+                    \[p_n(x) = \sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x-a)^k = f(a) + \frac{f'(a)}{1!} (x-a) + \frac{f''(a)}{2!} (x-a)^2 + \cdots + \frac{f^{n}(a)}{n!} (x-a)^n\]
+                </p>
+            </div>
+
+            <div class="example">
+                <p>Construct the degree \(4\) Taylor polynomial approximation for \(f(x) = e^x\) near \(x=0\). Note any pattern in the coefficients. Compare the approximation with the exact value at \(x=0.1\).</p>
+                <div class="solution">
+                    <p>
+                        The higher order derivatives are 
+                        \begin{align*}
+                            f(x) &= e^x\\
+                            f'(x) &= e^x\\
+                            f''(x) &= e^x\\
+                            f'''(x) &= e^x\\
+                            f^{(4)}(x) &= e^x
+                        \end{align*}
+                        Their value at \(x=0\)
+                        \begin{align*}
+                            f(0) &= 1\\
+                            f'(0) &= 1\\
+                            f''(0) &= 1\\
+                            f'''(0) &= 1\\
+                            f^{(4)}(0) &= 1
+                        \end{align*}
+                        the degree \(4\) Taylor polynomial approximation is
+                        \begin{align*}
+                            p_4(x) &= 1 + \frac{1}{1!} x + \frac{1}{2!} x^2 + \frac{1}{3!} x^3 + \frac{1}{4!} x^4\\
+                            &= 1 + x + \frac{1}{2} x^2 + \frac{1}{6} x^3 + \frac{1}{24} x^4
+                        \end{align*}
+                        The coefficient of \(x^k\) is \(\frac{1}{k!}\).
+                    </p>
+                    <p>
+                        The Taylor polynomial approximation compared to the actual value at \(x=0.1\)
+                        \begin{align*}
+                            p_4(0.1) &= 1 + (0.1) + \frac{1}{2} (0.1)^2 + \frac{1}{6} (0.1)^3 + \frac{1}{24} (0.1)^4\\
+                            &= 1.10517083333\ldots\\
+                            e^{0.1} & = 1.10517091808\ldots
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Construct the degree \(4\) Taylor polynomial approximation for \(f(x) = \cos(x)\) near \(x=0\). Note any pattern in the coefficients. Compare the approximation with the exact value at \(x=0.1\).</p>
+                <div class="solution">
+                    <p>
+                        The higher order derivatives are 
+                        \begin{align*}
+                            f(x) &= \cos(x)\\
+                            f'(x) &= -\sin(x)\\
+                            f''(x) &= -\cos(x)\\
+                            f'''(x) &= \sin(x)\\
+                            f^{(4)}(x) &= \cos(x)
+                        \end{align*}
+                        Their value at \(x=0\)
+                        \begin{align*}
+                            f(0) &= 1\\
+                            f'(0) &= 0\\
+                            f''(0) &= -1\\
+                            f'''(0) &= 0\\
+                            f^{(4)}(0) &= 1
+                        \end{align*}
+                        the degree \(4\) Taylor polynomial approximation is
+                        \begin{align*}
+                            p_4(x) &= 1 + \frac{0}{1!} x + \frac{-1}{2!} x^2 + \frac{0}{3!} x^3 + \frac{1}{4!} x^4\\
+                            &= 1 - \frac{1}{2!} x^2 + \frac{1}{4!} x^4\\
+                            &= 1 - \frac{1}{2} x^2 + \frac{1}{24} x^4
+                        \end{align*}
+                        Similar to the Taylor polynomial for \(e^x\), except the polynomial has only even powers, and alternates in sign.
+                    </p>
+                    <p>
+                        The Taylor polynomial approximation compared to the actual value at \(x=0.1\)
+                        \begin{align*}
+                            p_4(0.1) &= 1 - \frac{1}{2} (0.1)^2  + \frac{1}{24} (0.1)^4\\
+                            &= 0.995004166667\ldots\\
+                            \cos(0.1) & = 0.995004165278\ldots
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Construct the degree \(5\) Taylor polynomial approximation for \(f(x) = \sin(x)\) near \(x=0\). Note any pattern in the coefficients. Compare the approximation with the exact value at \(x=0.1\).</p>
+                <div class="solution">
+                    <p>
+                        The higher order derivatives are 
+                        \begin{align*}
+                            f(x) &= \sin(x)\\
+                            f'(x) &= \cos(x)\\
+                            f''(x) &= -\sin(x)\\
+                            f'''(x) &= -\cos(x)\\
+                            f^{(4)}(x) &= \sin(x)\\
+                            f^{(5)}(x) &= \cos(x)
+                        \end{align*}
+                        Their value at \(x=0\)
+                        \begin{align*}
+                            f(0) &= 0\\
+                            f'(0) &= 1\\
+                            f''(0) &= 0\\
+                            f'''(0) &= -1\\
+                            f^{(4)}(0) &= 0\\
+                            f^{(5)}(0) &= 1
+                        \end{align*}
+                        the degree \(4\) Taylor polynomial approximation is
+                        \begin{align*}
+                            p_5(x) &= 0 + \frac{1}{1!} x + \frac{0}{2!} x^2 + \frac{-1}{3!} x^3 + \frac{0}{4!} x^4 + \frac{1}{5!} x^5\\
+                            &= x - \frac{1}{3!} x^3 + \frac{1}{5!} x^5\\
+                            &= x - \frac{1}{6} x^3 + \frac{1}{120} x^5
+                        \end{align*}
+                        Similar to the Taylor polynomial for \(e^x\), except the polynomial has only odd powers, and alternates in sign.
+                    </p>
+                    <p>
+                        The Taylor polynomial approximation compared to the actual value at \(x=0.1\)
+                        \begin{align*}
+                            p_5(0.1) &= (0.1) - \frac{1}{6} (0.1)^3 + \frac{1}{120} (0.1)^5\\
+                            &= 0.0998334166667\ldots\\
+                            \cos(0.1) & = 0.0998334166468\ldots
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Construct the degree \(4\) Taylor polynomial approximation for \(f(x) = \frac{1}{1-x}\) near \(x=0\). Note any pattern in the coefficients. Compare the approximation with the exact value at \(x=0.1\).</p>
+                <div class="solution">
+                    <p>
+                        The higher order derivatives are 
+                        \begin{align*}
+                            f(x) &= \frac{1}{1-x} = (1-x)^{-1}\\
+                            f'(x) &= (1-x)^{-2}\\
+                            f''(x) &= 2 (1-x)^{-3}\\
+                            f'''(x) &= 6 (1-x)^{-4}\\
+                            f^{(4)}(x) &= 24 (1-x)^{-5}
+                        \end{align*}
+                        Their value at \(x=0\)
+                        \begin{align*}
+                            f(0) &= 1\\
+                            f'(0) &= 1\\
+                            f''(0) &= 2\\
+                            f'''(0) &= 6\\
+                            f^{(4)}(0) &= 24
+                        \end{align*}
+                        the degree \(4\) Taylor polynomial approximation is
+                        \begin{align*}
+                            p_4(x) &= 1 + \frac{1}{1!} x + \frac{2}{2!} x^2 + \frac{6}{3!} x^3 + \frac{24}{4!} x^4\\
+                            &= 1 + x + x^2 + x^3 + x^4
+                        \end{align*}
+                        All coefficients are \(1\).
+                    </p>
+                    <p>
+                        The Taylor polynomial approximation compared to the actual value at \(x=0.1\)
+                        \begin{align*}
+                            p_4(0.1) &= 1 + (0.1) +  (0.1)^2 +  (0.1)^3 +  (0.1)^4\\
+                            &= 1.1111\\
+                            \frac{1}{1-0.1} & = \frac{10}{9} = 1.111111111111\ldots
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Construct the degree \(4\) Taylor polynomial approximation for \(f(x) = \ln(x)\) near \(x=1\). Note any pattern in the coefficients. Compare the approximation with the exact value at \(x=1.1\).</p>
+                <div class="solution">
+                    <p>
+                        The higher order derivatives are 
+                        \begin{align*}
+                            f(x) &= \ln(x)\\
+                            f'(x) &= x^{-1}\\
+                            f''(x) &= -x^{-2}\\
+                            f'''(x) &= 2 x^{-3}\\
+                            f^{(4)}(x) &= -6 x^{-4}
+                        \end{align*}
+                        Their value at \(x=0\)
+                        \begin{align*}
+                            f(0) &= 0\\
+                            f'(0) &= 1\\
+                            f''(0) &= -1\\
+                            f'''(0) &= 2\\
+                            f^{(4)}(0) &= -6
+                        \end{align*}
+                        the degree \(4\) Taylor polynomial approximation is
+                        \begin{align*}
+                            p_4(x) &= 0 + \frac{1}{1!} (x-1) + \frac{-1}{2!} (x-1)^2 + \frac{2}{3!} (x-1)^3 + \frac{-6}{4!} (x-1)^4\\
+                            &= (x-1) - \frac{1}{2}(x-1)^2 + \frac{1}{3}(x-1)^3 - \frac{1}{4}(x-1)^4
+                        \end{align*}
+                        The coefficients alternate in sign. The coefficient of \((x-1)^k\) is \(\pm\frac{1}{k}\).
+                    </p>
+                    <p>
+                        The Taylor polynomial approximation compared to the actual value at \(x=1.1\)
+                        \begin{align*}
+                            p_4(1.1) &= (1.1-1) - \frac{1}{2}(1.1-1)^2 + \frac{1}{3}(1.1-1)^3 - \frac{1}{4}(1.1-1)^4\\
+                            &= 0.0953083333333\ldots\\
+                            \ln(1.1) & = 0.0953101798043\ldots
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            <p>The Taylor polynomial gives the best approximation near \(x = a\). A higher degree tends to give a better approximation.</p>
+
             <h2 id="Ch10.2">10.2 Taylor Series</h2>
+
+            <p>
+                In the previous section, we developed the Taylor polynomial for approximating a function \(f(x)\) near \(x=a\)
+                \[p_n(x) = \sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x-a)^k = f(a) + \frac{f'(a)}{1!} (x-a) + \frac{f''(a)}{2!} (x-a)^2 + \cdots + \frac{f^{n}(a)}{n!} (x-a)^n\]
+                Taking the limit as \(n \rightarrow \infty\), we get an infinite sum, a power series. This is known as the Taylor series.
+            </p>
+
+            <div class="formula">
+                <p>
+                    Suppose \(f(x)\) is a smooth function at \(x = a\). The <strong>Taylor series</strong> for \(f(x)\) near \(x = a\) is 
+                    \[\sum_{k=0}^\infty \frac{f^{(k)}(a)}{k!}(x-a)^k = f(a) + \frac{f'(a)}{1!} (x-a) + \frac{f''(a)}{2!} (x-a)^2 + \cdots \]
+                </p>
+            </div>
+
+            <p>
+                Since the accuracy of the Taylor polynomial approximation tends to get better as the degree gets larger, you might expect the Taylor series to converge to the function \(f(x)\). Sadly, this is not always true. First of all, the power series may not converge everywhere. Even on its interval of convergence, there are some poorly-behaved functions that converge to a different function from \(f(x)\)! An example is the function \[f(x) = \begin{cases}0 & x=0 \\ e^{-\frac{1}{|x|}} & x \neq 0\end{cases}\]
+                It can be shown that all of its derivatives at \(x = 0\) are zero, \(f^{(k)}(0) = 0\) for all \(k\). Hence, its Taylor series converges to the constant function \(0\) and not \(f(x)\).
+            </p>
+
+            <p>
+                A function \(f(x)\) is called <strong>(real) analytic</strong> at \(x = a\) if its Taylor series converges to \(f(x)\) in an open interval around \(x = a\). Luckily, all of our core functions, such as polynomials, exponential, trigonometric, logarithmic functions, are analytic at every point in their domain. Furthermore, the sum, difference, product, and composition of analytic functions are analytic. The quotient of analytic functions are analytic at every point where the denominator is not zero.
+            </p>
 
             <h2 id="Ch10.3">10.3 Finding and Using Taylor Series</h2>
 
