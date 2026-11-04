@@ -3849,55 +3849,57 @@
             <div class="example">
                 <p>Determine the Taylor series of \(f(x) = \ln(1+x)\) centered at \(x=0\), and investigate its convergence.</p>
                 <div class="solution">
-                    The higher order derivatives are 
-                    \begin{align*}
-                        f(x) &= \ln(1+x)\\
-                        f'(x) &= (1+x)^{-1}\\
-                        f''(x) &= (-1)\cdot (1+x)^{-2}\\
-                        f'''(x) &= (-1)(-2) \cdot (1+x)^{-3}\\
-                        f^{(4)}(x) &= (-1)(-2)(-3) \cdot (1+x)^{-4}\\
-                        \vdots\\
-                        f^{(n)}(x) &= (-1)(-2) \cdots (-n+1) \cdot (1+x)^{-n}
-                    \end{align*}
-                    Their value at \(x=0\)
-                    \begin{align*}
-                        f(0) &= 0\\
-                        f'(0) &= 1\\
-                        f''(0) &= (-1)\\
-                        f'''(0) &= (-1)(-2)\\
-                        f^{(4)}(0) &= (-1)(-2)(-3)\\
-                        \vdots\\
-                        f^{(n)}(0) &= (-1)(-2) \cdots (-n+1) = (-1)^{n-1}(n-1)!
-                    \end{align*}
-                    The Taylor series is 
-                    \begin{align*}
-                       \ln(1+x) &= 0 + \frac{1}{1!}x + \frac{-1}{2!}x^2 + \frac{(-1)(-2)}{3!}x^3 + \frac{(-1)(-2)(-3)}{4!}x^4 + \cdots &&= \sum_{n = 1}^\infty \frac{(-1)^{n-1}(n-1)!}{n!}x^n\\ 
-                       &= x - \frac{1}{2}x^2 + \frac{1}{3}x^3 - \frac{1}{4} x^4 + \cdots &&= \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n}x^n\\
-                    \end{align*}
-                    For convergence, compute the ratio of consecutive terms:
-                    \[\lim_{n \rightarrow \infty} \frac{|\frac{(-1)^{n}}{n+1}x^{n+1}|}{|\frac{(-1)^{n-1}}{n}x^n|} = \lim_{n \rightarrow \infty} \frac{n}{n+1}|x| = |x|\]
-                    by the ratio test, the series converges for \(|x| < 1\) and diverges for \(|x| > 1\), i.e. has radius of convergence \(1\). 
-                    
-                    On the boundary \(x = -1\),
-                    \begin{align*}
-                       (-1) - \frac{1}{2}(-1)^2 + \frac{1}{3}(-1)^3 - \frac{1}{4} (-1)^4 + \cdots &&= \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n}(-1)^n\\
-                       -1 - \frac{1}{2} - \frac{1}{3} - \frac{1}{4} - \cdots &&= \sum_{n = 1}^\infty \frac{-1}{n}\\
-                    \end{align*}
-                    the series diverges since it is a constant multiple of the \(p\)-series \(p=1 \leq 1\).
+                    <p>
+                        The higher order derivatives are 
+                        \begin{align*}
+                            f(x) &= \ln(1+x)\\
+                            f'(x) &= (1+x)^{-1}\\
+                            f''(x) &= (-1)\cdot (1+x)^{-2}\\
+                            f'''(x) &= (-1)(-2) \cdot (1+x)^{-3}\\
+                            f^{(4)}(x) &= (-1)(-2)(-3) \cdot (1+x)^{-4}\\
+                            \vdots\\
+                            f^{(n)}(x) &= (-1)(-2) \cdots (-n+1) \cdot (1+x)^{-n}
+                        \end{align*}
+                        Their value at \(x=0\)
+                        \begin{align*}
+                            f(0) &= 0\\
+                            f'(0) &= 1\\
+                            f''(0) &= (-1)\\
+                            f'''(0) &= (-1)(-2)\\
+                            f^{(4)}(0) &= (-1)(-2)(-3)\\
+                            \vdots\\
+                            f^{(n)}(0) &= (-1)(-2) \cdots (-n+1) = (-1)^{n-1}(n-1)!
+                        \end{align*}
+                        The Taylor series is 
+                        \begin{align*}
+                        \ln(1+x) &= 0 + \frac{1}{1!}x + \frac{-1}{2!}x^2 + \frac{(-1)(-2)}{3!}x^3 + \frac{(-1)(-2)(-3)}{4!}x^4 + \cdots &&= \sum_{n = 1}^\infty \frac{(-1)^{n-1}(n-1)!}{n!}x^n\\ 
+                        &= x - \frac{1}{2}x^2 + \frac{1}{3}x^3 - \frac{1}{4} x^4 + \cdots &&= \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n}x^n\\
+                        \end{align*}
+                        For convergence, compute the ratio of consecutive terms:
+                        \[\lim_{n \rightarrow \infty} \frac{|\frac{(-1)^{n}}{n+1}x^{n+1}|}{|\frac{(-1)^{n-1}}{n}x^n|} = \lim_{n \rightarrow \infty} \frac{n}{n+1}|x| = |x|\]
+                        by the ratio test, the series converges for \(|x| < 1\) and diverges for \(|x| > 1\), i.e. has radius of convergence \(1\). 
+                        
+                        On the boundary \(x = -1\),
+                        \begin{align*}
+                        (-1) - \frac{1}{2}(-1)^2 + \frac{1}{3}(-1)^3 - \frac{1}{4} (-1)^4 + \cdots &&= \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n}(-1)^n\\
+                        -1 - \frac{1}{2} - \frac{1}{3} - \frac{1}{4} - \cdots &&= \sum_{n = 1}^\infty \frac{-1}{n}\\
+                        \end{align*}
+                        the series diverges since it is a constant multiple of the \(p\)-series \(p=1 \leq 1\).
 
-                    On the boundary \(x = 1\),
-                    \begin{align*}
-                       (1) - \frac{1}{2}(1)^2 + \frac{1}{3}(1)^3 - \frac{1}{4} (1)^4 + \cdots &&= \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n}(1)^n\\
-                       1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} \pm \cdots &&= \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n}\\
-                    \end{align*}
-                    the series converges since it is alternating and the size of the terms decrease to zero.
+                        On the boundary \(x = 1\),
+                        \begin{align*}
+                        (1) - \frac{1}{2}(1)^2 + \frac{1}{3}(1)^3 - \frac{1}{4} (1)^4 + \cdots &&= \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n}(1)^n\\
+                        1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} \pm \cdots &&= \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n}\\
+                        \end{align*}
+                        the series converges since it is alternating and the size of the terms decrease to zero.
 
-                    The interval of convergence is \( (-1,1]\), and the equation
-                    \begin{align*}
-                       \ln(1+x) &= x - \frac{1}{2}x^2 + \frac{1}{3}x^3 - \frac{1}{4} x^4 + \cdots &&= \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n}x^n\\
-                    \end{align*}
-                    is valid for \(-1 < x \leq 1\). In particular, the value at \(x=1\) gives that the alternating harmonic series converges to \(\ln(2) \approx 0.69314718056\)
-                    \[\ln(2) = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} \pm \cdots = \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n}\]
+                        The interval of convergence is \( (-1,1]\), and the equation
+                        \begin{align*}
+                        \ln(1+x) &= x - \frac{1}{2}x^2 + \frac{1}{3}x^3 - \frac{1}{4} x^4 + \cdots &&= \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n}x^n\\
+                        \end{align*}
+                        is valid for \(-1 < x \leq 1\). In particular, the value at \(x=1\) gives that the alternating harmonic series converges to \(\ln(2) \approx 0.69314718056\)
+                        \[\ln(2) = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} \pm \cdots = \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n}\]
+                    </p>
                 </div>
             </div>
 
@@ -3905,55 +3907,285 @@
 
             <p>Sometimes it may be easier to compute Taylor series from a known series, rather than computing all the derivatives.</p>
 
-            <div class="example">
-                <p>Compute the Taylor series for \(f(x) = x^2 \sin(x)\) centered at \(x = 0\).</p>
-                <div class="solution">
-                    Using the known series for \(\sin(x)\) centered at \(x = 0\)
-                    \[\sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} + \frac{x^7}{7!} \pm \cdots = \sum_{n = 0}^\infty (-1)^n\frac{x^{2n+1}}{(2n+1)!}\]
-                    we can get the series for \(x^2 \sin(x)\) by multiplying each term by \(x^2\)
-                    \begin{align*}
-                        x^2 \sin(x) &= x^2\cdot ( x - \frac{x^3}{3!} + \frac{x^5}{5!} + \frac{x^7}{7!} \pm \cdots)  &&=  x^2 \cdot \sum_{n = 0}^\infty (-1)^n\frac{x^{2n+1}}{(2n+1)!}\\
-                        &= x^3 - \frac{x^5}{3!} + \frac{x^7}{5!} + \frac{x^9}{7!} \pm \cdots)  &&=  \sum_{n = 0}^\infty (-1)^n\frac{x^{2n+3}}{(2n+1)!}\\
-                    \end{align*}
-                </div>
-            </div>
+            <p>
+                If you know the Taylor series for \(f(x)\) centered at \(x = 0\), you can obtain the Taylor series for \(f(ax^n)\) by substituting \(ax^n\) for \(x\).
+            </p>
 
             <div class="example">
                 <p>Compute the Taylor series for \(f(x) = e^{-x^2}\) centered at \(x = 0\).</p>
                 <div class="solution">
-                    Using the known series for \(e^x\) centered at \(x = 0\)
-                    \[e^x = 1 + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots = \sum_{n = 0}^\infty \frac{x^n}{n!}\]
-                    we can get the series for \(e^{-x^2}\) by replacing \(x\) with \(-x^2\)
-                    \begin{align*}
-                        e^{-x^2} &= 1 + \frac{(-x^2)}{1!} + \frac{(-x^2)^2}{2!} + \frac{(-x^2)^3}{3!} + \cdots = \sum_{n = 0}^\infty \frac{(-x^2)^n}{n!} \\
-                        &=  1 - \frac{x^2}{1!} + \frac{x^4}{2!} - \frac{x^6}{3!} + \cdots = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{n!} 
-                    \end{align*}
+                    <p>
+                        Using the known series for \(e^x\) centered at \(x = 0\)
+                        \[e^x = 1 + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots = \sum_{n = 0}^\infty \frac{x^n}{n!}\]
+                        we can get the series for \(e^{-x^2}\) by replacing \(x\) with \(-x^2\)
+                        \begin{align*}
+                            e^{-x^2} &= 1 + \frac{(-x^2)}{1!} + \frac{(-x^2)^2}{2!} + \frac{(-x^2)^3}{3!} + \cdots &&= \sum_{n = 0}^\infty \frac{(-x^2)^n}{n!} \\
+                            &=  1 - \frac{x^2}{1!} + \frac{x^4}{2!} - \frac{x^6}{3!} + \cdots &&= \sum_{n = 0}^\infty \frac{(-1)^n x^{2n}}{n!} 
+                        \end{align*}
+                    </p>
                 </div>
             </div>
 
             <div class="example">
                 <p>Compute the Taylor series for the functions \(\frac{1}{1+x}, \frac{1}{1+x^2}\) centered at \(x = 0\).</p>
                 <div class="solution">
-                    Using the known series for \(\frac{1}{1-x}\) centered at \(x = 0\)
-                    \[\frac{1}{1-x} = 1 + x + x^2 + x^3 + \cdots = \sum_{n = 0}^\infty x^n\]
-                    we can get the series for \(\frac{1}{1+x}=\frac{1}{1-(-x)}\) by replacing \(x\) with \(-x\)
-                    \begin{align*}
-                        \frac{1}{1+x} &= 1 + (-x) + (-x)^2 + (-x)^3 + \cdots &&= \sum_{n = 0}^\infty (-x)^n \\
-                        &=  1 - x + x^2 - x^3 + \cdots = \sum_{n = 0}^\infty \frac{(-1)^n x^n} 
-                    \end{align*}
-                    we can get the series for \(\frac{1}{1+x^2}=\frac{1}{1-(-x^2)}\) by replacing \(x\) with \(-x^2\)
-                    \begin{align*}
-                        \frac{1}{1+x} &= 1 + (-x^2) + (-x^2)^2 + (-x^2)^3 + \cdots &&= \sum_{n = 0}^\infty (-x^2)^n \\
-                        &=  1 - x^2 + x^4 - x^6 + \cdots = \sum_{n = 0}^\infty \frac{(-1)^n x^{2n}} 
-                    \end{align*}
+                    <p>
+                        Using the known series for \(\frac{1}{1-x}\) centered at \(x = 0\)
+                        \[\frac{1}{1-x} = 1 + x + x^2 + x^3 + \cdots = \sum_{n = 0}^\infty x^n\]
+                        we can get the series for \(\frac{1}{1+x}=\frac{1}{1-(-x)}\) by replacing \(x\) with \(-x\)
+                        \begin{align*}
+                            \frac{1}{1+x} &= 1 + (-x) + (-x)^2 + (-x)^3 + \cdots &&= \sum_{n = 0}^\infty (-x)^n \\
+                            &=  1 - x + x^2 - x^3 + \cdots &&= \sum_{n = 0}^\infty (-1)^n x^n 
+                        \end{align*}
+                        we can get the series for \(\frac{1}{1+x^2}=\frac{1}{1-(-x^2)}\) by replacing \(x\) with \(-x^2\)
+                        \begin{align*}
+                            \frac{1}{1+x^2} &= 1 + (-x^2) + (-x^2)^2 + (-x^2)^3 + \cdots &&= \sum_{n = 0}^\infty (-x^2)^n \\
+                            &=  1 - x^2 + x^4 - x^6 + \cdots &&= \sum_{n = 0}^\infty (-1)^n x^{2n}
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            <p>
+                If you know the Taylor series for \(f(x)\), you can obtain the Taylor series for the its derivative and antiderivative(s) using the power rule term by term.
+            </p>
+
+            <div class="example">
+                <p>Determine the Taylor series for \(\frac{1}{(1-x)^2}\) centered at \(x = 0\).</p>
+                <div class="solution">
+                    <p>
+                        Notice that \(\frac{1}{(1-x)^2} = \frac{d}{dx}(\frac{1}{1-x})\). Using the known series for \(\frac{1}{1-x}\) centered at \(x = 0\)
+                        \[\frac{1}{1-x} = 1 + x + x^2 + x^3 + \cdots = \sum_{n = 0}^\infty x^n\]
+                        we can get the series for \(\frac{1}{(1-x)^2} = \frac{d}{dx}(\frac{1}{1-x})\) by differentiating term by term.
+                        \begin{align*}
+                            \frac{1}{(1-x)^2} = \frac{d}{dx}(\frac{1}{1-x}) &= \frac{d}{dx}(1 + x + x^2 + x^3 + \cdots) &&= \frac{d}{dx}\left(\sum_{n = 0}^\infty (-x)^n \right) \\
+                            &=  0 + 1 + 2x + 3x^2 + \cdots &&= \sum_{n = 0}^\infty nx^{n-1} \\
+                            &= 1 + 2x + 3x^2 + \cdots &&= \sum_{n = 1}^\infty (n+1)x^{n}
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Determine the Taylor series for \(\arctan(x)\) centered at \(x = 0\).</p>
+                <div class="solution">
+                    <p>
+                        Notice that \(\arctan(x) = \int \frac{1}{1+x^2} \: dt +C\). Both sides may differ by constant because of the constant of integration. From the earlier example, we found the series for \(\frac{1}{1+x^2}\) centered at \(x = 0\) by substitution
+                        \begin{align*}
+                            \frac{1}{1+x^2} &=  1 - x^2 + x^4 - x^6 + \cdots = \sum_{n = 0}^\infty (-1)^n x^{2n}
+                        \end{align*}
+                        we can get the series for \(\arctan(x) = \int \frac{1}{1+x^2} \: dx\) by antidifferentiation term by term.
+                        \begin{align*}
+                            \arctan(x) = C + \int \frac{1}{1+x^2} \: dx &= C +  \int (1 - x^2 + x^4 - x^6 + \cdots) \: dx &&= C + \int\left(\sum_{n = 0}^\infty (-1)^n x^{2n} \right)\\
+                            &=  C + x - \frac{1}{3}x^3 + \frac{1}{5}x^5 - \frac{1}{7}x^7 + \cdots &&= C + \sum_{n = 0}^\infty (-1)^n \frac{1}{2n+1}x^{2n+1}
+                        \end{align*}
+                        The the constant \(C\) may be obtained by plugging \(x = 0\). In this case, \(C = \arctan(0) = 0\), so 
+                        \begin{align*}
+                            \arctan(x) &= x - \frac{1}{3}x^3 + \frac{1}{5}x^5 - \frac{1}{7}x^7 + \cdots &&= \sum_{n = 0}^\infty (-1)^n \frac{1}{2n+1}x^{2n+1}
+                        \end{align*}
+                    </p>
+
+                    <p>
+                        Plugging in \(x=1\), we get the alternating sum of the reciprocal of odd numbers. This converges by the alternating series test since the terms \(\frac{1}{2n+1}\) decreases to \(0\). This series converges to \(\frac{\pi}{4} = \arctan(1)\).
+                        \begin{align*}
+                            \frac{\pi}{4} = \arctan(1) &= 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \cdots &&= \sum_{n = 0}^\infty (-1)^n \frac{1}{2n+1}
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            <p>
+                If you know the Taylor series for \(f(x)\) centered at \(x = 0\), you can obtain the Taylor series for \(a x^n f(x)\) by multiplying each term by \(a x^n\).
+            </p>
+
+            <div class="example">
+                <p>Compute the Taylor series for \(f(x) = x^2 \sin(x)\) centered at \(x = 0\).</p>
+                <div class="solution">
+                    <p>
+                        Using the known series for \(\sin(x)\) centered at \(x = 0\)
+                        \[\sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} + \frac{x^7}{7!} \pm \cdots = \sum_{n = 0}^\infty (-1)^n\frac{x^{2n+1}}{(2n+1)!}\]
+                        we can get the series for \(x^2 \sin(x)\) by multiplying each term by \(x^2\)
+                        \begin{align*}
+                            x^2 \sin(x) &= x^2\cdot ( x - \frac{x^3}{3!} + \frac{x^5}{5!} + \frac{x^7}{7!} \pm \cdots)  &&=  x^2 \cdot \sum_{n = 0}^\infty (-1)^n\frac{x^{2n+1}}{(2n+1)!}\\
+                            &= x^3 - \frac{x^5}{3!} + \frac{x^7}{5!} + \frac{x^9}{7!} \pm \cdots  &&=  \sum_{n = 0}^\infty (-1)^n\frac{x^{2n+3}}{(2n+1)!}\\
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+
+            <p>
+                If you know the Taylor series for \(f(x)\) and \(g(x)\) centered at \(x = 0\), you can obtain the Taylor series for \(f(x) \pm g(x)\) by adding or subtracting term by term.
+            </p>
+
+            <div class="example">
+                <p>Compute the Taylor series for \(f(x) = e^x - e^{-x}\) centered at \(x = 0\).</p>
+                <div class="solution">
+                    <p>
+                        We know the Taylor series for \(e^x\) and can obtain the series for \(e^{-x}\) by replacing \(x\) with \(-x\):
+                        \begin{align*}
+                            e^x &= 1 + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots = \sum_{n = 0}^\infty \frac{x^n}{n!}
+                            e^{-x} &= 1 - \frac{x}{1!} + \frac{x^2}{2!} - \frac{x^3}{3!} + \cdots = \sum_{n = 0}^\infty \frac{(-1)^n x^n}{n!}
+                        \end{align*}
+                        Then, their difference is
+                        \begin{align*}
+                            e^x - e^{-x} &= 0 + 2\frac{x}{1!} + 0 + 2\frac{x^3}{3!} + \cdots &&= \sum_{n = 0}^\infty \frac{x^n - (-1)^n x^n}{n!}\\
+                            &= 2\frac{x}{1!} + 2\frac{x^3}{3!} + \cdots &&= \sum_{n = 0}^\infty \frac{2 x^{2n+1} }{(2n+1)!}
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            <p>
+                If you know the Taylor series for \(f(x)\) and \(g(x)\) centered at \(x = 0\), you can obtain the Taylor series for \(f(x) \cdot g(x)\) by multiplying using the distributive property. This is more tedious; if you lay out the series for \(f(x)\) horizontally and \(g(x)\) vertically, then the product by the distributive property will appear as an entire infinite grid in which the like terms collect along diagonals.
+            </p>
+
+            <div class="example">
+                <p>Compute the first three terms of the Taylor series for \(\frac{e^x}{1-x}\) centered at \(x = 0\).</p>
+                <div class="solution">
+                    <p>
+                        We know the Taylor series for \(e^x\) and \(\frac{1}{1-x}\)
+                        \begin{align*}
+                            e^x &= 1 + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots &&= \sum_{n = 0}^\infty \frac{x^n}{n!}\\
+                            \frac{1}{1-x} &= 1 + x + x^2 + x^3 + \cdots &&= \sum_{n = 0}^\infty x^n
+                        \end{align*}
+                        To compute the product \(\frac{e^x}{1-x} =  e^x \cdot \frac{1}{1-x}\), we set up a multiplication table with the series for \(e^x\) in the first row and the series for \(\frac{1}{1-x}\) in the first column
+                        <table>
+                            <tr>
+                                <th></th><th>\(+1\)</th><th>\(+\frac{x}{1!}\)</th><th>\(+\frac{x^2}{2!}\)</th><th>\(\cdots\)</th>
+                            </tr>
+                            <tr>
+                                <th>\(+1\)</th>
+                            </tr>
+                            <tr>
+                                <th>\(+x\)</th>
+                            </tr>
+                            <tr>
+                                <th>\(+x^2\)</th>
+                            </tr>
+                            <tr>
+                                <th>\(\vdots\)</th>
+                            </tr>
+                        </table>
+                        Compute the products:
+                        <table>
+                            <tr>
+                                <th></th><th>\(+1\)</th><th>\(+\frac{x}{1!}\)</th><th>\(+\frac{x^2}{2!}\)</th><th>\(\cdots\)</th>
+                            </tr>
+                            <tr>
+                                <th>\(+1\)</th><td>\(+1\)</td><td>\(+\frac{x}{1!}\)</td><td>\(+\frac{x^2}{2!}\)</td><td>\(\cdots\)</td>
+                            </tr>
+                            <tr>
+                                <th>\(+x\)</th><td>\(+x\)</td><td>\(+\frac{x^2}{1!}\)</td><td>\(\ddots\)</td>
+                            </tr>
+                            <tr>
+                                <th>\(+x^2\)</th><td>\(+x^2\)</td><td>\(\ddots\)</td>
+                            </tr>
+                            <tr>
+                                <th>\(\vdots\)</th><td>\(\vdots\)</td>
+                            </tr>
+                        </table>
+                        The like powers of \(x\) appear along diagonals. The first term is \(1\). The second term is \(x +\frac{x}{1!} = 2x\). The third term is \(x^2 + \frac{x^2}{1!} +\frac{x^2}{2!}  = \frac{5}{2}x^2\). Therefore, the Taylor series starts as
+                        \[\frac{e^x}{1-x} = 1 + 2x + \frac{5}{2}x^2 + \cdots\]
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Decide whether \(e^x\) or \(\frac{1}{1-x}\) is largest near zero by examining the Taylor series / polynomial approximation.</p>
+                <div class="solution">
+                    <p>
+                        We know the Taylor series for \(e^x\) and \(\frac{1}{1-x}\)
+                        \begin{align*}
+                            e^x &= 1 + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots &&= \sum_{n = 0}^\infty \frac{x^n}{n!}\\
+                            \frac{1}{1-x} &= 1 + x + x^2 + x^3 + \cdots &&= \sum_{n = 0}^\infty x^n
+                        \end{align*}
+                        and we can truncate to get a Taylor polynomial approximation. Near zero, the lowest powers dominate, and the lowest power where the two series differ is at degree 2.
+                        \begin{align*}
+                            e^x &\approx 1 + x + \frac{1}{2}x^2
+                            \frac{1}{1-x} &\approx 1 + x + x^2
+                        \end{align*}
+                        Since \(1 + x + x^2 \geq 1 + x + \frac{1}{2}x^2\), the function \(\frac{1}{1-x}\) is larger near \(0\).
+                    </p>
                 </div>
             </div>
 
             <h2 id="Ch10.4">10.4 The Error in Taylor Polynomial Approximations</h2>
 
+            <p>The approximation error is the difference between the true value and the approximation value. If \(p_n(x)\) is the degree \(n\) Taylor polynomial approximation for a function \(f(x)\), then the error is defined as 
+                
+            \[E_n(x) := f(x) - p_n(x)\]</p>
+            
+            <p>It is often useful in applications to have a bound on the error. The following formula for the error bound is due to Joseph-Louis Lagrange:</p>
+
+            <div class="formula">
+                Lagrange Error Bound
+                <p>
+                    Suppose \(p_n(x)\) is the degree \(n\) Taylor polynomial approximation for a function \(f(x)\) near \(x = a\). Fix a point \(x_0\) where you want to know the error. Let \(M\) be the maximum value of the \(n+1\)-th derivative \(|f^{(n+1)}|\) on the interval between \(a\) and \(x_0\), so that \(-M \leq f^{(n+1)}(x) \leq M\) for all \(x\) between \(a\) and \(x_0\). Then, the size of the error is bounded according to the formula
+                    \[|E_n(x_0)| \leq \frac{M|x_0-a|^{n+1}}{(n+1)!}\]
+                </p>
+            </div>
+
+            <div class="example">
+                <p>Use the degree \(2\) Taylor polynomial of \(e^x\) near \(0\) to approximate the value of \(e^{1/2}\). Show that the size of the approximation error is less than \(\frac{1}{20} = 0.05\). (Without using a calculator!)</p>
+                <div class="solution">
+                    <p>
+                        The Taylor polynomial is \(p_2(x) =  1 + \frac{x}{1!} + \frac{x^2}{2!}\), hence the approximation yields
+                        \[e^{1/2} \approx 1 + (1/2) + \frac{(1/2)^2}{2} = 1 + \frac{1}{2} + \frac{1}{8} = \frac{13}{8} = 1.625\]
+                        the maximum value of the third derivative (which is also \(e^x\)) on the interval \([0, \frac{1}{2}]\) is \(M = e^{1/2}\). Then the Lagrange error bound yields
+                        \[\left|e^{1/2} - 1.625\right| \leq \frac{e^{1/2} \cdot (1/2)^3}{3!}\]
+                        Since \(e < 4, e^{1/2} < 2 \),
+                        \[\left|e^{1/2} - 1.625\right| \leq \frac{e^{1/2}\cdot (1/2)^3}{3!} \leq \frac{2 \cdot \frac{1}{2^3}}{3!} = \frac{1}{24} \leq \frac{1}{20}\]
+                        Therefore, the exact value of \(e^{1/2}\) lies between \(1.625 \pm 0.05 \), in the interval  \([1.575, 1.675]\).
+                    </p>
+                    
+                    <p>(The actual value according to the calculator is \(e^{1/2} = 1.6487212707\ldots\)).</p>
+                </div>
+            </div>
+
+            <p>
+                One shows that a function equals its Taylor series by showing that the error \(E_n(x)\) goes to zero as \(n \rightarrow \infty\). All the higher derivatives of \(e^x, \sin(x), \cos(x)\) are again among \(e^x, \pm \sin(x), \pm \cos(x)\), and on any interval \([a, b]\), they are uniformly bounded by a constant \(M = e^b, 1, 1\) respectively. Because the factorial sequence has a faster growth rate than exponential \(n! \gg |x - a|^n\), the Lagrange error bound goes to zero: 
+                \[\lim_{n \rightarrow \infty}\frac{M|x - a|^{n+1}}{(n+1)!} = 0\]
+                By the squeeze theorem, the error \(E_n(x)\) also goes to zero, which shows that \(e^x, \sin(x), \cos(x)\) equal their respective Taylor series, i.e. they are real analytic functions.
+            </p>
+
+            <p>Another way to estimate error for Taylor series which are alternating:</p>
+
+            <div class="formula">
+                Alternating Series Bound
+                <p>
+                    Suppose an alternating series \(\sum_{k=0}^\infty (-1)^{k} a_k = a_0 - a_1 + a_2 \pm \cdots\) converges to \(S\). Denote the partial sum by \(S_n = \sum_{k=0}^n (-1)^{k} a_k = a_0 - a_1 + a_2 \pm \cdots \pm a_n\). The distance between \(S\) and the partial sum \(S_n\) is bounded by the size of next term \(a_{n+1}\).
+                    \[|S - S_n| \leq a_{n+1}\]
+                </p>
+            </div>
+
+            <div class="example">
+                <p>Use the degree \(4\) Taylor polynomial of \(\cos(x)\) near \(0\) to approximate the value of \(\cos(1)\). Show that the size of the approximation error is less than \(\frac{1}{500} = 0.002\).</p>
+                <div class="solution">
+                    <p>
+                        \[\cos(1) = 1 - \frac{1^2}{2!} + \frac{1^4}{4!} - \frac{1^6}{6!} + \cdots\]
+                        The degree 4 approximation is 
+                        \[\cos(1) \approx 1 - \frac{1^2}{2!} + \frac{1^4}{4!} = 1 - \frac{1}{2} + \frac{1}{24} = \frac{13}{24} = 0.541666\ldots\]
+                        The Taylor series is alternating, so the difference is bounded by the next term 
+                        \[|\cos(1) - \frac{13}{24}| \leq \frac{1^6}{6!} = \frac{1}{720}\]
+                        which is less than \(\frac{1}{500}\) as desired.
+                    </p>
+
+                    <p>Therefore, the exact value of \(\cos(1)\) lies between \(0.541666\ldots \pm 0.002 \), in the interval  \([0.539666\ldots, 0.543666\ldots]\).</p>
+                    
+                    <p>(The actual value according to the calculator is \(\cos(1) = 0.540302305868\ldots\)).</p>
+                </div>
+            </div>
+
             <h1 id="Ch11">Chapter 11. Differential Equations</h1>
 
             <h2 id="Ch11.1">11.1 What is a Differential Equation?</h2>
+
+            <p>A <strong>differential equation</strong> is an equation relating an unknown function and its derivatives. A function is called a solution if it satisfies the equation.</p>
+
+            <div class="example">
+                <p>For the differential equation \[\frac{dy}{dt} = 100 - y\], show that \(y = 100 + Ce^{-t}\) is a solution, for any constant \(C\).</p>
+            </div>
 
             <h2 id="Ch11.2">11.2 Slope Fields</h2>
 
