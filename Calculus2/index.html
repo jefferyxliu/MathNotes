@@ -4244,6 +4244,41 @@
                 </div>
             </div>
 
+            <div class="example">
+                <p>Show that \(y = e^{2t}\) is not a solution of the differential equation \[y'' + 4y = 0\].</p>
+                <div class="solution">
+                    <p>
+                        Compute the derivative:
+                        \begin{align*}
+                            y &= e^{2t}\\
+                            y' &= 2e^{2t}\\
+                            y'' &= 4e^{2t}
+                        \end{align*}
+                        plug in to the differential equation and verify both sides are identical:
+                        \begin{align*}
+                            y'' + 4y &= (4e^{2t}) + 4(e^{2t}))\\
+                                &= 8e^{2t}
+                                &\neq 0
+                        \end{align*}
+                        Therefore, \(y = e^{2t}\) is not a solution.
+                    </p>
+                </div>
+            </div>
+
+            <p>For first order differential equation in the form \(\frac{dy}{dt} = f(t)\) (i.e. that don't depend on the dependent variable \(y\)), the solution is simply the antiderivative \(y = \int f(t) dt + C\); the arbitrary constant is the constant of integration. By repeating this, the higher order differential equation in the form \(\frac{d^n y}{dt^n} = f(t)\) can be solved by integrating \(n\) times; this yields \(n\) many arbitrary constants, one for each time of integration.</p>
+
+            <div class="example">
+                <p>An object in free-fall experiences a constant downward acceleration due to gravity of \(9.8\) meters per second squared. Remember that acceleration is the second derivative of position and velocity is the first derivative of position. Let \(s(t)\) denote the height in meters of an object at time \(t\) in seconds. Then the object in free-fall is modelled by the differential equation: \[\frac{d^2s}{dt^2} = -9.8\] 
+                </p>
+                <p>Find the general solution of the differential equation.</p>    
+                    
+                <p>Find the particular solution when the initial velocity at \(t = 0\) is \(30\) meters per second upward, and the initial position is \(5\) meters above the ground.</p>  
+                    
+                <div class="solution">
+                    <p></p>
+                </div>
+            </div>
+
             <h2 id="Ch11.2">11.2 Slope Fields</h2>
 
             <h2 id="Ch11.3">11.3 Euler's Method</h2>
