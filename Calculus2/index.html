@@ -4275,15 +4275,199 @@
                 <p>Find the particular solution when the initial velocity at \(t = 0\) is \(30\) meters per second upward, and the initial position is \(5\) meters above the ground.</p>  
                     
                 <div class="solution">
-                    <p></p>
+                    <p>
+                        We use \(a(t) = \frac{d^2s}{dt^2}\) and \(v(t) = \frac{ds}{dt}\) to mean the acceleration and velocity, which are the second and first derivatives. The general solution is given by taking antiderivative twice. 
+                        \begin{align*}
+                            a(t) = \frac{d^2s}{dt^2} &= -9.8\\
+                            v(t) = \frac{ds}{dt} &= -9.8t + C_1\\
+                            s(t) &= -4.9t^2 + C_1t + C_2
+                        \end{align*}
+                        The general solution is \(s(t) = -4.9t^2 + C_1t + C_2\) where \(C_1, C_2\) are arbitrary constants.
+                    </p>
+
+                    <p>
+                        Plug in the initial conditions \(v(0) = 30, s(0) = 5\) to solve for the value of \(C_1, C_2\) to get a particular solution.
+                        \begin{align*}
+                            30 = v(0) &= -9.8(0) + C_1 = C_1\\
+                            C_1 &= 30\\
+                            5 = s(0) &= -4.9(0)^2 + C_1(0) + C_2 = C_2\\
+                            C_2 &= 5
+                        \end{align*}
+                        The particular solution which satisfies the initial conditions \(v(0) = 30, s(0) = 5\) is \(s(t) = -4.9t^2 + 30t + 5\).
+                    </p>
                 </div>
             </div>
 
             <h2 id="Ch11.2">11.2 Slope Fields</h2>
 
+            <p>A <strong>slope field</strong> is a way to visualize a first order differential equation in the form \[\frac{dy}{dx} = F(x,y)\] where \(F(x,y)\) is an expression involving \(x\) and \(y\). The slope field is constructed over a grid in the \(x,y\)-plane. At each point \((x,y)\), draw a small segment through the point with slope \(F(x,y)\); this represents the tangent line through a solution curve. The graph of the solution curve will roughly follow the "flow" of the slope field.</p>
+
+            <div class="example">
+                <p>Draw the slope field for the differential equation: \[\frac{dy}{dx} = y\]</p>
+                <div class="solution">
+                    <iframe src="https://www.desmos.com/calculator/upycoilkxh?embed" width="500" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Draw the slope field for the differential equation: \[\frac{dy}{dx} = 2x\] Solve the differential equation by taking the antiderivative and sketch a solution curve.</p>
+                <div class="solution">
+                    <p>The general solution by antiderivative is \(y = x^2 + C\), which are parabolas whose vertex lies on the \(y\)-axis.</p>
+                    <iframe src="https://www.desmos.com/calculator/suzzdouuom?embed" width="500" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Draw the slope field for the differential equation: \[\frac{dy}{dx} = -\frac{x}{y}\] Guess the form of the solution curve.</p>
+                <div class="solution">
+                    <iframe src="https://www.desmos.com/calculator/edax1upucs?embed" width="500" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
+                    <p>The form of the solution curve is a circle centered at the origin. The implicit equation of a circle centered at the origin with radius \(R\) is \[x^2 + y^2 = R^2\] and we can check by implicit differentiation that this satisfies the differential equation.
+                    \begin{align}
+                        x^2 + y^2 &= R^2\\
+                        2x + 2y \cdot\frac{dy}{dx} &= 0\\
+                        2y \cdot\frac{dy}{dx} &= -2x\\
+                        \frac{dy}{dx} &= \frac{-2x}{2y}\\
+                        &=^\checkmark -\frac{x}{y}
+                    \end{align}</p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>Draw the slope field for the differential equation: \[\frac{dy}{dx} = \frac{x}{y}\] Sketch the solution curve which satisfies the initial condition \(y(0) = 1\).</p>
+                <div class="solution">
+                    <iframe src="https://www.desmos.com/calculator/ngk0u5yygx?embed" width="500" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
+                    <p>The initial condition \(y(0) = 1\) means that the solution curve should go through the point \((0,1)\).</p>
+                </div>
+            </div>
+
+
             <h2 id="Ch11.3">11.3 Euler's Method</h2>
 
             <h2 id="Ch11.4">11.4 Separation of Variables</h2>
+
+            <p>
+                A differential equation is called <strong>separable</strong> if it can be written of the form \[\frac{dy}{dx} = f(x)\cdot g(y)\] i.e. the variables \(x\) and \(y\) can be separated inside two different factors. A separable equation can be solved by isolating each variable and its infinitesimal on different sides of the equation and integrating both sides.
+                \begin{align*}
+                    \frac{dy}{dx} &= f(x)\cdot g(y)\\
+                    \frac{1}{g(y)} \: dy &= f(x) \: dx\\
+                    \int \frac{1}{g(y)} \: dy &= \int f(x) \: dx
+                \end{align*}
+                Remember that the two sides may differ by a constant of integration. The result is an implicit equation for the general solution. 
+            </p>
+
+            <div class="example">
+                <p>
+                    Solve the differential equation using separation of variables. \[\frac{dy}{dx} = -\frac{x}{y}\]
+                </p>
+                <div class="solution">
+                    <p>
+                        The equation is separable since \(-\frac{x}{y} = (-x) \cdot \frac{1}{y}\)
+                        \begin{align*}
+                            \frac{dy}{dx} &= -\frac{x}{y}\\
+                            y \: dy &= -x \: dx\\
+                            \int y \: dy &= \int -x \: dx\\
+                            \frac{1}{2}y^2 &= -\frac{1}{2}x^2 + C\\
+                            y^2 &= -x^2 + C' & \text{rewrite constant $C' := 2C$}\\
+                        \end{align*}
+                        The solution in implicit form \(x^2 + y^2 = C\). Can solve for \(y\) to obtain function form \(y = \pm\sqrt{C -x^2}\). This is the equation of a circle which we saw in the slope field in section 11.2.
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>
+                    Solve the differential equation using separation of variables. \[\frac{dy}{dx} = ky\] (where \(k\) is a constant.)
+                </p>
+                <div class="solution">
+                    <p>
+                        \begin{align*}
+                            \frac{dy}{dx} &= ky\\
+                            \frac{1}{y} \: dy &= k \: dx\\
+                            \int \frac{1}{y} \: dy &= \int k \: dx\\
+                            \ln|y| &= kx + C\\
+                            |y| &= e^{kx+C} \\
+                            y &= \pm e^{kx+C} = \pm e^{kx} \cdot e^C\\
+                            y &= Ae^{kx} & \text{rewrite constant $A := \pm e^C$}
+                        \end{align*}
+                    </p>
+                </div>
+            </div>
+
+            <p>Some factoring may be necessary to separate the variables.</p>
+
+            <div class="example">
+                <p>
+                    Solve the differential equation using separation of variables. \[\frac{dy}{dt} = y^2 + y^2t\] Find the particular solution such that \(y = 2\) when \(t = 1\).
+                </p>
+                <div class="solution">
+                    <p>
+                        \begin{align*}
+                            \frac{dy}{dt} &= y^2 + y^2t = y^2(1 + t)\\
+                            \frac{1}{y^2} \: dy &= (1+t) \: dt\\
+                            \int \frac{1}{y^2} \: dy &=  \int (1+t) \: dt\\
+                            -\frac{1}{y} &= t + \frac{1}{2}t^2 + C\\
+                            y &=-\frac{1}{t + \frac{1}{2}t^2 + C}
+                        \end{align*}
+                        Plug in initial condition:
+                        \begin{align*}
+                            2 &=-\frac{1}{1 + \frac{1}{2}\cdot 1^2 + C}\\
+                            2 &=-\frac{1}{\frac{3}{2} + C}\\
+                            -\frac{1}{2} &= \frac{3}{2} + C\\
+                            C &= -2
+                        \end{align*}
+                        The particular solution is \(y =-\frac{1}{t + \frac{1}{2}t^2 - 2}\)
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>
+                    Solve the differential equation using separation of variables. \[\frac{dP}{dt} = 2P-2Pt\] Find the particular solution such that \(P(0)=5\).
+                </p>
+                <div class="solution">
+                    <p>
+                        \begin{align*}
+                            \frac{dP}{dt} &=  2P-2Pt = P(2 - 2t)\\
+                            \frac{1}{P} \: dP &= (2-2t) \: dt\\
+                            \int \frac{1}{P} \: dP &= \int (2-2t) \: dt\\
+                            \ln|P| &= 2t - t^2 + C\\
+                            P &= \pm e^{2t - t^2 + C}\\
+                            P &= A e^{2t - t^2} & \text{rewrite constant $A := \pm e^C$}
+                        \end{align*}
+                        Plug in initial condition:
+                        \begin{align*}
+                            5 = P(0) &= A e^{2(0) - (0)^2} = A\\
+                            A &= 5
+                        \end{align*}
+                        The particular solution is \(P(t) = 5 e^{2t - t^2}\)
+                    </p>
+                </div>
+            </div>
+
+            <div class="example">
+                <p>
+                    Solve the differential equation using separation of variables. \[x(x+1)\frac{dy}{dx} = y^2\] Find the particular solution such that \(y(1)=1\).
+                </p>
+                <div class="solution">
+                    <p>
+                        \begin{align*}
+                            x(x+1)\frac{dy}{dx} = y^2\\
+                            \frac{1}{y^2} \: dy &= \frac{1}{x(x+1)} \: dx\\
+                            \int \frac{1}{y^2} \: dy &=  \int \frac{1}{x(x+1)} \: dx\\
+                            &= \int \frac{1}{x} - \frac{1}{(x+1)} \: dx &\text{(partial fraction decomposition)}\\
+                            -\frac{1}{y} &= \ln|x| + \ln|x+1| + C\\
+                            y &= -\frac{1}{\ln|x| + \ln|x+1| + C}
+                        \end{align*}
+                        Plug in initial condition:
+                        \begin{align*}
+                            -\frac{1}{1} &= \ln|1| + \ln|1+1| + C
+                            -1 &= \ln(2) + C\\
+                            C &= -\ln(2) - 1
+                        \end{align*}
+                        The particular solution is \(y = -\frac{1}{\ln|x| + \ln|x+1| -\ln(2) - 1}\)
+                    </p>
+                </div>
+            </div>
 
             <h2 id="Ch11.5">11.5 Growth and Decay</h2>
 
