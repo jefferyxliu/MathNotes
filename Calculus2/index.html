@@ -4471,6 +4471,234 @@
 
             <h2 id="Ch11.5">11.5 Growth and Decay</h2>
 
+            <p>
+                Several real life quantities exhibit exponential growth or decay, such as growth of a population, decay of a radioactive substance, or the temperature of a hot object cooling down in its surroundings. Why? Members of a population or radioactive particles are not consciously conspiring to arrange themselves according to exponential function. Rather, they exhibit a behavior where the rate of change of some quantity is proportional to the quantity itself. This is modelled by a differential equation of the form: 
+                \[\frac{dP}{dt} = kP\]
+                where \(P\) is the quantity as a function of time \(t\), and \(k\) is a proportionality constant. This can be solved by separation of variables
+                \begin{align*}
+                    \frac{dP}{dt} &= kP\\
+                    \frac{1}{P} \: dP &= k \: dt\\
+                    \int \frac{1}{P} \: dP &= \int k \: dt\\
+                    \ln|P| &= kt + C\\
+                    |P| &= e^{kt+C} \\
+                    P &= \pm e^{kt+C} = \pm e^{kt} \cdot e^C\\
+                    P &= P_0 e^{kt} & \text{rewrite constant $P_0 := \pm e^C$}
+                \end{align*}
+                The solution is the exponential function \(P(t) = P_0 e^{kt}\) where \(P_0 = P(0)\) is the quantity at time \(t=0\). If \(k > 0\), this is exponentially growing. If \(k < 0\), this is exponentially decaying.
+            </p>
+
+            <h3>Population Growth</h3>
+            <p>
+                We study a very simplified model of a population, assuming no immigration or emmigration or deaths. We take the assumption that each individual has a fixed propability of reproducing at any moment. Then, the number of new individuals per unit time is proportional to the population, because the larger the population, the more of them there are to reproduce. 
+            </p>    
+             
+            <p>
+                Let \(P\) be the population as a function of time \(t\); then this is modelled by the differential equation 
+                \[\frac{dP}{dt} = kP\]
+                and exhibits exponential growth. The proportionality constant \(k\) is a positive number representing the continuous birth rate per unit time per individual.
+            </p>
+
+            
+                
+            
+
+            <h3>Radioactive Decay</h3>
+
+            <p>
+                According to quantum theory each radioactive particle has a fixed propability of decaying at any moment. Therefore, the number particles which decay per unit time is proportional to the quantity. Let \(Q\) be the quantity of a radioactive substance as a function of time \(t\); then this is modelled by the differential equation 
+                \[\frac{dQ}{dt} = kQ\]
+                and exhibits exponential decay. The proportionality constant \(k\) is a negative number associated to the decay rate.
+            </p>
+
+            <div class="example">
+                <p>
+                    A \(50\) g sample of a radioactive substance decays to \(40\) g after \(3\) hours. Write an equation to model the quantity \(Q\) of the sample remaining after \(t\) hours.
+                </p>
+                <div class="solution">
+                    <p>
+                        The solution satisfies the differential equation
+                        \[\frac{dQ}{dt} = kQ\]
+                        and initial conditions \(Q(0) = 50, Q(3) = 40\). 
+                        This can be solved by separation of variables
+                        \begin{align*}
+                            \frac{dQ}{dt} &= kQ\\
+                            \frac{1}{Q} \: dQ &= k \: dt\\
+                            \int \frac{1}{Q} \: dQ &= \int k \: dt\\
+                            \ln|Q| &= kt + C\\
+                            |Q| &= e^{kt+C} \\
+                            Q &= \pm e^{kt+C} = \pm e^{kt} \cdot e^C\\
+                            Q &= Q_0 e^{kt} & \text{rewrite constant $Q_0 := \pm e^C$}
+                        \end{align*}
+                        The general solution is \(Q(t) = Q_0 e^{kt}\). Plug initial conditions to determine \(P_0\) and the proportionality constant \(k\):
+                        \begin{align*}
+                            50 = Q(0) &= Q_0 e^{k(0)} = Q_0\\
+                            Q_0 &= 50\\
+                            40 = Q(3) &= 50 e^{k(3)}\\
+                            \frac{40}{50} &= e^{k(3)}\\
+                            3k &= \ln\left(\frac{40}{50}\right)\\
+                            k &= \frac{1}{3}\ln\left(\frac{40}{50}\right) \approx -0.07438118377
+                        \end{align*}
+                        The particular solution is \(Q(t) = 50 e^{\frac{1}{3}\ln(\frac{40}{50}) \cdot t} = 50 (\frac{40}{50})^{\frac{t}{3}}\).
+                    </p>
+                </div>
+            </div>
+
+            <p>
+                The <strong>half-life</strong> of a radioactive species is the amount of time it takes for the quantity to decay to half its original quantity.
+            </p>
+
+            <div class="example">
+                <p>
+                    Write an equation for the half-life \(t_{1/2}\) in terms of the proportionality constant \(k\).
+                </p>
+                <div class="solution">
+                    <p>As shown previously, the general solution is \(Q(t) = Q_0 e^{kt}\), where \(Q_0\) is the initial quantity.</p>
+                    
+                    <p>The half-life \(t_{1/2}\) then must satisfy
+                        \begin{align*}
+                           \frac{1}{2}Q_0 = Q(t_{1/2}) &= Q_0 e^{kt_{1/2}}\\
+                           \frac{1}{2} &= e^{k \cdot t_{1/2}}\\
+                           k \cdot t_{1/2} &= \ln\left(\frac{1}{2}\right) = -\ln(2)\\
+                           t_{1/2} &= \frac{-\ln(2)}{k}\\
+                        \end{align*}
+                        The half-life is thus completely determined by the decay constant \(k\), and they are inversely proportional. The larger the size of \(k\), the faster the substance decays, and the shorter the half-life.
+                    </p>
+                </div>
+            </div>
+
+            <h3>Continuously Compounded Interest</h3>
+
+            <p>
+                At a bank, continuous compounding means that interest is accrued at a rate that is a fixed percentage of the balance at that moment. So, the larger the balance, the faster interest is earned and the faster the balance grows. 
+            </p>
+
+            <p>
+                Let \(P\) be the balance as a function of time \(t\); then this is modelled by the differential equation 
+                \[\frac{dP}{dt} = rP\]
+                and exhibits exponential growth. The proportionality constant \(r\) is a positive number representing the interest rate.
+            </p>
+
+            <div class="example">
+                <p>
+                    A bank account earns interest continuously at a rate of \(5\%\) of the current balance per year. Assume that the initial deposit is \(\$1000\) and that no other deposits or withdrawals are made. Write the differential equation satisfied by the balance in the account. Solve the differential equation. Determine the balance in the bank account after \(10\) years.
+                </p>
+                <div class="solution">
+                    <p>
+                        The solution satisfies the differential equation
+                        \[\frac{dP}{dt} = 0.05 \cdot P\]
+                        and initial conditions \(P(0) = 1000\). 
+                        As shown previous, this can be solved by separation of variables, and the general solution is \(P(t) = P_0 e^{0.05 t}\). Plug initial conditions to determine \(P_0\)
+                        \begin{align*}
+                            1000 = P(0) &= P_0 e^{0.05(0)} = P_0\\
+                            P_0 &= 1000
+                        \end{align*}
+                        The particular solution is \(P(t) = 1000 e^{0.05 t}\). After \(10\) years, 
+                        \(P(10) = 1000 e^{0.05 \cdot 10} \approx 1684.72\)
+                        the balance will be \(\$1684.72\).
+                    </p>
+                </div>
+            </div>
+
+            <h3>Newton's Law of Heating and Cooling</h3>
+
+            <p>
+                Newton proposed that the temperate of a hot object decreases at a rate proportional to the difference between its temperature and that of its surroundings. Similarly, a cold object heats up at a rate proportional to the temperature difference between the object and its surroundings. For example, a hot cup of coffee on the kitchen counter cools at a rate proportional to the temperature difference between the coffee and the surrounding air. As the coffee cools, the rate at which it cools decreases because the temperature difference between the coffee and the air has decreased. In the long run, the rate of cooling goes to zero, as the coffee gets closer to room temperature.
+            </p>
+
+            <p>
+                Let \(H\) be the temperature as a function of time \(t\), and let \(H_{\text{room}\) be the ambient room temperature; this is modelled by the differential equation 
+                \[\frac{dH}{dt} = k(H - H_{\text{room}})\]
+                and exhibits exponential decay asymptotically to the room temperature. The proportionality constant \(k\) is a negative number representing how well the object transfers heat.
+            </p>
+
+            <div class="example">
+                <p>
+                    When a murder is committed, the body, originally at \(37\) degrees Celsius, cools according to Newton's law of cooling. Suppose that after two hours, the temperature of the body is \(35\) degrees and that the temperature of the surrounding air is a constant \(20\) degrees. Find the temperature \(H\) of the body as a function of time \(t\) in hours since the murder was committed. If the body is found at \(4\) PM at a temperature of \(30\) degrees, when was the murder committed?
+                </p>
+                <div class="solution">
+                    <p>
+                        The solution satisfies the differential equation
+                        \[\frac{dH}{dt} = k(H - 20)\]
+                        and initial conditions \(H(0) = 37, H(2) = 37\). 
+                        This can be solved by separation of variables
+                        \begin{align*}
+                            \frac{dH}{dt} &= k(H - 20)\\
+                            \frac{1}{H-20} \: dH &= k \: dt\\
+                            \int \frac{1}{H-20} \: dH &= \int k \: dt\\
+                            \ln|H-20| &= kt + C\\
+                            |H-20| &= e^{kt+C} \\
+                            H-20 &= \pm e^{kt+C} = \pm e^{kt} \cdot e^C\\
+                            H-20 &= A e^{kt} & \text{rewrite constant $A := \pm e^C$}
+                            H &= 20 + A e^{kt}
+                        \end{align*}
+                        The general solution is \(H(t) = 20 + A e^{kt}\). Plug initial conditions to determine \(A\) and the proportionality constant \(k\):
+                        \begin{align*}
+                            37 = H(0) &= 20 + A e^{k(0)} = 20 + A\\
+                            A &= 17\\
+                            35 = H(2) &= 20 + 17 e^{k(2)}\\
+                            15  &= 17 e^{k(2)}\\
+                            \frac{15}{17} &= e^{k(2)}\\
+                            2k &= \ln\left(\frac{15}{17}\right)\\
+                            k &= \frac{1}{2}\ln\left(\frac{15}{17}\right)
+                        \end{align*}
+                        The particular solution is \(Q(t) = 20+17 e^{\frac{1}{2}\ln\left(\frac{15}{17}\right) \cdot t} = 20 + 17 (\frac{15}{17})^{\frac{t}{2}}\).
+                        If the body cools to \(30\) degrees,
+                        \begin{align*}
+                            30= H(t) &= 20 + 17e^{\frac{1}{2}\ln\left(\frac{15}{17}\right) \cdot t}\\
+                            10 &= 17e^{\frac{1}{2}\ln\left(\frac{15}{17}\right) \cdot t}\\
+                            \frac{10}{17} &= e^{\frac{1}{2}\ln\left(\frac{15}{17}\right) \cdot t}\\
+                            \ln\left( \frac{10}{17}\right) &= \frac{1}{2}\ln\left(\frac{15}{17}\right) \cdot t\\
+                            t &= 2\frac{\ln\left(\frac{10}{17}\right)}{\ln\left(\frac{15}{17}\right)}\\
+                            &\approx 8.478985723
+                        \end{align*}
+                        it will have been \(8.48\) hours, or approximately \(8\) hours and \(29\) minutes since the murder was committed. If the body is found at \(30\) degrees at \(4\) PM, then the murder was committed at \(7:31\) AM.
+                    </p>
+                </div>
+            </div>
+
+            <h3>Equilibrium Solutions</h3>
+
+            <p>
+                An <strong>equilibrium</strong> solution is a constant function solution for a differential equation. The graph is a horizontal line.
+            </p>
+
+            <p>
+                An equilibrium solution is <strong>stable</strong> if a small change in the initial conditions gives a solution which tends towards the equilibrium. Newton's law of heating and cooling gives an example of stable equilibrium. An object at room temperature will remain at room temperature. An object hotter than the room temperature will cool down to room temperature, and an object colder than the room temperature will warm up to room temperature.
+            </p>
+
+            <p>
+                An equilibrium solution is <strong>unstable</strong> if a small change in the initial conditions gives a solution veers away from the equilibrium.
+            </p>
+
+            <p>
+                Consider differential equation of the form \[\frac{dy}{dt} = F(y)\] (i.e. only depends on the dependent variable.) The equilibrium solutions can be found by solving \(F(y) = 0\). You can determine whether equilibrium is stable or unstable by the sign of \(F(y)\) on either side of the equilibrium.
+            </p>
+
+            <div class="example">
+                <p>
+                    Determine the equilibrium solution to the differential equation 
+                    \[\frac{dy}{dt} = y^2 - 3y + 2\]
+                    and classify them as stable or unstable or neither.
+                </p>
+                <div class="solution">
+                    <p>
+                        The equilibrium solutions are
+                        \begin{align*}
+                            0 &= y^2 - 3y + 2\\
+                            &= (y-2)(y-1)\\
+                            y &= 1, 2
+                        \end{align*}
+                        \(\frac{dy}{dt} = y^2 - 3y + 2\) is positive for \(y < 1\), negative for \(1 < y < 2\), and positive again for \(2 < y\). The sign of the derivative tells whether the values are increasing or decreasing:
+                    </p>
+                    <p>An initial value in the range \(y < 1\) will increase until \(y=1\).</p>
+                    <p>An initial value in the range \(1 < y < 2\) will decrease until \(y=1\).</p>
+                    <p>An initial value in the range \(2 < y \) will increase without bound.</p>
+
+                    <p>Therefore, \(y=1\) is a stable equilibrium and \(y=2\) is an unstable equilibrium. This can be visualized on the slope field:</p>
+                    <iframe src="https://www.desmos.com/calculator/hroyffpt4t?embed" width="500" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
+                </div>
+            </div>
+
             <h2 id="Ch11.6">11.6 Applications and Modeling</h2>
         </div>
     </body>
