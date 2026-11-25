@@ -4733,7 +4733,49 @@
 
             <h2 id="Ch11.6">11.6 Applications and Modeling</h2>
 
+            <div class="example">
+                <p>A company earns revenue at a continuous rate equal to \(5\%\) of its net worth per year. At the same time it pays a fixed \(\$200\) million per year in expenses. Write a differential equation to model the company's net worth over time. Solve the differential equation and describe what happens in the long run for different initial values.</p>
+            </div>
 
+            <div class="example">
+                <p>
+                    Model the velocity \(v\) of a falling object over time \(t\) with air resistance. Suppose that the object has mass \(m\). Assume that the gravity pulls the object downward with a constant force \(m g\) where \(g\) is the acceleration due to gravity; and air resistance poses a force on the object opposite its motion with magnitude proportional to its velocity, with proportionality constant \(k\). Write a differential equation to model the velocity over time. Solve the differential equation and describe what happens in the long run assuming the object starts from rest.
+                </p>
+                <div class="hint">
+                    <p>
+                        Write an expression for the net force on the object. According to Newton's law, the net force equals mass times acceleration of the object. The acceleration is the derivative of velocity.
+                    </p>
+                </div>
+                <div class="solution">
+                    <p>
+                        Use the convention that the downward direction is positive. The net force on the object is \(mg - kv\) where \(k\) is the (positive) air resistance proportionality constant. This is equal to its mass times acceleration:
+                        \[ma = m \frac{dv}{dt} = mg - kv\]
+                        Solve using separation of variables
+                        \begin{align*}
+                            m \frac{dv}{dt} &= mg - kv\\
+                            &= k(\frac{mg}{k} - v)\\
+                            \frac{dv}{dt} &= \frac{k}{m}(\frac{mg}{k} - v)\\
+                            \frac{1}{\frac{mg}{k} - v}\: dv &= \frac{k}{m} \: dt\\
+                            \int \frac{1}{\frac{mg}{k} - v}\: dv &= \int \frac{k}{m} \: dt\\
+                            -\ln|\frac{mg}{k} - v| &= \frac{k}{m}t + C\\
+                            \ln|\frac{mg}{k} - v| &= -\frac{k}{m}t - C\\
+                            |\frac{mg}{k} - v| &= e^{-\frac{k}{m}t - C}\\
+                            \frac{mg}{k} - v &= \pm e^{-\frac{k}{m}t - C}\\
+                            \frac{mg}{k} - v &= A e^{-\frac{k}{m}t} & A = \pm e^{-C}\\
+                            v &= \frac{mg}{k} - A e^{-\frac{k}{m}t}\\
+                        \end{align*}
+                        The general solution is \(v(t) = \frac{mg}{k} - A e^{-\frac{k}{m}t}\). Assuming the object starts from rest, \(v(0) = 0\),
+                        \begin{align*}
+                            0 = v(0) &= \frac{mg}{k} - A e^{-\frac{k}{m}(0)}\\
+                                &= \frac{mg}{k} - A\\
+                                A &= \frac{mg}{k}
+                        \end{align*}
+                        the particular solution is \(v(t) = \frac{mg}{k} - \frac{mg}{k} e^{-\frac{k}{m}t}\). In the long run as \(t \rightarrow \infty\), \(e^{-\frac{k}{m}t} \rightarrow 0\), so
+                        \[\lim_{t \rightarrow \infty} v(t) = \lim_{t \rightarrow \infty} \frac{mg}{k} - \frac{mg}{k} e^{-\frac{k}{m}t} = \frac{mg}{k}\]
+                        the object speeds up until it approaches a <strong>terminal velocity</strong> \(\frac{mg}{k}\).
+                    </p>
+                </div>
+            </div>
         </div>
     </body>
 
